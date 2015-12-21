@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="doob:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="doob.war">
+      <element id="artifact" artifact-name="doob:war exploded" />
+    </root>
+  </artifact>
+</component>
