@@ -1,5 +1,6 @@
 package ren.doob.mapper;
 
+import ren.doob.common.Parameter;
 import ren.doob.model.User;
 
 /**
@@ -12,5 +13,5 @@ import ren.doob.model.User;
 
 public interface UserMapper {
 
-    public User getUser();
+    public User getUser(Parameter parameter);
 }

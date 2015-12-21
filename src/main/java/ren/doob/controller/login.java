@@ -1,8 +1,12 @@
 package ren.doob.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ren.doob.common.BaseController;
+import ren.doob.common.Parameter;
+import ren.doob.model.User;
+import ren.doob.serivces.UserMapperService;
 
 /**
  * Created by Administrator on 2015-12-21.
@@ -11,11 +15,14 @@ import ren.doob.common.BaseController;
 @Controller
 public class login extends BaseController{
 
+    @Autowired
+    private UserMapperService userMapperService;
+
     @RequestMapping("/login")
     public String login(){
-        String pass = request.getParameter("pass");
-        String name = request.getParameter("name");
-        if (pass.equals("123456") && name.equals("fudali")){
+        User user = userMapperService.getUser(p);
+        if (p.getAccept().get("pass").equals(user.getPass())){
+            session.setAttribute("nowUser",user);
             return "login";
         }
         return "error";

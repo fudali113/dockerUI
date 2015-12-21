@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.tianjian.emmanage.mapper.YongHuMapper">
+<mapper namespace="ren.doob.mapper.UserMapper">
 
-    <select id="getUser" resultType="ren.doob.model.User">
+    <select id="getUser" resultType="ren.doob.model.User" parameterType="ren.doob.common.Parameter">
           SELECT * FROM user
           <where>
-                  <if test="name != null and name != ''">
-                          NAME = #{name}
+                  <if test="accept.name != null and accept.name != ''">
+                          NAME = #{accept.name}
                   </if>
-                  <if test="pass != null and pass != ''">
-                          AND pass = #{pass}
+                  <if test="accept.pass != null and accept.pass != ''">
+                          AND pass = #{accept.pass}
                   </if>
           </where>
           order by ID
