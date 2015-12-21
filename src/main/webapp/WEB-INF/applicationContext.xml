@@ -25,69 +25,69 @@
         </property>
         <property name="jdbcUrl">
             <value>
-                jdbc:mysql://139.129.4.187:3306/doob
+                jdbc:mysql://doob:3306/doob
             </value>
         </property>
-        <!--MySQLÊý¾Ý¿âµÄÓÃ»§Ãû -->
+        <!--MySQLï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ -->
         <property name="user">
-            <value>fudali</value>
+            <value>#{name}</value>
         </property>
-        <!--MySQLÊý¾Ý¿â ÃÜÂë -->
+        <!--MySQLï¿½ï¿½ï¿½Ý¿ï¿½ ï¿½ï¿½ï¿½ï¿½ -->
         <property name="password">
-            <value>fudali133</value>
+            <value>#{password}</value>
         </property>
-        <!--Á¬½Ó³ØÖÐ±£ÁôµÄ×îÐ¡Á¬½ÓÊý¡£-->
+        <!--ï¿½ï¿½ï¿½Ó³ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-->
         <property name="minPoolSize">
             <value>5</value>
         </property>
-        <!--Á¬½Ó³ØÖÐ±£ÁôµÄ×î´óÁ¬½ÓÊý¡£Default: 15 -->
+        <!--ï¿½ï¿½ï¿½Ó³ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Default: 15 -->
         <property name="maxPoolSize">
             <value>30</value>
         </property>
-        <!--³õÊ¼»¯Ê±»ñÈ¡µÄÁ¬½ÓÊý£¬È¡ÖµÓ¦ÔÚminPoolSizeÓëmaxPoolSizeÖ®¼ä¡£Default: 3 -->
+        <!--ï¿½ï¿½Ê¼ï¿½ï¿½Ê±ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ÖµÓ¦ï¿½ï¿½minPoolSizeï¿½ï¿½maxPoolSizeÖ®ï¿½ä¡£Default: 3 -->
         <property name="initialPoolSize">
             <value>10</value>
         </property>
-        <!--×î´ó¿ÕÏÐÊ±¼ä,60ÃëÄÚÎ´Ê¹ÓÃÔòÁ¬½Ó±»¶ªÆú¡£ÈôÎª0ÔòÓÀ²»¶ªÆú¡£Default: 0 -->
+        <!--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½,60ï¿½ï¿½ï¿½ï¿½Î´Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Default: 0 -->
         <property name="maxIdleTime">
             <value>60</value>
         </property>
-        <!--µ±Á¬½Ó³ØÖÐµÄÁ¬½ÓºÄ¾¡µÄÊ±ºòc3p0Ò»´ÎÍ¬Ê±»ñÈ¡µÄÁ¬½ÓÊý¡£Default: 3 -->
+        <!--ï¿½ï¿½ï¿½ï¿½ï¿½Ó³ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ÓºÄ¾ï¿½ï¿½ï¿½Ê±ï¿½ï¿½c3p0Ò»ï¿½ï¿½Í¬Ê±ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Default: 3 -->
         <property name="acquireIncrement">
             <value>5</value>
         </property>
-        <!--JDBCµÄ±ê×¼²ÎÊý£¬ÓÃÒÔ¿ØÖÆÊý¾ÝÔ´ÄÚ¼ÓÔØµÄPreparedStatementsÊýÁ¿¡£µ«ÓÉÓÚÔ¤»º´æµÄ                statementsÊôÓÚµ¥¸öconnection¶ø²»ÊÇÕû¸öÁ¬½Ó³Ø¡£ËùÒÔÉèÖÃÕâ¸ö²ÎÊýÐèÒª¿¼ÂÇµ½¶à·½Ãæ                µÄÒòËØ¡£Èç¹ûmaxStatementsÓëmaxStatementsPerConnection¾ùÎª0£¬Ôò»º´æ±»¹Ø±Õ¡£Default: 0-->
+        <!--JDBCï¿½Ä±ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½Ú¼ï¿½ï¿½Øµï¿½PreparedStatementsï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½                statementsï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½connectionï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó³Ø¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Çµï¿½ï¿½à·½ï¿½ï¿½                ï¿½ï¿½ï¿½ï¿½ï¿½Ø¡ï¿½ï¿½ï¿½ï¿½maxStatementsï¿½ï¿½maxStatementsPerConnectionï¿½ï¿½Îª0ï¿½ï¿½ï¿½ò»º´æ±»ï¿½Ø±Õ¡ï¿½Default: 0-->
         <property name="maxStatements">
             <value>0</value>
         </property>
-        <!--Ã¿60Ãë¼ì²éËùÓÐÁ¬½Ó³ØÖÐµÄ¿ÕÏÐÁ¬½Ó¡£Default: 0 -->
+        <!--Ã¿60ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó³ï¿½ï¿½ÐµÄ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¡ï¿½Default: 0 -->
         <property name="idleConnectionTestPeriod">
             <value>60</value>
         </property>
-        <!--¶¨ÒåÔÚ´ÓÊý¾Ý¿â»ñÈ¡ÐÂÁ¬½ÓÊ§°ÜºóÖØ¸´³¢ÊÔµÄ´ÎÊý¡£Default: 30 -->
+        <!--ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Üºï¿½ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ÔµÄ´ï¿½ï¿½ï¿½ï¿½ï¿½Default: 30 -->
         <property name="acquireRetryAttempts">
             <value>30</value>
         </property>
-        <!--»ñÈ¡Á¬½ÓÊ§°Ü½«»áÒýÆðËùÓÐµÈ´ýÁ¬½Ó³ØÀ´»ñÈ¡Á¬½ÓµÄÏß³ÌÅ×³öÒì³£¡£µ«ÊÇÊý¾ÝÔ´ÈÔÓÐÐ§
-        ±£Áô£¬²¢ÔÚÏÂ´Îµ÷ÓÃgetConnection()µÄÊ±ºò¼ÌÐø³¢ÊÔ»ñÈ¡Á¬½Ó¡£Èç¹ûÉèÎªtrue£¬ÄÇÃ´ÔÚ³¢ÊÔ
-        »ñÈ¡Á¬½ÓÊ§°Üºó¸ÃÊý¾ÝÔ´½«ÉêÃ÷ÒÑ¶Ï¿ª²¢ÓÀ¾Ã¹Ø±Õ¡£Default: false-->
+        <!--ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÐµÈ´ï¿½ï¿½ï¿½ï¿½Ó³ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½Óµï¿½ï¿½ß³ï¿½ï¿½×³ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½Ð§
+        ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â´Îµï¿½ï¿½ï¿½getConnection()ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½È¡ï¿½ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªtrueï¿½ï¿½ï¿½ï¿½Ã´ï¿½Ú³ï¿½ï¿½ï¿½
+        ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Üºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¶Ï¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¹Ø±Õ¡ï¿½Default: false-->
         <property name="breakAfterAcquireFailure">
             <value>true</value>
         </property>
-        <!--ÒòÐÔÄÜÏûºÄ´óÇëÖ»ÔÚÐèÒªµÄÊ±ºòÊ¹ÓÃËü¡£Èç¹ûÉèÎªtrueÄÇÃ´ÔÚÃ¿¸öconnectionÌá½»µÄ
-                Ê±ºò¶¼½«Ð£ÑéÆäÓÐÐ§ÐÔ¡£½¨ÒéÊ¹ÓÃidleConnectionTestPeriod»òautomaticTestTable
-                µÈ·½·¨À´ÌáÉýÁ¬½Ó²âÊÔµÄÐÔÄÜ¡£Default: false -->
+        <!--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Ê±ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªtrueï¿½ï¿½Ã´ï¿½ï¿½Ã¿ï¿½ï¿½connectionï¿½á½»ï¿½ï¿½
+                Ê±ï¿½ò¶¼½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½Ô¡ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½idleConnectionTestPeriodï¿½ï¿½automaticTestTable
+                ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó²ï¿½ï¿½Ôµï¿½ï¿½ï¿½ï¿½Ü¡ï¿½Default: false -->
         <property name="testConnectionOnCheckout">
             <value>false</value>
         </property>
     </bean>
 
-    <!-- transaction support,ÊÂÎñ¹ÜÀíÖ§³Öbean-->
+    <!-- transaction support,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½bean-->
     <!-- PlatformTransactionMnager -->
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />
     </bean>
-    <!-- enable transaction annotation support£¬»ùÓÚ×¢½âµÄÊÂÎñguanli -->
+    <!-- enable transaction annotation supportï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½guanli -->
     <tx:annotation-driven transaction-manager="txManager" />
 
     <context:component-scan base-package="ren.doob" use-default-filters="false">
