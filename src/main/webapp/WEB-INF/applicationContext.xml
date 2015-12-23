@@ -17,69 +17,11 @@
      http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
     <context:component-scan base-package="ren.doob"/>
 
-    <bean id="dataSource"
-          class="com.mchange.v2.c3p0.ComboPooledDataSource"
-          destroy-method="close">
-        <property name="driverClass">
-            <value>com.mysql.jdbc.Driver</value>
-        </property>
-        <property name="jdbcUrl">
-            <value>
-                jdbc:mysql://139.129.4.187:3306/doob
-            </value>
-        </property>
-        <!--MySQL数据库的用户名 -->
-        <property name="user">
-            <value>fudali</value>
-        </property>
-        <!--MySQL数据库 密码 -->
-        <property name="password">
-            <value>fudali133</value>
-        </property>
-        <!--连接池中保留的最小连接数。-->
-        <property name="minPoolSize">
-            <value>5</value>
-        </property>
-        <!--连接池中保留的最大连接数。Default: 15 -->
-        <property name="maxPoolSize">
-            <value>30</value>
-        </property>
-        <!--初始化时获取的连接数，取值应在minPoolSize与maxPoolSize之间。Default: 3 -->
-        <property name="initialPoolSize">
-            <value>10</value>
-        </property>
-        <!--最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
-        <property name="maxIdleTime">
-            <value>60</value>
-        </property>
-        <!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
-        <property name="acquireIncrement">
-            <value>5</value>
-        </property>
-        <!--JDBC的标准参数，用以控制数据源内加载的PreparedStatements数量。但由于预缓存的                statements属于单个connection而不是整个连接池。所以设置这个参数需要考虑到多方面                的因素。如果maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。Default: 0-->
-        <property name="maxStatements">
-            <value>0</value>
-        </property>
-        <!--每60秒检查所有连接池中的空闲连接。Default: 0 -->
-        <property name="idleConnectionTestPeriod">
-            <value>60</value>
-        </property>
-        <!--定义在从数据库获取新连接失败后重复尝试的次数。Default: 30 -->
-        <property name="acquireRetryAttempts">
-            <value>30</value>
-        </property>
-        <!--获取连接失败将会引起所有等待连接池来获取连接的线程抛出异常。但是数据源仍有效
-        保留，并在下次调用getConnection()的时候继续尝试获取连接。如果设为true，那么在尝试
-        获取连接失败后该数据源将申明已断开并永久关闭。Default: false-->
-        <property name="breakAfterAcquireFailure">
-            <value>true</value>
-        </property>
-        <!--因性能消耗大请只在需要的时候使用它。如果设为true那么在每个connection提交的
-                时候都将校验其有效性。建议使用idleConnectionTestPeriod或automaticTestTable
-                等方法来提升连接测试的性能。Default: false -->
-        <property name="testConnectionOnCheckout">
-            <value>false</value>
-        </property>
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"  >
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://139.129.4.187:3306/doob" />
+        <property name="username" value="fudali" />
+        <property name="password" value="fudali133" />
     </bean>
 
     <!-- transaction support,事务管理支持bean-->
@@ -90,7 +32,7 @@
     <!-- enable transaction annotation support，基于注解的事务guanli -->
     <tx:annotation-driven transaction-manager="txManager" />
 
-    <context:component-scan base-package="ren.doob" use-default-filters="false">
+    <context:component-scan base-package="ren.doob">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
     </context:component-scan>
@@ -102,7 +44,7 @@
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="ren.doob.mapper"/>
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />-->
     </bean>
 
 </beans>

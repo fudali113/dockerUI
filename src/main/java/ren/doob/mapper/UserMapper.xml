@@ -2,17 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="ren.doob.mapper.UserMapper">
 
-    <select id="getUser" resultType="ren.doob.model.User" parameterType="ren.doob.common.Parameter">
-          SELECT * FROM user
-          <where>
+    <select id="getLoginUser" parameterType="ren.doob.common.Parameter" resultType="ren.doob.model.User">
+          SELECT * FROM user where
                   <if test="accept.name != null and accept.name != ''">
                           NAME = #{accept.name}
                   </if>
                   <if test="accept.pass != null and accept.pass != ''">
                           AND pass = #{accept.pass}
                   </if>
-          </where>
-          order by ID
     </select>
 
 </mapper>
