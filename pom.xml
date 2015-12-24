@@ -9,7 +9,7 @@
   <url>http://maven.apache.org</url>
 
   <properties>
-    <spring.version>4.1.6.RELEASE</spring.version>
+    <spring.version>4.0.4.RELEASE</spring.version>
   </properties>
 
   <dependencies>
@@ -75,20 +75,6 @@
     </dependency>
     <!-- springframe end -->
 
-    <!--aspectj start-->
-    <dependency>
-      <groupId>org.aspectj</groupId>
-      <artifactId>aspectjweaver</artifactId>
-      <version>1.8.6</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.aspectj</groupId>
-      <artifactId>aspectjrt</artifactId>
-      <version>1.8.6</version>
-    </dependency>
-    <!--aspectj end-->
-
     <!--c3p0-->
     <dependency>
       <groupId>com.mchange</groupId>
@@ -123,13 +109,13 @@
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis</artifactId>
-      <version>3.3.0</version>
+      <version>3.2.3</version>
     </dependency>
     <!--mybatis spring整合-->
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis-spring</artifactId>
-      <version>1.2.3</version>
+      <version>1.2.1</version>
     </dependency>
 
     <!--mysql driver-->

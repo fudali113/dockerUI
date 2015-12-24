@@ -3,13 +3,7 @@
 <mapper namespace="ren.doob.mapper.UserMapper">
 
     <select id="getLoginUser" parameterType="ren.doob.common.Parameter" resultType="ren.doob.model.User">
-          SELECT * FROM user where
-                  <if test="accept.name != null and accept.name != ''">
-                          NAME = #{accept.name}
-                  </if>
-                  <if test="accept.pass != null and accept.pass != ''">
-                          AND pass = #{accept.pass}
-                  </if>
+          SELECT * FROM user where  NAME = #{accept.name}
     </select>
 
 </mapper>
