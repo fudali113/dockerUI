@@ -20,6 +20,7 @@ public class UserMapperService {
     private UserMapper um;
 
     public User getUser(Parameter parameter){
+
         return um.getLoginUser(parameter);
     }
 }
