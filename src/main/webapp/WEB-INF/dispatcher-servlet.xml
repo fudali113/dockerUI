@@ -11,16 +11,18 @@
                         http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd ">
 
     <context:annotation-config />
+    <mvc:annotation-driven />
+
     <context:component-scan base-package="ren.doob.controller" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
-
     <bean  class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
 
-    <mvc:annotation-driven />
-    <mvc:resources mapping="/views/**" location="/views/"/>
+
+    <!--使静态资源请求不被springmvc处理-->
+    <mvc:resources mapping="/views/**" location="/views/" />
 
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
