@@ -131,7 +131,17 @@
       <artifactId>jstl</artifactId>
       <version>1.2</version>
     </dependency>
+
+    <!--ssh连接-->
+    <dependency>
+      <groupId>sshtools</groupId>
+      <artifactId>j2ssh-core</artifactId>
+      <version>0.2.9</version>
+    </dependency>
+
   </dependencies>
+
+
   <build>
     <finalName>doob</finalName>
 
