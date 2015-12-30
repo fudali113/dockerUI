@@ -1,5 +1,8 @@
 #doob
-spring mvc + mybatis + maven + idea学习项目
+spring mvc + mybatis + maven + idea
 
-纯属学习.-^_^
-妈蛋，为什么我第一个^符号打不出来
+并加入ssh功能作为一个web ssh应用
+同时连接我的一个linux服务器
+通过后台连接服务器操作docker搭建简易的docker云服务
+
+毕业论文设计
