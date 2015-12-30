@@ -14,7 +14,7 @@
     <link href="/views/css/error.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 <body>
-<!-----start-wrap--------->
+
 <div class="wrap">
     <!-----start-content--------->
     <div class="content">
