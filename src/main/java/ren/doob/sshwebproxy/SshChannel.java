@@ -3,9 +3,6 @@ package ren.doob.sshwebproxy;
 
 public abstract class SshChannel {
 
-    //***************************************************************
-    // Variables
-    //***************************************************************
 
     /** The type of channel, Shell, SCP, etc */
     private String channelType;
@@ -16,9 +13,6 @@ public abstract class SshChannel {
     /** The SshConnection this channel is using */
     protected SshConnection sshConnection;
 
-    //***************************************************************
-    // Constructor
-    //***************************************************************
 
     /**
      * Create a new SshChannel of the specified type.
@@ -32,9 +26,6 @@ public abstract class SshChannel {
         this.sshConnection = sshConnection;
     }
 
-    //***************************************************************
-    // Abstract Methods
-    //***************************************************************
 
     /**
      * Close the SessionChannelClient and all internal
@@ -59,9 +50,7 @@ public abstract class SshChannel {
      */
     public abstract String getPage();
 
-    //***************************************************************
-    // Parameter Access Methods
-    //***************************************************************
+
 
     /** The type of channel, Shell, SCP, etc */
     public String getChannelType() {
@@ -86,9 +75,7 @@ public abstract class SshChannel {
         this.channelId = channelId;
     }
 
-    //***************************************************************
-    // Public methods
-    //***************************************************************
+
 
     /**
      * Replaces any HTML control characters with their escaped value.

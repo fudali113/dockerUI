@@ -12,9 +12,7 @@ import java.util.Collection;
 
 public class SshSession {
 
-    //***************************************************************
-    // Constants
-    //***************************************************************
+
 
     private static final String USER = "User";
 
@@ -24,9 +22,6 @@ public class SshSession {
 
     private static final String SSH_CONNECTIONS = "SshConnections";
 
-    //***************************************************************
-    // Variables
-    //***************************************************************
 
     /** The HttpSession this class is wrapping. */
     private HttpSession session;
@@ -34,9 +29,6 @@ public class SshSession {
     /** Logger */
     private static final Log log = LogFactory.getLog( ShellChannel.class );
 
-    //***************************************************************
-    // Constructor
-    //***************************************************************
 
     /**
      * Helper constructor.  Creates a new SSHWebProxy using
@@ -59,9 +51,6 @@ public class SshSession {
         this.session = session;
     }
 
-    //***************************************************************
-    // Parameter Access Methods
-    //***************************************************************
 
     /**
      * Checks to makes sure that a user has logged into the system.
@@ -207,10 +196,6 @@ public class SshSession {
         Map connections = getConnectionMap();
         return (connections == null) ? null : connections.values();
     }
-
-    //***************************************************************
-    // Private Parameter Access Methods
-    //***************************************************************
 
     /**
      * Removes the ConnectionMap from the Session (actually, the ServletContext).

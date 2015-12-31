@@ -3,9 +3,6 @@ package ren.doob.sshwebproxy;
 
 public interface SshConstants {
 
-    //***************************************************************
-    // Properties
-    //***************************************************************
 
     /** Filename of the properties file used to store user information */
     static final String PROPERTIES_FILENAME = "sshwebproxy.properties";

@@ -1,4 +1,3 @@
-
 package ren.doob.sshwebproxy;
 
 import org.apache.commons.logging.Log;
@@ -7,11 +6,6 @@ import com.sshtools.j2ssh.session.SessionChannelClient;
 
 public class VT100ShellChannel extends ShellChannel
 {
-    //***************************************************************
-    // Constants
-    //***************************************************************
-
-    // Control Characters (all values are decimal)
 
     /** Backspace */
     private static final int CTRL_BS = 8;

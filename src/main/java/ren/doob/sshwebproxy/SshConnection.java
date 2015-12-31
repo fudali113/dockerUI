@@ -26,10 +26,6 @@ import org.apache.commons.logging.LogFactory;
 
 public class SshConnection implements SshConstants {
 
-    //***************************************************************
-    // Variables
-    //***************************************************************
-
     /** The SSHClient instance */
     private SshClient sshClient;
 
