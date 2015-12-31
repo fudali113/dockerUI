@@ -20,10 +20,6 @@ public interface SshConstants {
     /** Indicates restricted mode host to connect to. */
     static final String PROPERTIES_RESTRICTED = "sshwebproxy.restricted";
 
-    //***************************************************************
-    // Page URLs.
-    //***************************************************************
-
     /** Home page for the application */
     static final String PAGE_HOME = "index.jsp";
 
@@ -36,10 +32,6 @@ public interface SshConstants {
     /** File Channel page */
     static final String PAGE_FILE_HOME = "file.jsp";
 
-    //***************************************************************
-    // Servlet URLs.
-    //***************************************************************
-
     /** The Admin Servlet, used to handle User and Config setup */
     static final String SERVLET_ADMIN = "admin";
 
@@ -51,10 +43,6 @@ public interface SshConstants {
 
     /** The SshFileServlet */
     static final String SERVLET_FILE = "file";
-
-    //***************************************************************
-    // Parameter Name Constants
-    //***************************************************************
 
     /** The action to perform */
     static final String PARAMETER_ACTION = "action";
@@ -101,11 +89,6 @@ public interface SshConstants {
     /** The name of the file to work with. */
     static final String PARAMETER_DIRECTORY = "directory";
 
-    //***************************************************************
-    // Action Constants
-    //***************************************************************
-
-    // Admin Servlet Actions
 
     /** A user request to login */
     static final String ACTION_LOGIN = "login";
@@ -143,10 +126,6 @@ public interface SshConstants {
     /** Change to a different directory */
     static final String ACTION_CHANGE_DIRECTORY = "changeDirectory";
 
-    //***************************************************************
-    // Channel Types
-    //***************************************************************
-
     /** Do not open any channel after connection */
     static final String CHANNEL_TYPE_NONE = "None";
 
@@ -155,10 +134,6 @@ public interface SshConstants {
 
     /** FileChannel */
     static final String CHANNEL_TYPE_FILE = "File";
-
-    //***************************************************************
-    // Authentication Types
-    //***************************************************************
 
     static final String AUTHENTICATION_TYPE_PASSWORD = "passwordauthentication";
 

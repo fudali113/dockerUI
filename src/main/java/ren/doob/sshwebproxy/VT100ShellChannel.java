@@ -119,9 +119,6 @@ public class VT100ShellChannel extends ShellChannel
     /** Logger */
     private static Log log = LogFactory.getLog( VT100ShellChannel.class );
 
-    //***************************************************************
-    // Constructor
-    //***************************************************************
 
     /**
      * Initializes a new VT100ShellChannel.  Uses ShellChannel constructor
@@ -142,9 +139,6 @@ public class VT100ShellChannel extends ShellChannel
         clearScreen();
     }
 
-    //***************************************************************
-    // Static Public Methods
-    //***************************************************************
 
     /**
      * Determines if the specified character is a control character.
@@ -159,9 +153,6 @@ public class VT100ShellChannel extends ShellChannel
         return ( character < 32 || character > 126 );
     }
 
-    //***************************************************************
-    // Parameter Access Methods
-    //***************************************************************
 
     /**
      * The index of the row the cursor is on, if we are
@@ -197,9 +188,6 @@ public class VT100ShellChannel extends ShellChannel
         }
     }
 
-    //***************************************************************
-    // Public Methods
-    //***************************************************************
 
     /**
      * Parses the data read from the server for control characters.
@@ -338,10 +326,6 @@ public class VT100ShellChannel extends ShellChannel
             return output;
         }
     }
-
-    //***************************************************************
-    // Private Helper Methods
-    //***************************************************************
 
     /**
      * Check to see if the current character is a control character.

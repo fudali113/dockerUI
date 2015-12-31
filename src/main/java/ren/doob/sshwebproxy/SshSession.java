@@ -76,8 +76,7 @@ public class SshSession {
     }
 
     /**
-     * Returns the name of the current logged-in user,
-     * or null if no user is logged in.
+     * 返回当前登录用户的名称, 或零如果没有登录用户。
      *
      * @return Username, or null.
      */
@@ -87,7 +86,7 @@ public class SshSession {
     }
 
     /**
-     * Sets a username into the session.
+     * 设置一个用户名到会话中。
      *
      * @param user
      */
@@ -127,11 +126,11 @@ public class SshSession {
     }
 
     /**
-     * Returns the SshConnection for the given connectionInfo.
-     * Returns null if the connection does not exist or has been closed.
+     * 返回给定connectionInfo SshConnection。
+     * 返回null如果连接不存在o closed.r
      *
-     * @param connectionInfo the connectionInfo unique to this connection.
-     * @return the SshConnection or null if it does not exist or has been closed.
+     * @param connectionInfo connectionInfo独特的连接。
+     * @return SshConnection或null如果它不存在或已被关闭。
      */
     public synchronized SshConnection getSshConnection( String connectionInfo )
     {
@@ -153,10 +152,10 @@ public class SshSession {
     }
 
     /**
-     * Stores a new SshConnection in the session.
+     * 将新的SshConnection存储在会话中。
      *
      * @param sshConnection the connection to store.
-     * @return returns false if this SshConnection is a duplicate.
+     * @return 如果这个SshConnection重复返回false。
      */
     public synchronized boolean addSshConnection( SshConnection sshConnection )
     {
@@ -174,7 +173,7 @@ public class SshSession {
     }
 
     /**
-     * Removes an SshConnection from the session.
+     * 从会话中删除一个SshConnection。
      *
      * @param connectionInfo
      */
@@ -186,7 +185,7 @@ public class SshSession {
     }
 
     /**
-     * Returns an Collection for the current connections.
+     * 返回一个收集当前连接。
      *
      * @return null if no connections exist, or an Collection for the current
      * connections.
@@ -207,9 +206,7 @@ public class SshSession {
     }
 
     /**
-     * Retrieve the ConnectionMap for this session.  The map is actually stored
-     * in the ServletContext so it will be accessible by the SessionCleanup class
-     * after the session is destroyed.
+     * 检索的ConnectionMap会话。地图是存储　　*将访问ServletContext中所以SessionCleanup类　　*会议后销毁.
      *
      * @return A Map of SshConnections, keyed by the connectionInfo String.
      */

@@ -41,9 +41,6 @@ public class SshConnection implements SshConstants {
     /** Logger */
     private static final Log log = LogFactory.getLog( SshConnection.class );
 
-    //***************************************************************
-    // Static Initialization
-    //***************************************************************
 
     // Initialize the SSH Library
     static
@@ -64,7 +61,7 @@ public class SshConnection implements SshConstants {
     //***************************************************************
 
     /**
-     * Performs common constructor logic.
+     * 构造函数执行常见的逻辑。
      */
     private SshConnection()
     {
@@ -72,7 +69,7 @@ public class SshConnection implements SshConstants {
     }
 
     /**
-     * Initialize a new SshConnection with the SshClient connection.
+     * 初始化一个新的SshConnection SshClient连接。
      *
      * @param sshClient the sshClient that represents the connection.
      */
@@ -86,14 +83,13 @@ public class SshConnection implements SshConstants {
     }
 
     /**
-     * Create a new SshConnection to the specified location
-     * with the specified username and password.
+     * 创建一个新的SshConnection到指定的位置　使用指定的用户名和密码。
      *
-     * @param host the remote host to connect to.
-     * @param port the port to connect to.
-     * @param username the username to login with.
-     * @param password the password to login with.
-     * @throws SshConnectException thrown if the connection attempt failes for any reason.
+     * @param host IP地址
+     * @param port 端口号
+     * @param username 用户名
+     * @param password 密码.
+     * @throws  如果连接尝试失败的任何理由将导致SshConnectException抛出。
      */
     public SshConnection( String host, int port, String username, String password )
         throws SshConnectException
@@ -156,15 +152,14 @@ public class SshConnection implements SshConstants {
     }
 
     /**
-     * Create a new SshConnection to the specified location
-     * with the specified username and key.
+     * 创建一个新的SshConnection到指定的位置　　*使用指定的用户名和键。
      *
-     * @param host the remote host to connect to.
-     * @param port the port to connect to.
-     * @param username the username to login with.
-     * @param key the SSH Key as a byte array.
-     * @param keyPassPhrase the passPharse for the key (optional)
-     * @throws SshConnectException thrown if the connection attempt failes for any reason.
+     * @param host
+     * @param port
+     * @param username
+     * @param key SSH密钥作为一个字节数组。
+     * @param keyPassPhrase 关键的passPharse(可选)
+     * @throws 如果连接尝试失败的任何理由将导致SshConnectException抛出。
      */
      public SshConnection( String host, int port, String username, byte[] key, String keyPassPhrase )
              throws SshConnectException
@@ -232,16 +227,13 @@ public class SshConnection implements SshConstants {
         // Success!
         if( log.isInfoEnabled() ) log.info( connectionInfo + " - Connection opened successfully." );
     }
-    //***************************************************************
-    // Parameter Access Methods
-    //***************************************************************
+
 
     /**
-     * Returns information about this connection.  The information
-     * consists of the username, the host, and the port.  The result
-     * is formatted as: username@host:port
-     *
-     * @return formated string: username@host:port
+     * 返回此连接的信息。
+     * 信息包括用户名、主机和端口。
+     * 结果被格式化:username@host:端口
+     * @return 格式化字符串:username@host:端口
      */
     public String getConnectionInfo()
     {
@@ -249,12 +241,12 @@ public class SshConnection implements SshConstants {
     }
 
     /**
-     * Helper method to return the connection info.
+     * 助手方法返回的连接信息。
      *
      * @param host
      * @param port
      * @param username
-     * @return a propertly formatted connection info string.
+     * @return 一个改过的格式化字符串连接信息.
      */
     public static String getConnectionInfo( String host, String port, String username )
     {
@@ -262,7 +254,7 @@ public class SshConnection implements SshConstants {
     }
 
     /**
-     * Helper method to return the connection info.
+     * 助手方法返回的连接信息.
      *
      * @param host
      * @param port
@@ -274,12 +266,9 @@ public class SshConnection implements SshConstants {
         return getConnectionInfo( host, String.valueOf( port ), username );
     }
 
-    //***************************************************************
-    // Public Methods
-    //***************************************************************
 
     /**
-     * Returns true if this SshConnection is open.
+     * 返回true,如果这个SshConnection是开着的.
      *
      * @return true if it is open.
      */
@@ -289,7 +278,7 @@ public class SshConnection implements SshConstants {
     }
 
     /**
-     * Closes all open channels and the current SshConnection.
+     * 关闭所有打开的通道和当前SshConnection。
      */
     public void close()
     {
@@ -309,10 +298,10 @@ public class SshConnection implements SshConstants {
     }
 
     /**
-     * Returns the requested channel.
+     * 返回请求的通道。
      *
-     * @param channelId the channel's unique id.
-     * @return the requested channel, or null if it does not exist.
+     * @param channelId 通道的惟一id.
+     * @return 请求的通道,或null如果它不存在.
      */
     public SshChannel getChannel( String channelId )
     {
@@ -328,7 +317,7 @@ public class SshConnection implements SshConstants {
     }
 
     /**
-     * Open a new Shell Channel for this connection.
+     * 打开一个新的壳渠道连接。
      *
      * @return a newly opened ShellChannel
      * @throws SshConnectException if the channel could not be opened.
@@ -428,10 +417,6 @@ public class SshConnection implements SshConstants {
         channelMap.remove( sshChannel.getChannelId() );
     }
 
-    //***************************************************************
-    // Object Methods
-    //***************************************************************
-
     /**
      * Return a string representation of this connection.
      * @return
@@ -441,9 +426,6 @@ public class SshConnection implements SshConstants {
         return MessageFormat.format( "Connected to {0} with {1} open channels.", args );
     }
 
-    //***************************************************************
-    // Inner Classes
-    //***************************************************************
 
     /**
      * Handles the HostKeyVerification.  Current implementation accepts

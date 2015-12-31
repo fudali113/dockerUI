@@ -15,10 +15,10 @@ public abstract class SshChannel {
 
 
     /**
-     * Create a new SshChannel of the specified type.
+     * 构造一个sshchannel对象
      *
-     * @param channelType the type of channel.
-     * @param sshConnection the connection to the SSH Server.
+     * @param channelType channel的状态
+     * @param sshConnection 连接了的.SshConnection对象
      */
     public SshChannel( String channelType, SshConnection sshConnection )
     {

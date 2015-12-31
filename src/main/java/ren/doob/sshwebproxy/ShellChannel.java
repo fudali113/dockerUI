@@ -11,9 +11,6 @@ import com.sshtools.j2ssh.session.SessionChannelClient;
 
 public class ShellChannel extends SshChannel implements SshConstants {
 
-    //***************************************************************
-    // Variables
-    //***************************************************************
 
     /** The number of columns to display as a screen */
     protected int screenWidth = 80;
@@ -48,19 +45,16 @@ public class ShellChannel extends SshChannel implements SshConstants {
     /** The entire stored buffer. */
     private ArrayList buffer;
 
-    /** Logger */
+    /** 创建一个日志对象 */
     private static final Log log = LogFactory.getLog( ShellChannel.class );
 
-    //***************************************************************
-    // Constructor
-    //***************************************************************
 
     /**
      * Opens a vt100 terminal session transfer session with the server.
      *
-     * @param sshConnection the connection to use.
-     * @param sshChannel the SSH API channel.
-     * @throws SshConnectException thrown if there is any error opening
+     * @param sshConnection 传入一个连接了的sshConnection
+     * @param sshChannel SSH API 的channel
+     * @throws SshConnectException 抛出异常
      * the connection.
      */
     public ShellChannel( SshConnection sshConnection, SessionChannelClient sshChannel )
@@ -96,12 +90,10 @@ public class ShellChannel extends SshChannel implements SshConstants {
         }
     }
 
-    //***************************************************************
-    // SshChannel Methods
-    //***************************************************************
 
     /**
-     * Closes the Reader and Writer after the Channel has been closed.
+     * 清空之前所有reader和writer储存的数据
+     * 只对当前连接的sshconnection有效
      * This should only be called by the SshConnection
      * class and never directly called from this class.
      */
@@ -161,9 +153,6 @@ public class ShellChannel extends SshChannel implements SshConstants {
         return PAGE_SHELL_HOME + "?connection=" + sshConnection.getConnectionInfo() + "&channel=" + getChannelId();
     }
 
-    //***************************************************************
-    // Public Parameter Access
-    //***************************************************************
 
 
     /**
@@ -231,13 +220,11 @@ public class ShellChannel extends SshChannel implements SshConstants {
         return cursorColumn;
     }
 
-    //***************************************************************
-    // Public Data Manipulation
-    //***************************************************************
+
 
     /**
-     * Performs a read of the input data and fills the buffer.
-     * This should be called before getScreen or getBuffer.
+     * 执行一个读的输入数据和填充缓冲区。.
+     * 这个方法应该在getScreen or getBuffer之前调用
      */
     public void read()
     {
@@ -311,11 +298,11 @@ public class ShellChannel extends SshChannel implements SshConstants {
     }
 
     /**
-     * Writes the data to the SSH server and sends a newline charecter
-     * "\n" if the sendNewLine boolean is true.
+     * 将数据写入SSH服务器和发送一个换行符charecter
+     * sendNewLine为true时发送"\n"
      *
-     * @param data the data to write.
-     * @param sendNewLine true if a newline should be sent.
+     * @param data 把data发送到ssh server
+     * @param sendNewLine 为true时发送一个换行符
      */
     public void write( String data, boolean sendNewLine )
     {
@@ -349,9 +336,8 @@ public class ShellChannel extends SshChannel implements SshConstants {
     }
 
     /**
-     * Adds the data that was read to the buffer.
-     *
-     * @param input the processed data read from the server
+     * 将读取的数据添加到缓冲区。
+     * @param input the processed data read from the server 从服务器读取处理过的数据
      */
     public void fillBuffer( String input )
     {
@@ -393,11 +379,9 @@ public class ShellChannel extends SshChannel implements SshConstants {
     }
 
     /**
-     * Returns a String array of the currently visible
-     * rows.  The number of rows returned will always match
-     * the Screen Size.
+     * 返回一个字符串数组当前可见的行。返回的行数总是与屏幕尺寸相匹配
      *
-     * @return Array of Strings that represent the current data on the screen.
+     * @return  字符串数组表示当前数据在屏幕上。
      */
     public String[] getScreen()
     {
@@ -439,10 +423,9 @@ public class ShellChannel extends SshChannel implements SshConstants {
     }
 
     /**
-     * Returns a String array of the entire buffer.
-     * rows.
+     * 返回一个字符串数组的行整个缓冲区。
      *
-     * @return Array of Strings that represent the entire buffer.
+     * @return 代表整个缓冲区的字符串数组。
      */
     public String[] getBuffer()
     {
@@ -458,7 +441,7 @@ public class ShellChannel extends SshChannel implements SshConstants {
     }
 
     /**
-     * Process the incoming request into a string.
+     * 成一个字符串处理传入的请求
      * @return
      */
     protected String process( char[] inputBuffer, int count )
@@ -467,10 +450,10 @@ public class ShellChannel extends SshChannel implements SshConstants {
     }
 
     /**
-     * Parse the data to write to the server for control characters.
+     * 解析数据写入服务器控制字符。
      *
-     * @param input the data read from the client.
-     * @return a char array to write to the server.
+     * @param input 从客户端读取的数据。
+     * @return 一个char数组写入服务器。
      */
     private char[] encodeOutput( String input )
     {
