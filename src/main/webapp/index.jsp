@@ -6,7 +6,7 @@
 </head>
 <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="/views/chajian/BootSideMenu.css">
+<link rel="stylesheet" href="/doob/views/chajian/BootSideMenu.css">
 
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -110,8 +110,8 @@
     </div><!-- /.modal -->
         <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
         <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-        <script src="/views/chajian/BootSideMenu.js"></script>
-        <script src="/views/js/index.js"></script>
+        <script src="/doob/views/chajian/BootSideMenu.js"></script>
+        <script src="/doob/views/js/index.js"></script>
 
 </body>
 </html>
