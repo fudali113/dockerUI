@@ -55,7 +55,7 @@
                     </form>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="#">登陆/注册</a>
+                            <a href="#" data-toggle="modal" data-target="#myModal">登陆/注册</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">帮助<strong class="caret"></strong></a>
@@ -128,7 +128,131 @@
 </nav>
 </div>
 
-<div class="col-md-11" >
+<div class="container-fluid" id="show">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="hero-unit">
+                <h1>
+                    Hello, docker!
+                </h1>
+                <p>
+                    Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，
+                    然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，
+                    相互之间不会有任何接口（类似 iPhone 的 app）。几乎没有性能开销,可以很容易地在机器和数据中心中运行。
+                    最重要的是,他们不依赖于任何语言、框架包括系统。
+                </p>
+                <p>
+                    <a class="btn btn-primary btn-large" href="#">参看更多 »</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="carousel slide" id="carousel-47380">
+                <ol class="carousel-indicators">
+                    <li data-slide-to="0" data-target="#carousel-47380">
+                    </li>
+                    <li data-slide-to="1" data-target="#carousel-47380">
+                    </li>
+                    <li data-slide-to="2" data-target="#carousel-47380" class="active">
+                    </li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item">
+                        <img alt="" src="/doob/views/images/index/1.jpg" />
+                        <div class="carousel-caption">
+                            <h4>
+                                棒球
+                            </h4>
+                            <p>
+                                棒球运动是一种以棒打球为主要特点，集体性、对抗性很强的球类运动项目，在美国、日本尤为盛行。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img alt="" src="/doob/views/images/index/2.jpg" />
+                        <div class="carousel-caption">
+                            <h4>
+                                冲浪
+                            </h4>
+                            <p>
+                                冲浪是以海浪为动力，利用自身的高超技巧和平衡能力，搏击海浪的一项运动。运动员站立在冲浪板上，或利用腹板、跪板、充气的橡皮垫、划艇、皮艇等驾驭海浪的一项水上运动。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="item active">
+                        <img alt="" src="/doob/views/images/index/3.jpg" />
+                        <div class="carousel-caption">
+                            <h4>
+                                自行车
+                            </h4>
+                            <p>
+                                以自行车为工具比赛骑行速度的体育运动。1896年第一届奥林匹克运动会上被列为正式比赛项目。环法赛为最著名的世界自行车锦标赛。
+                            </p>
+                        </div>
+                    </div>
+                </div> <a data-slide="prev" href="#carousel-47380" class="left carousel-control">‹</a> <a data-slide="next" href="#carousel-47380" class="right carousel-control">›</a>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <ul class="thumbnails">
+                <li class="span4">
+                    <div class="thumbnail">
+                        <img alt="300x200" src="/doob/views/images/index/people.jpg" />
+                        <div class="caption">
+                            <h3>
+                                冯诺尔曼结构
+                            </h3>
+                            <p>
+                                也称普林斯顿结构，是一种将程序指令存储器和数据存储器合并在一起的存储器结构。程序指令存储地址和数据存储地址指向同一个存储器的不同物理位置。
+                            </p>
+                            <p>
+                                <a class="btn btn-primary" href="#">浏览</a> <a class="btn" href="#">分享</a>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li class="span4">
+                    <div class="thumbnail">
+                        <img alt="300x200" src="/doob/views/images/index/city.jpg" />
+                        <div class="caption">
+                            <h3>
+                                哈佛结构
+                            </h3>
+                            <p>
+                                哈佛结构是一种将程序指令存储和数据存储分开的存储器结构，它的主要特点是将程序和数据存储在不同的存储空间中，进行独立编址。
+                            </p>
+                            <p>
+                                <a class="btn btn-primary" href="#">浏览</a> <a class="btn" href="#">分享</a>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li class="span4">
+                    <div class="thumbnail">
+                        <img alt="300x200" src="/doob/views/images/index/sports.jpg" />
+                        <div class="caption">
+                            <h3>
+                                改进型哈佛结构
+                            </h3>
+                            <p>
+                                改进型的哈佛结构具有一条独立的地址总线和一条独立的数据总线，两条总线由程序存储器和数据存储器分时复用，使结构更紧凑。
+                            </p>
+                            <p>
+                                <a class="btn btn-primary" href="#">浏览</a> <a class="btn" href="#">分享</a>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-11"  id = "iframe">
     <div class="bs-docs-section">
         <!-- <h1 id="overview" class="page-header">任务提报</h1> -->
         <iframe src="/doob/views/jsp/error.jsp"  scroling="yes"  width="100%" height="90%" name="float" frameborder="0" allowTransparency="true">
