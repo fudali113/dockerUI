@@ -4,57 +4,138 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>doob</title>
 </head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="/doob/views/chajian/BootSideMenu.css">
+<link rel="stylesheet" href="/doob/views/chajian/bootstrap-vertical-menu.css">
+<link rel="stylesheet" type="text/css" href="/doob/views/css/index.css">
 
-<body>
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="navbar-header" style="width: 200px">
-        <a class="navbar-brand" href="#"><strong>doob</strong></a>
-    </div>
-    <div>
-        <ul class="nav navbar-nav" id="nnn">
-            <li class="active"><a href="#" title="/emmanage/html/renwtb.html">主页</a></li>
-            <li><a href="#" title="/emmanage/html/quexxx.html">信息</a></li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    请假
-                    <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="#" data-toggle="modal" data-target="#myModal1">请假</a></li>
-                    <li><a href="#" data-toggle="modal" data-target="#myModal2">查看请假记录</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#" data-toggle="modal" data-target="#myModal3">请假审核</a></li>
-                </ul>
-            </li>
+<div class="container" style="width: 100%">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <nav class="navbar navbar-inverse" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">doob</a>
+                </div>
 
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    管理
-                    <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu" id="caidan">
-                    <li><a href="#" title="html/xitgl.html">系统管理</a></li>
-                </ul>
-            </li>
-            <li><a href="#" data-toggle="modal" data-target="#myModal">登陆</a></li>
-        </ul>
-    </div>
-    <div align="right">
-    </div>
-</nav>
-<div id="demo">
-    <div class="list-group">
-        <a href="#" class="list-group-item active">Item 1</a>
-        <a href="#" class="list-group-item">Item 2</a>
-        <a href="#" class="list-group-item">Item 3</a>
-        <a href="#" class="list-group-item">Item 4</a>
-        <a href="#" class="list-group-item">Item 5</a>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="#">主页</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">操作<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">Action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Another action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Something else here</a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                <li>
+                                    <a href="#">Separated link</a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                <li>
+                                    <a href="#">One more separated link</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" />
+                        </div> <button type="submit" class="btn btn-default">搜索</button>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#">登陆/注册</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">帮助<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">Action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Another action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Something else here</a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                <li>
+                                    <a href="#">Separated link</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+            </nav>
+        </div>
     </div>
 </div>
 
+<%--侧边导航--%>
+<div class="col-md-1">
+<nav class="navbar navbar-vertical-left">
+    <ul class="nav navbar-nav">
+        <li>
+            <a href>
+                <i class="fa fa-fw fa-lg fa-home"></i>
+                <span>主页</span>
+            </a>
+        </li>
+        <li>
+            <a href>
+                <i class="fa fa-fw fa-lg fa-download "></i>
+                <span>下载</span>
+            </a>
+        </li>
+        <li>
+            <a href>
+                <i class="fa fa-fw fa-lg fa-comments-o"></i>
+                <span>信息</span>
+            </a>
+        </li>
+        <li>
+            <a href>
+                <i class="fa fa-fw fa-lg fa-desktop"></i>
+                <span>电脑</span>
+            </a>
+        </li>
+        <li>
+            <a href>
+                <i class="fa fa-fw fa-lg fa-tablet"></i>
+                <span>手机</span>
+            </a>
+        </li>
+        <li>
+            <a href>
+                <i class="fa fa-fw fa-lg fa-laptop"></i>
+                <span>平板</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+</div>
+
+<div class="col-md-11" >
+    <div class="bs-docs-section">
+        <!-- <h1 id="overview" class="page-header">任务提报</h1> -->
+        <iframe src="/doob/views/jsp/error.jsp"  scroling="yes"  width="100%" height="90%" name="float" frameborder="0" allowTransparency="true">
+        </iframe>
+
+    </div>
+</div>
 
 
 <!-- 模态框（Modal） -->
@@ -110,7 +191,6 @@
     </div><!-- /.modal -->
         <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
         <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-        <script src="/doob/views/chajian/BootSideMenu.js"></script>
         <script src="/doob/views/js/index.js"></script>
 
 </body>
