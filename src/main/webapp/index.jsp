@@ -18,33 +18,29 @@
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">doob</a>
                 </div>
 
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" id="oooo">
                     <ul class="nav navbar-nav">
-                        <li class="active">
+                        <li>
                             <a href="#">主页</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">操作<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="#">Action</a>
+                                    <a href="#">申请容器</a>
                                 </li>
                                 <li>
-                                    <a href="#">Another action</a>
+                                    <a href="/doob/views/jsp/caozuo.jsp">管理容器</a>
                                 </li>
                                 <li>
-                                    <a href="#">Something else here</a>
+                                    <a href="#">容器相关知识</a>
                                 </li>
                                 <li class="divider">
                                 </li>
                                 <li>
-                                    <a href="#">Separated link</a>
+                                    <a href="#">SSH连接</a>
                                 </li>
                                 <li class="divider">
-                                </li>
-                                <li>
-                                    <a href="#">One more separated link</a>
-                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -61,18 +57,15 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">帮助<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="#">Action</a>
+                                    <a href="#">帮助</a>
                                 </li>
                                 <li>
-                                    <a href="#">Another action</a>
-                                </li>
-                                <li>
-                                    <a href="#">Something else here</a>
+                                    <a href="#">汇报bug</a>
                                 </li>
                                 <li class="divider">
                                 </li>
                                 <li>
-                                    <a href="#">Separated link</a>
+                                    <a href="#">联系我</a>
                                 </li>
                             </ul>
                         </li>
@@ -82,50 +75,6 @@
             </nav>
         </div>
     </div>
-</div>
-
-<%--侧边导航--%>
-<div class="col-md-1">
-<nav class="navbar navbar-vertical-left">
-    <ul class="nav navbar-nav">
-        <li>
-            <a href>
-                <i class="fa fa-fw fa-lg fa-home"></i>
-                <span>主页</span>
-            </a>
-        </li>
-        <li>
-            <a href>
-                <i class="fa fa-fw fa-lg fa-download "></i>
-                <span>下载</span>
-            </a>
-        </li>
-        <li>
-            <a href>
-                <i class="fa fa-fw fa-lg fa-comments-o"></i>
-                <span>信息</span>
-            </a>
-        </li>
-        <li>
-            <a href>
-                <i class="fa fa-fw fa-lg fa-desktop"></i>
-                <span>电脑</span>
-            </a>
-        </li>
-        <li>
-            <a href>
-                <i class="fa fa-fw fa-lg fa-tablet"></i>
-                <span>手机</span>
-            </a>
-        </li>
-        <li>
-            <a href>
-                <i class="fa fa-fw fa-lg fa-laptop"></i>
-                <span>平板</span>
-            </a>
-        </li>
-    </ul>
-</nav>
 </div>
 
 <div class="container-fluid" id="show">

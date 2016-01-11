@@ -22,7 +22,7 @@ public class login extends BaseController{
     public String login(){
         User user = userMapperService.getUser(p);
         if (p.getAccept().get("pass").equals(user.getPass())){
-            session.setAttribute("nowUser",user);
+                session.setAttribute("nowUser",user);
             return "login";
         }
         return "error";
