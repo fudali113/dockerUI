@@ -1,6 +1,5 @@
 package ren.doob.common;
 
-import java.io.ObjectInput;
 import java.util.HashMap;
 
 /**

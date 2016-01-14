@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ren.doob.common.BaseController;
 import ren.doob.common.CommonField;
-import ren.doob.common.Parameter;
 import ren.doob.model.User;
 import ren.doob.serivces.UserMapperService;
 
@@ -14,7 +13,7 @@ import ren.doob.serivces.UserMapperService;
  */
 
 @Controller
-public class login extends BaseController{
+public class SysLogin extends BaseController{
 
     @Autowired
     private UserMapperService userMapperService;

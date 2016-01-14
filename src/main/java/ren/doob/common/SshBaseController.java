@@ -5,8 +5,6 @@ import ren.doob.sshwebproxy.SshConnectException;
 import ren.doob.sshwebproxy.SshConnection;
 import ren.doob.sshwebproxy.SshSession;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * @author fudali
  * @package ren.doob.common
@@ -16,11 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 
 public class SshBaseController extends BaseController{
 
-    protected String ssh_ip;
-    protected String ssh_host;
-    protected String ssh_name;
-    protected String ssh_pass;
-    protected String ssh_mingl;
+    protected String ssh_ip ;
+    protected String ssh_host ;
+    protected String ssh_name ;
+    protected String ssh_pass ;
+    protected String ssh_mingl ;
 
     /**
      * 根据连接信息连接ssh
@@ -72,46 +70,16 @@ public class SshBaseController extends BaseController{
         return shellChannel;
     }
 
-    public String getSsh_pass() {
-        return ssh_pass;
+
+    /**
+     * 加载相关的字段
+     */
+    protected void localField(){
+        ssh_ip = request.getParameter("ssh_ip");
+        ssh_host = request.getParameter("ssh_host");
+        ssh_name = request.getParameter("ssh_name");
+        ssh_pass = request.getParameter("ssh_pass");
+        ssh_mingl = request.getParameter("ssh_mingl");
     }
 
-    public void setSsh_pass(String ssh_pass) {
-        this.ssh_pass = ssh_pass;
-    }
-
-    public String getSsh_name() {
-
-        return ssh_name;
-    }
-
-    public void setSsh_name(String ssh_name) {
-        this.ssh_name = ssh_name;
-    }
-
-    public String getSsh_ip() {
-
-        return ssh_ip;
-    }
-
-    public void setSsh_ip(String ssh_ip) {
-        this.ssh_ip = ssh_ip;
-    }
-
-    public String getSsh_host() {
-
-        return ssh_host;
-    }
-
-    public void setSsh_host(String ssh_host) {
-        this.ssh_host = ssh_host;
-    }
-
-    public String getSsh_mingl() {
-        return ssh_mingl;
-    }
-
-    public void setSsh_mingl(String ssh_mingl) {
-        this.ssh_mingl = ssh_mingl;
-    }
 }

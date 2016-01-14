@@ -23,9 +23,10 @@
 </div>
 <div class="col-lg-6">
     <div class="input-group">
-        <input type="text" class="form-control" id="mingl">
+        <input type="text" class="form-control" id="mingl" placeholder="在这里输入你要执行的命令">
                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" id="scml">Go!</button>
+                  <button class="btn btn-success" type="button" id="scml">Go!</button>
+                   <button class="btn btn-success" type="button" id="scml1">History</button>
                </span>
     </div><!-- /input-group -->
 </div>
@@ -46,27 +47,27 @@
             <div class="modal-body">
                 <form class="form-horizontal" role="form" id="SSHlogin">
                     <div class="form-group">
-                        <label for="ip" class="col-sm-2 control-label">IP：</label>
+                        <label for="ssh1" class="col-sm-2 control-label">IP：</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="ip" placeholder="请输入IP" name="ip">
+                            <input type="text" class="form-control" id="ssh1" value="139.129.4.187" name="ssh_ip">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="host" class="col-sm-2 control-label">Host：</label>
+                        <label for="ssh2" class="col-sm-2 control-label">Host：</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="host" placeholder="请输入端口号" name="host">
+                            <input type="text" class="form-control" id="ssh2" value="22" name="ssh_host" >
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="name" class="col-sm-2 control-label">Name：</label>
+                        <label for="ssh3" class="col-sm-2 control-label">Name：</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" placeholder="请输入登陆用户名" name="name">
+                            <input type="text" class="form-control" id="ssh3" value="root" name="ssh_name" >
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="pass" class="col-sm-2 control-label">Pass：</label>
+                        <label for="ssh4" class="col-sm-2 control-label">Pass：</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="pass" placeholder="请输入登陆用户密码" name="pass">
+                            <input type="text" class="form-control" id="ssh4" value="******" name="ssh_pass">
                         </div>
                     </div>
                 </form>

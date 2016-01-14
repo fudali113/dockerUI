@@ -1,6 +1,4 @@
-var channelid = "";
 var xinxi = new Array();
-var ConnectionInfo = "";
 
 $(function(){
 
@@ -19,7 +17,7 @@ $(function(){
                     alert('请确认输入信息！')
                 }else {
                     channelid = data.channelid;
-                    xinxi = data.xinxi;
+                    xinxi = data.ssh_information;
                     ConnectionInfo = data.ConnectionInfo;
                     $('#myModal').modal('hide');
                     dqxx();
@@ -34,7 +32,7 @@ $(function(){
     $('#scml').click(function(){
         var mingl = {};
         mingl.channelid = channelid;
-        mingl.mingl = $('#mingl').val();
+        mingl.ssh_mingl = $('#mingl').val();
         mingl.ConnectionInfo = ConnectionInfo;
         $.ajax({
             type : "POST",
@@ -42,7 +40,7 @@ $(function(){
             data : mingl,
             dataType : "json",
             success : function(data){
-                xinxi = data.xinxi;
+                xinxi = data.ssh_information;
                 dqxx();
             },
             error : function(){
@@ -51,7 +49,11 @@ $(function(){
         })
 
         $('#mingl').val('');
+
     })
+
+    loclafocusblur();
+
 })
 
 /**
@@ -64,4 +66,19 @@ var dqxx = function(){
         if(xinxi[i] != "") html += xinxi[i]+"\n";
     }
     $('#shuc').val(html);
+}
+
+var loclafocusblur = function(){
+    var i;
+    var ssh = ['139.129.4.187' , '22' , 'root' , '******']
+        $('#SSHlogin div input').focus(function(){
+            i = parseInt(this.id.substring(3)) - 1
+            if($(this).val() == ssh[i]) {
+                $(this).val("");
+            }
+        }).blur(function(){
+            if ($(this).val() == '') {
+                $(this).val(ssh[i]);
+            }
+        });
 }

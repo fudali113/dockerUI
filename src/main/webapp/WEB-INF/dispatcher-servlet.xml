@@ -29,7 +29,7 @@
         </property>
     </bean>
 
-    <context:component-scan base-package="ren.doob.controller" use-default-filters="false">
+    <context:component-scan base-package="ren.doob.controller.*" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
