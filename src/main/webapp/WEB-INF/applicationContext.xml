@@ -24,6 +24,8 @@
         <property name="password" value="fudali133" />
     </bean>
 
+    <aop:aspectj-autoproxy/>
+
     <!-- transaction support,事务管理支持bean-->
     <!-- PlatformTransactionMnager -->
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

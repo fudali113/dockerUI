@@ -13,6 +13,7 @@ $(function(){
             data : $('#SSHlogin').serialize(),
             dataType : "json",
             success : function(data){
+               if (loginRightsChucke(data)) return
                 if(data.result == 0){
                     alert('请确认输入信息！')
                 }else {
@@ -40,6 +41,7 @@ $(function(){
             data : mingl,
             dataType : "json",
             success : function(data){
+                if (loginRightsChucke(data)) return
                 xinxi = data.ssh_information;
                 dqxx();
             },
@@ -81,4 +83,17 @@ var loclafocusblur = function(){
                 $(this).val(ssh[i]);
             }
         });
+}
+
+/**
+ * 检查用户是否登陆
+ * @param data
+ * @returns {boolean}
+ */
+var loginRightsChucke = function (data) {
+       if (data.loginRightsChucke == 0){
+           alert("请登录！")
+           return true
+       }
+    return false
 }
