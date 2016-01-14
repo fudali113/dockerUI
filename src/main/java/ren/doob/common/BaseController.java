@@ -17,8 +17,8 @@ import java.util.HashMap;
  */
 public class BaseController {
 
-    protected HashMap<String ,Object> result = new HashMap<String, Object>();
-    protected Parameter p = new Parameter();
+    protected HashMap<String ,Object> result = new HashMap<String, Object>();//返回数据储存map
+    protected Parameter p ;
     protected HttpServletResponse response;
     protected HttpServletRequest request;
     protected HttpSession session;
@@ -31,30 +31,31 @@ public class BaseController {
      */
     @ModelAttribute
     public void init(HttpServletRequest request , HttpServletResponse response){
+        p = new Parameter();
         this.request = request;
         this.response = response;
         this.session = request.getSession();
         //清空result
         result.clear();
-        //清空parameter的手机参数map
-        p.accept.clear();
+        //清空parameter的存放参数map
+        p.clear();
 
         Enumeration en = request.getParameterNames();
         if(en != null){
             while (en.hasMoreElements()) {
                 String nms = en.nextElement().toString();
-                p.accept.put(nms, request.getParameter(nms).trim());
+                p.put(nms, request.getParameter(nms).trim());
             }
         }
 
     }
     //储存当前用户
-    private User nowUser;
+    protected User userinfo;
     protected User getNU(){
-        if (nowUser == null) {
-            nowUser = (User) session.getAttribute("nowUser");
+        if (userinfo == null) {
+            userinfo = (User) session.getAttribute(CommonField.SESSION_USERINFO);
         }
-        return nowUser;
+        return userinfo;
     }
 
 }

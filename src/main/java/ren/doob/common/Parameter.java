@@ -1,5 +1,6 @@
 package ren.doob.common;
 
+import java.io.ObjectInput;
 import java.util.HashMap;
 
 /**
@@ -11,13 +12,25 @@ import java.util.HashMap;
 
 public class Parameter {
     //装入请求参数
-    public static HashMap<String,String> accept = new HashMap<String, String>();
+    private  HashMap<String,String> accept = new HashMap<String, String>();
 
     //请求人的id
     private String id;
 
     //请求人的name
     private String name;
+
+    public void put(String name, String value){
+        this.accept.put(name , value);
+    }
+
+    public  String get(String name){
+        return this.accept.get(name);
+    }
+
+    public void clear(){
+        this.accept.clear();
+    }
 
     public HashMap<String, String> getAccept() {
         return accept;
