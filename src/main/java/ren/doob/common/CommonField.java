@@ -13,7 +13,7 @@ public class CommonField {
 
     public static final String SESSION_CHANNELID = "channelid";
 
-    public static final String SESSION_CONNECTIONINFO = "ConnectionInfo";
+    public static final String SESSION_CONNECTIONINFO = "connectionInfo";
 
     public static final String SSH_INFORMATION = "ssh_information";
 
