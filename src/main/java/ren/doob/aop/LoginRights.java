@@ -34,9 +34,10 @@ public class LoginRights {
                 throwable.printStackTrace();
             }
         }else {
-            return new HashMap().put("loginRightsChucke" , 0);
-        }
 
+            result = new HashMap().put("loginRightsChucke" , 0);
+        }
+        System.out.print("oo");
         return result ;
 
     }
