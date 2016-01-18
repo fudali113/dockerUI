@@ -8,6 +8,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import ren.doob.common.CommonField;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
@@ -36,8 +37,8 @@ public class LoginRights {
         }else {
 
             result = new HashMap().put("loginRightsChucke" , 0);
+            System.out.println("weidenglu");
         }
-        System.out.print("oo");
         return result ;
 
     }

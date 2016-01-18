@@ -17,34 +17,16 @@
     <context:annotation-config />
     <mvc:annotation-driven />
 
-    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >
-        <property name="messageConverters">
-            <util:list id="beanList">
-                <ref bean="mappingJacksonHttpMessageConverter"/>
-            </util:list>
-        </property>
-    </bean>
-    <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
-        <property name="supportedMediaTypes">
-            <list>
-                <value>text/html;charset=UTF-8</value>
-            </list>
-        </property>
-    </bean>
 
-    <context:component-scan base-package="ren.doob.controller.*" use-default-filters="false">
+    <context:component-scan base-package="ren.doob.*" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
-
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
-    <bean  class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
 
 
     <!--使静态资源请求不被springmvc处理-->
     <mvc:resources mapping="/views/**" location="/views/" />
 
-    <aop:aspectj-autoproxy proxy-target-class="true" />
+    <aop:aspectj-autoproxy />
 
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

@@ -51,7 +51,7 @@
                     </form>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="#" data-toggle="modal" data-target="#myModal">登陆/注册</a>
+                            <a href="#" data-toggle="modal" data-target="#myModal" id="userinfo">登陆/注册</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">帮助<strong class="caret"></strong></a>
@@ -256,7 +256,7 @@
                 <button type="button" class="btn btn-warning"
                         data-dismiss="modal">关闭
                 </button>
-                <button type="button" class="btn btn-success">
+                <button type="button" class="btn btn-success" id="login">
                     登陆
                 </button>
             </div>

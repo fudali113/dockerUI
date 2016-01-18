@@ -1,10 +1,9 @@
-package ren.doob.controller.login;
+package ren.doob.common;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ren.doob.common.BaseController;
-import ren.doob.common.CommonField;
+import org.springframework.web.bind.annotation.ResponseBody;
 import ren.doob.model.User;
 import ren.doob.serivces.UserMapperService;
 
@@ -18,13 +17,16 @@ public class SysLogin extends BaseController{
     @Autowired
     private UserMapperService userMapperService;
 
+    @ResponseBody
     @RequestMapping("/login")
-    public String login(){
+    public Object login(){
         User user = userMapperService.getUser(p);
         if (p.get("pass").equals(user.getPass())){
-                session.setAttribute(CommonField.SESSION_USERINFO,user);
-            return CommonField.PAGE_LOGIN;
+            session.setAttribute(CommonField.SESSION_USERINFO,user);
+            result.put("userinfo" , user);
+        } else {
+            result.put("result" , 0);
         }
-        return "error";
+        return result;
     }
 }
