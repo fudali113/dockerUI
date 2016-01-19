@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ren.doob.common.CommonField;
+import ren.doob.common.Mc;
 import ren.doob.common.SshBaseController;
 import ren.doob.sshwebproxy.ShellChannel;
 import ren.doob.sshwebproxy.SshConnectException;
@@ -27,8 +28,8 @@ public class SshLogin extends SshBaseController {
     public HashMap SSHLogin(){
         this.localField();
         ShellChannel shellChannel = connection();
-        result.put(CommonField.SSH_INFORMATION, shellChannel.getScreen());
-        return result;
+        Mc.putR(CommonField.SSH_INFORMATION, shellChannel.getScreen());
+        return Mc.getR();
     }
 
     /**
@@ -43,7 +44,7 @@ public class SshLogin extends SshBaseController {
         SshConnection sshConnection = null;
 
         try{
-            SshSession ss = new SshSession(session);
+            SshSession ss = new SshSession(Mc.getSes());
             sshConnection = new SshConnection(ssh_ip,Integer.parseInt(ssh_host),ssh_name,ssh_pass);
             ss.addSshConnection(sshConnection);
             shellChannel = sshConnection.openShellChannel();
@@ -53,8 +54,8 @@ public class SshLogin extends SshBaseController {
         }
 
         if (shellChannel != null && sshConnection != null) {
-            session.setAttribute(CommonField.SESSION_CHANNELID , shellChannel.getChannelId());
-            session.setAttribute(CommonField.SESSION_CONNECTIONINFO , sshConnection.getConnectionInfo());
+            Mc.getSes().setAttribute(CommonField.SESSION_CHANNELID , shellChannel.getChannelId());
+            Mc.getSes().setAttribute(CommonField.SESSION_CONNECTIONINFO , sshConnection.getConnectionInfo());
             shellChannel.read();
         }
 

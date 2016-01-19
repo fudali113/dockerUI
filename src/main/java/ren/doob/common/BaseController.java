@@ -5,7 +5,6 @@ import ren.doob.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.Enumeration;
 import java.util.HashMap;
 
@@ -17,13 +16,7 @@ import java.util.HashMap;
 */
 public class BaseController {
 
-    protected HashMap<String ,Object> result = new HashMap<String, Object>();//返回数据储存map
-    protected Parameter p ;
-    //储存当前用户
-    protected User userinfo;
-    protected HttpServletResponse response;
-    protected HttpServletRequest request;
-    protected HttpSession session;
+
 
     /**
      * 利用@ModelAttribute在每个controller方法之前调用这个方法
@@ -33,18 +26,12 @@ public class BaseController {
      */
     @ModelAttribute
     public void init(HttpServletRequest request , HttpServletResponse response){
-        p = new Parameter();
-        //清空result
-        result.clear();
-        //清空parameter的存放参数map
-        p.clear();
+        Parameter p = new Parameter();
 
-        this.request = request ;
-        this.response = response ;
-        this.session = request.getSession() ;
-
-        ReqAndResContext.setRequest(request);
-        ReqAndResContext.setResponse(response);
+        Mc.resultThreadLocal.set(new HashMap<String, Object>());
+        Mc.requestThreadLocal.set(request);
+        Mc.responseThreadLocal.set(response);
+        Mc.sessionThreadLocal.set(request.getSession());
 
         Enumeration en = request.getParameterNames();
         if(en != null){
@@ -54,12 +41,21 @@ public class BaseController {
             }
         }
 
+        Mc.parameterThreadLocal.set(p);
+
     }
-    protected User getNU(){
-        if (userinfo == null) {
-            userinfo = (User) session.getAttribute(CommonField.SESSION_USERINFO);
+
+    /**
+     * 从ThreadLocal中获取当前线程的userinfo，方便子类调用
+     * @return
+     */
+    protected User getUserinfo(){
+        if (Mc.userThreadLocal.get() == null) {
+            User user = (User) Mc.sessionThreadLocal.get().getAttribute(CommonField.SESSION_USERINFO);
+            Mc.userThreadLocal.set(user);
         }
-        return userinfo;
+        return Mc.userThreadLocal.get();
     }
+
 
 }

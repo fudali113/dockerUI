@@ -20,13 +20,13 @@ public class SysLogin extends BaseController{
     @ResponseBody
     @RequestMapping("/login")
     public Object login(){
-        User user = userMapperService.getUser(p);
-        if (p.get("pass").equals(user.getPass())){
-            session.setAttribute(CommonField.SESSION_USERINFO,user);
-            result.put("userinfo" , user);
+        User user = userMapperService.getUser(Mc.getPara());
+        if (Mc.getPara().get("pass").equals(user.getPass())){
+            Mc.getSes().setAttribute(CommonField.SESSION_USERINFO,user);
+            Mc.putR("userinfo" , user);
         } else {
-            result.put("result" , 0);
+            Mc.putR("result" , 0);
         }
-        return result;
+        return Mc.getR();
     }
 }
