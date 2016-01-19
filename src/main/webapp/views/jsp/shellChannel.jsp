@@ -16,9 +16,8 @@
     <title>Title</title>
 </head>
 <body>
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">登陆</button>
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">登陆终端</button>
 <div class="form-group">
-    <label>shell终端：</label>
     <textarea class="form-control" rows="31" id="shuc" readonly="true"></textarea>
 </div>
 <div class="col-lg-6">
