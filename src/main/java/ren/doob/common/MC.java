@@ -48,28 +48,55 @@ public class Mc {
     public static ThreadLocal<HttpSession> sessionThreadLocal = new ThreadLocal<HttpSession>();
 
 
+    /**
+     * 快速取值
+     * @return
+     */
     public static HashMap<String ,Object> getR(){
         return resultThreadLocal.get();
     }
 
-    public static void putR(String string , Object object){
+    /**
+     * 直接向resultThreadLocal中的HashMap进行put操作
+     * @param string
+     * @param object
+     * @return 返回put操作之后的HashMap
+     */
+    public static HashMap<String ,Object> putR(String string , Object object){
         HashMap<String ,Object> hashMap = resultThreadLocal.get();
         hashMap.put(string , object);
         resultThreadLocal.set(hashMap);
+        return hashMap;
     }
 
+    /**
+     * 快速取值
+     * @return
+     */
     public static Parameter getPara(){
         return parameterThreadLocal.get();
     }
 
+    /**
+     * 快速取值
+     * @return
+     */
     public static HttpServletResponse getRes(){
         return responseThreadLocal.get();
     }
 
+    /**
+     * 快速取值
+     * @return
+     */
     public static HttpServletRequest getReq(){
         return requestThreadLocal.get();
     }
 
+    /**
+     * 快速取值
+     * @return
+     */
     public static HttpSession getSes(){
         return sessionThreadLocal.get();
     }
