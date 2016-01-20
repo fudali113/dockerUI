@@ -298,6 +298,45 @@ public class SshConnection implements SshConstants {
     }
 
     /**
+     * Open a new File Channel for this connection.
+     *
+     * @return a newly opened FileChannel
+     * @throws SshConnectException if the channel could not be opened.
+     */
+    public FileChannel openFileChannel() throws SshConnectException
+    {
+        if( log.isInfoEnabled() ) log.info( connectionInfo + " - Opening new FileChannel" );
+
+        FileChannel fileChannel = new FileChannel( this, sshClient );
+
+        // Generate a channelId for the channel and add it to the local map.
+        String channelId = String.valueOf( nextChannelId++ );
+        fileChannel.setChannelId( channelId );
+        channelMap.put( channelId, fileChannel );
+
+        return fileChannel;
+    }
+
+    /**
+     * Returns the requested channel.
+     *
+     * @param channelId the channel's unique id.
+     * @return the requested channel, or null if it does not exist.
+     */
+    public FileChannel getFileChannel( String channelId )
+    {
+        SshChannel channel = (SshChannel) channelMap.get( channelId );
+
+        // Return null if it does not exist or is the wrong type of channel.
+        if( channel == null || !( channel instanceof FileChannel ) )
+        {
+            return null;
+        }
+
+        return (FileChannel) channel;
+    }
+
+    /**
      * 返回请求的通道。
      *
      * @param channelId 通道的惟一id.
