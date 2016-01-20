@@ -14,7 +14,7 @@ public class SshBaseController extends BaseController{
     protected String ssh_name ;
     protected String ssh_pass ;
     protected String ssh_mingl ;
-    protected String channelid ;
+    protected String shellchannelid ;
     protected String connectionInfo;
 
 
@@ -27,7 +27,7 @@ public class SshBaseController extends BaseController{
         ssh_name = Mc.getReq().getParameter("ssh_name");
         ssh_pass = Mc.getReq().getParameter("ssh_pass");
         ssh_mingl = Mc.getReq().getParameter("ssh_mingl");
-        channelid =(String) Mc.getSes().getAttribute(CommonField.SESSION_CHANNELID);
+        shellchannelid =(String) Mc.getSes().getAttribute(CommonField.SESSION_SHELLCHANNELID);
         connectionInfo = (String) Mc.getSes().getAttribute(CommonField.SESSION_CONNECTIONINFO);
     }
 

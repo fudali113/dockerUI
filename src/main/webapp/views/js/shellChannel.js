@@ -9,7 +9,7 @@ $(function(){
     $('#sshdl').click(function(){
         $.ajax({
             type : "POST",
-            url : "/doob/SSHLogin",
+            url : "/doob/ssh/connection",
             data : $('#SSHlogin').serialize(),
             dataType : "json",
             success : function(data){
@@ -37,7 +37,7 @@ $(function(){
         mingl.ConnectionInfo = ConnectionInfo;
         $.ajax({
             type : "POST",
-            url : "/doob/SSHcaozuo",
+            url : "/doob/ssh/shell/handle",
             data : mingl,
             dataType : "json",
             success : function(data){

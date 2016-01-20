@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ren.doob.common.CommonField;
 import ren.doob.common.Mc;
 import ren.doob.common.SshBaseController;
-import ren.doob.sshwebproxy.ShellChannel;
-import ren.doob.sshwebproxy.SshConnectException;
-import ren.doob.sshwebproxy.SshConnection;
-import ren.doob.sshwebproxy.SshSession;
+import ren.doob.sshwebproxy.*;
 
 import java.util.HashMap;
 
@@ -21,10 +18,11 @@ import java.util.HashMap;
  * @date 2016-1-11
  */
 @Controller
+@RequestMapping("/ssh")
 public class SshLogin extends SshBaseController {
 
     @ResponseBody
-    @RequestMapping("/SSHLogin")
+    @RequestMapping("/connection")
     public HashMap SSHLogin(){
         this.localField();
         ShellChannel shellChannel = connection();
@@ -41,6 +39,7 @@ public class SshLogin extends SshBaseController {
     public  ShellChannel connection(){
 
         ShellChannel shellChannel = null;
+        FileChannel fileChannel = null;
         SshConnection sshConnection = null;
 
         try{
@@ -48,14 +47,16 @@ public class SshLogin extends SshBaseController {
             sshConnection = new SshConnection(ssh_ip,Integer.parseInt(ssh_host),ssh_name,ssh_pass);
             ss.addSshConnection(sshConnection);
             shellChannel = sshConnection.openShellChannel();
+            fileChannel = sshConnection.openFileChannel();
 
         }catch (SshConnectException sce){
             sce.printStackTrace();
         }
 
-        if (shellChannel != null && sshConnection != null) {
-            Mc.getSes().setAttribute(CommonField.SESSION_CHANNELID , shellChannel.getChannelId());
+        if (shellChannel != null && sshConnection != null && fileChannel != null) {
+            Mc.getSes().setAttribute(CommonField.SESSION_SHELLCHANNELID , shellChannel.getChannelId());
             Mc.getSes().setAttribute(CommonField.SESSION_CONNECTIONINFO , sshConnection.getConnectionInfo());
+            Mc.getSes().setAttribute(CommonField.SESSION_FILECHANNELID , fileChannel.getChannelId());
             shellChannel.read();
         }
 

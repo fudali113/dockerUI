@@ -11,7 +11,9 @@ public class CommonField {
 
     public static final String SESSION_USERINFO = "session_userinfo";
 
-    public static final String SESSION_CHANNELID = "channelid";
+    public static final String SESSION_SHELLCHANNELID = "shellchannelid";
+
+    public static final String SESSION_FILECHANNELID = "filechannelid";
 
     public static final String SESSION_CONNECTIONINFO = "connectionInfo";
 

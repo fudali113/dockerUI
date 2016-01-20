@@ -19,10 +19,11 @@ import java.util.HashMap;
  */
 
 @Controller
+@RequestMapping("/ssh/shell")
 public class ShhExecute extends SshBaseController {
 
     @ResponseBody
-    @RequestMapping("/SSHcaozuo")
+    @RequestMapping("/handle")
     public HashMap sshml(){
         this.localField();
         ShellChannel shellChannel = getShellChannel();
@@ -38,7 +39,7 @@ public class ShhExecute extends SshBaseController {
      */
     public ShellChannel getShellChannel(){
 
-        String channelid = (String) Mc.getSes().getAttribute(CommonField.SESSION_CHANNELID);
+        String channelid = (String) Mc.getSes().getAttribute(CommonField.SESSION_SHELLCHANNELID);
         String connectionInfo = (String) Mc.getSes().getAttribute(CommonField.SESSION_CONNECTIONINFO);
 
         SshSession sshSession = new SshSession(Mc.getSes());
