@@ -26,12 +26,13 @@
         <table id="fileTable" class="table table-bordered">
         <thead>
         <tr>
-            <th>NO.</th>
-            <th>文件名</th>
-            <th>操作权限</th>
-            <th>大小</th>
-            <th>最后修改时间</th>
-            <th>下载</th>
+            <th style="width: 6%">NO.</th>
+            <th style="width: 39%">文件名</th>
+            <th style="width: 12%">操作权限</th>
+            <th style="width: 10%">大小</th>
+            <th style="width: 15%">最后修改时间</th>
+            <th style="width: 10%">属性</th>
+            <th style="width: 8%">下载</th>
         </tr>
         </thead>
         <tbody id="fileTableTbody">

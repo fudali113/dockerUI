@@ -8,15 +8,21 @@ $(function () {
 
     upload(uploadpara)
 
-    $("#fileTableTbody").delegate('tr[id!=tfoot]' , "click" , function(){
-        uploadpara.sshcdpath = info[this.id].absolutePath
+    $("#fileTableTbody").delegate('tr td[id != null]' , "click" , function(){
+        console.log(this.id)
+        if(this.id != null && this.id != undefined && this.id != '')
+            uploadpara.sshcdpath = info[this.id].absolutePath;
+        else
+            return
         upload(uploadpara)
     })
 
-    $("#fileTableTbody").delegate('tr[id!=tfoot]' , "mouseenter" , function(){
-        $(this).addClass("success").siblings().removeClass("success")
-        //$(this).nextAll().removeClass("success")
-        //$(this).prevAll().removeClass("success")
+    $("#fileTableTbody").delegate('tr td[id != ]' , "mouseenter" , function(){
+        var $color = {}
+        if(this.id != null && this.id != undefined && this.id != '') $color = $(this).addClass("success")
+        else $color = $(this).addClass("danger")
+
+        $color.parent().siblings().children().removeClass()
     })
 
 })
@@ -33,7 +39,7 @@ var upload = function(uploadpara){
         dataType : "json",
         success : function(data){
             if (loginRightsChucke(data)) return
-            info = data.ssh_info;
+            info = data.ssh_info == null ? alert('请求数据为空') : data.ssh_info;
             nowpath = data.nowpath;
             yeshu = 1
             if(info != null) loadinfo(info , nowpath)
@@ -55,18 +61,24 @@ var loadinfo = function(info , nowpath){
     var j = (i + meiyeshuju > info.length) ? info.length : i+meiyeshuju
     var html = ""
     for(i ; i < j ; i++ ){
-        html += '<tr id="' + i + '">'+
+        html += '<tr>'+
                     '<td>'+ (i+1) + '</td>'+
-                    '<td>' + info[i].filename +'</td>'+
+                    '<td id="'+ i +'">' + info[i].filename +'</td>'+
                     '<td>' + info[i].attributes.permissionsString + '</td>'+
                     '<td>' + info[i].attributes.size + '</td>'+
                     '<td>' + info[i].attributes.modTimeString + '</td>'+
+                    '<td>' + isdirectory(info[i].directory) + '</td>'+
                     '<td>' + '<button type="button" class="btn btn-success" id="downfile'+ i +'">下载文件</button>'
                 '</tr>'
     }
     $('#fileTableTbody').html(html)
-    $('#nowpath').html(nowpath)
+    $('#nowpath').html('当前目录：' + nowpath)
     $('#totalpages').html('#'+maxpageno(info)+'@')
+}
+//判断是否为文件夹
+var isdirectory = function(a){
+    if(a) return '目录'
+    else return '文件'
 }
 
 //下一页点击实现的功能
