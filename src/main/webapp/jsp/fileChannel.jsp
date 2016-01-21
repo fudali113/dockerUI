@@ -21,11 +21,12 @@
 <body>
 <div>
     <div>
-        <div class="col-md-8">
+        <div class="col-md-10">
             <h2><strong id="nowpath"></strong></h2>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-2">
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">上传文件</button>
+            <button type="button" class="btn btn-success" onclick="window.location.reload()">刷新</button>
         </div>
     </div>
     <div>

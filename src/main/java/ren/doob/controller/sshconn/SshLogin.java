@@ -1,4 +1,4 @@
-package ren.doob.controller.login;
+package ren.doob.controller.sshconn;
 
 
 import org.springframework.stereotype.Controller;

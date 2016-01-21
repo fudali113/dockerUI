@@ -31,15 +31,13 @@ public class LoginRights {
         if ( session.getAttribute(CommonField.SESSION_USERINFO) != null) {
             try {
                 result = jp.proceed();
+                return result;
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
+                return "error";
             }
-        }else {
-
-            result = new HashMap().put("loginRightsChucke" , 0);
-            System.out.println("weidenglu");
         }
-        return result ;
+        return "error" ;
 
     }
 

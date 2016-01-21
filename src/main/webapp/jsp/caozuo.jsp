@@ -20,31 +20,31 @@
     <nav class="navbar navbar-vertical-left">
         <ul class="nav navbar-nav">
             <li>
-                <a href="#" title="/doob/views/jsp/zhuye.jsp">
+                <a href="#" title="index">
                     <i class="fa fa-fw fa-lg fa-home"></i>
                     <span>主页</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="#" title="info">
                     <i class="fa fa-fw fa-lg fa-comments-o"></i>
                     <span>信息</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="#" title="computer">
                     <i class="fa fa-fw fa-lg fa-desktop"></i>
                     <span>电脑</span>
                 </a>
             </li>
             <li>
-                <a href="#" title="/doob/views/jsp/shellChannel.jsp">
+                <a href="#" title="shell">
                     <i class="fa fa-fw fa-lg fa-laptop"></i>
                     <span>ssh</span>
                 </a>
             </li>
             <li>
-                <a href="#" title="/doob/views/jsp/fileChannel.jsp">
+                <a href="#" title="upload">
                     <i class="fa fa-fw fa-lg fa-download "></i>
                     <span>下载/上传</span>
                 </a>
@@ -52,13 +52,33 @@
         </ul>
     </nav>
 </div>
-
-<div class="col-md-11"  id = "iframe">
-    <div class="bs-docs-section">
-        <iframe src="/doob/views/jsp/zhuye.jsp"  scroling="yes"  width="100%" height="100%" name="float" frameborder="0" allowTransparency="true"></iframe>
+<div>
+    <div class="col-md-11"  id = "index">
+        <div class="bs-docs-section">
+            <iframe src="/doob/pages/get?page=zhuye"  scroling="yes"  width="100%" height="100%" name="float" frameborder="0" allowTransparency="true"></iframe>
+        </div>
+    </div>
+    <div class="col-md-11"  id = "info">
+        <div class="bs-docs-section">
+            <iframe src="/doob/pages/get?page=zhuye"  scroling="yes"  width="100%" height="100%" name="float" frameborder="0" allowTransparency="true"></iframe>
+        </div>
+    </div>
+    <div class="col-md-11"  id = "computer">
+        <div class="bs-docs-section">
+            <iframe src="/doob/pages/get?page=zhuye"  scroling="yes"  width="100%" height="100%" name="float" frameborder="0" allowTransparency="true"></iframe>
+        </div>
+    </div>
+    <div class="col-md-11"  id = "shell">
+        <div class="bs-docs-section">
+            <iframe src="/doob/pages/get?page=shellChannel"  scroling="yes"  width="100%" height="100%" name="float" frameborder="0" allowTransparency="true"></iframe>
+        </div>
+    </div>
+    <div class="col-md-11"  id = "upload">
+        <div class="bs-docs-section">
+            <iframe src="/doob/pages/get?page=fileChannel"  scroling="yes"  width="100%" height="100%" name="float" frameborder="0" allowTransparency="true"></iframe>
+        </div>
     </div>
 </div>
-
 </body>
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>

@@ -5,7 +5,8 @@ $(function(){
 
     $('li a').click(function(){
         var src = this.title;
-        $('iframe').attr('src',src);
+        $('#'+src).show().siblings().hide()
+        $(this).addClass("active").siblings().removeClass("active")
     })
 
     daovoice('init', {

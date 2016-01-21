@@ -69,7 +69,7 @@ var loadinfo = function(oldinfo , nowpath){
         }
         return newinfo
     }
-    var info = guolv(oldinfo)
+    info = guolv(oldinfo)
     var i = (yeshu-1)*meiyeshuju
     var j = (i + meiyeshuju > info.length) ? info.length : i+meiyeshuju
     var html = ""
@@ -83,7 +83,7 @@ var loadinfo = function(oldinfo , nowpath){
                     '<td>' + info[i].attributes.size + '</td>'+
                     '<td>' + info[i].attributes.modTimeString + '</td>'+
                     '<td>' + isdirectory(info[i].directory) + '</td>'+
-                    '<td><a href="/doob/ssh/file/download?downloadfilename=' + filename +'&isdirectory='+ info[i].directory + '">下载文件</a></td>'+
+                    '<td id="down' + i + '"><a href="/doob/ssh/file/download?downloadfilename=' + filename +'&isdirectory='+ info[i].directory + '">下载文件</a></td>'+
                 '</tr>'
     }
     $('#fileTableTbody').html(html)

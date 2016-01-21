@@ -32,7 +32,7 @@
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <!-- 这里的配置我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 -->
-        <property name="prefix" value="/views/jsp/" />
+        <property name="prefix" value="/jsp/" />
         <property name="suffix" value=".jsp" />
     </bean>
 
