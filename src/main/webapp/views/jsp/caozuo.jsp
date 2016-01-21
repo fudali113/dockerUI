@@ -27,12 +27,6 @@
             </li>
             <li>
                 <a href="#">
-                    <i class="fa fa-fw fa-lg fa-download "></i>
-                    <span>下载</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
                     <i class="fa fa-fw fa-lg fa-comments-o"></i>
                     <span>信息</span>
                 </a>
@@ -47,6 +41,12 @@
                 <a href="#" title="/doob/views/jsp/shellChannel.jsp">
                     <i class="fa fa-fw fa-lg fa-laptop"></i>
                     <span>ssh</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" title="/doob/views/jsp/fileChannel.jsp">
+                    <i class="fa fa-fw fa-lg fa-download "></i>
+                    <span>下载/上传</span>
                 </a>
             </li>
         </ul>

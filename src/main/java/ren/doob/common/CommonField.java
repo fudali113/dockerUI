@@ -17,7 +17,11 @@ public class CommonField {
 
     public static final String SESSION_CONNECTIONINFO = "connectionInfo";
 
-    public static final String SSH_INFORMATION = "ssh_information";
+    public static final String SSH_INFORMATION = "ssh_info";
+
+    public static final String SESSION_FILEPATH = "sshfilepath";
+
+    public static final String REQUEST_CDDIRECTORY = "sshcdpath";
 
     public static final String PAGE_LOGIN = "login";
 

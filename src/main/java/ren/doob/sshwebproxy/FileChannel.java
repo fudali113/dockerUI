@@ -167,7 +167,6 @@ public class FileChannel extends SshChannel implements SshConstants {
         catch (IOException ioException)
         {
             log.info( "Error occured while getting directory listing: " + ioException );
-            System.out.print("cd shiban");
             return null;
         }
     }

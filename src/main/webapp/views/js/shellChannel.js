@@ -18,7 +18,7 @@ $(function(){
                     alert('请确认输入信息！')
                 }else {
                     channelid = data.channelid;
-                    xinxi = data.ssh_information;
+                    xinxi = data.ssh_info;
                     ConnectionInfo = data.ConnectionInfo;
                     $('#myModal').modal('hide');
                     dqxx();
@@ -42,7 +42,7 @@ $(function(){
             dataType : "json",
             success : function(data){
                 if (loginRightsChucke(data)) return
-                xinxi = data.ssh_information;
+                xinxi = data.ssh_info;
                 dqxx();
             },
             error : function(){
@@ -85,15 +85,3 @@ var loclafocusblur = function(){
         });
 }
 
-/**
- * 检查用户是否登陆
- * @param data
- * @returns {boolean}
- */
-var loginRightsChucke = function (data) {
-       if (data.loginRightsChucke == 0){
-           alert("请登录！")
-           return true
-       }
-    return false
-}

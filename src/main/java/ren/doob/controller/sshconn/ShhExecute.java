@@ -3,9 +3,9 @@ package ren.doob.controller.sshconn;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import ren.doob.common.CommonField;
-import ren.doob.common.Mc;
-import ren.doob.common.SshBaseController;
+import static ren.doob.common.CommonField.*;
+import static ren.doob.common.Mc.*;
+import ren.doob.common.*;
 import ren.doob.sshwebproxy.ShellChannel;
 import ren.doob.sshwebproxy.SshSession;
 
@@ -27,7 +27,7 @@ public class ShhExecute extends SshBaseController {
     public HashMap sshml(){
         this.localField();
         ShellChannel shellChannel = getShellChannel();
-        Mc.putR(CommonField.SSH_INFORMATION,shellChannel.getScreen());
+        Mc.putR(SSH_INFORMATION,shellChannel.getScreen());
         return Mc.getR();
     }
 
@@ -39,8 +39,8 @@ public class ShhExecute extends SshBaseController {
      */
     public ShellChannel getShellChannel(){
 
-        String channelid = (String) Mc.getSes().getAttribute(CommonField.SESSION_SHELLCHANNELID);
-        String connectionInfo = (String) Mc.getSes().getAttribute(CommonField.SESSION_CONNECTIONINFO);
+        String channelid = (String) Mc.getSes().getAttribute(SESSION_SHELLCHANNELID);
+        String connectionInfo = (String) Mc.getSes().getAttribute(SESSION_CONNECTIONINFO);
 
         SshSession sshSession = new SshSession(Mc.getSes());
         ShellChannel shellChannel = sshSession.getSshConnection(connectionInfo).getShellChannel(channelid);
