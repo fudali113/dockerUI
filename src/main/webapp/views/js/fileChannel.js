@@ -1,8 +1,8 @@
-var info = new Array();
-var uploadpara = {}
-var nowpath = ""
-var yeshu = 1
-var meiyeshuju = 12
+var info = new Array(); //保存数据
+var uploadpara = {}     //上传参数
+var nowpath = ""        //当前路径
+var yeshu = 1           //开始页数
+var meiyeshuju = 15     //每页显示条数
 
 $(function () {
 
@@ -23,6 +23,11 @@ $(function () {
         else $color = $(this).addClass("danger")
 
         $color.parent().siblings().children().removeClass()
+    })
+
+    $('#nowpath').delegate('a' , 'click' ,function(){
+        uploadpara.sshcdpath = this.title
+        upload(uploadpara)
     })
 
 })
@@ -56,24 +61,57 @@ var upload = function(uploadpara){
  * 获得信息并加载在页面
  * @param info
  */
-var loadinfo = function(info , nowpath){
+var loadinfo = function(oldinfo , nowpath){
+    var guolv = function(info){
+        var newinfo = new Array()
+        for(var i = 0 ; i < info.length ; i++){
+            if(info[i].filename != '.' && info[i].filename != '..') newinfo.push(info[i])
+        }
+        return newinfo
+    }
+    var info = guolv(oldinfo)
     var i = (yeshu-1)*meiyeshuju
     var j = (i + meiyeshuju > info.length) ? info.length : i+meiyeshuju
     var html = ""
     for(i ; i < j ; i++ ){
-        html += '<tr>'+
+        var filename = info[i].filename
+        if(filename == '.' || filename == '..') html += ''
+        else html += '<tr>'+
                     '<td>'+ (i+1) + '</td>'+
-                    '<td id="'+ i +'">' + info[i].filename +'</td>'+
+                    '<td id="'+ i +'">' + filename +'</td>'+
                     '<td>' + info[i].attributes.permissionsString + '</td>'+
                     '<td>' + info[i].attributes.size + '</td>'+
                     '<td>' + info[i].attributes.modTimeString + '</td>'+
                     '<td>' + isdirectory(info[i].directory) + '</td>'+
-                    '<td>' + '<button type="button" class="btn btn-success" id="downfile'+ i +'">下载文件</button>'
+                    '<td><a href="/doob/ssh/file/download?downloadfilename=' + filename +'&isdirectory='+ info[i].directory + '">下载文件</a></td>'+
                 '</tr>'
     }
     $('#fileTableTbody').html(html)
-    $('#nowpath').html('当前目录：' + nowpath)
+    $('#nowpath').html('当前目录：' + touchdirectory(nowpath))
     $('#totalpages').html('#'+maxpageno(info)+'@')
+
+}
+
+//实现目录点击
+var touchdirectory= function(nowpath){
+    var last = function(i){ //判断最后一个是不加/
+        if(i == ooo.length - 1) return ''
+        else return '/'
+    }
+    var requestpath = function(j){
+        var requestpath = ""
+        if(j == 0) return '/'
+        for(var i = 1; i <= j ; i++){
+            requestpath += '/'+ooo[i]
+        }
+        return requestpath
+    }
+    var html = ""
+    var ooo =  nowpath.split('/')
+    for(var i = 0 ; i < ooo.length ; i++){
+            html += '<a href="#" title="'+ requestpath(i) +'">' + ooo[i] + '</a>' + last(i)
+    }
+    return html
 }
 //判断是否为文件夹
 var isdirectory = function(a){

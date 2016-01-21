@@ -1,5 +1,8 @@
 package ren.doob.controller.sshconn;
 
+import org.apache.commons.fileupload.DiskFileUpload;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -7,7 +10,14 @@ import static ren.doob.common.Mc.*;
 import static ren.doob.common.CommonField.*;
 import ren.doob.common.*;
 import ren.doob.sshwebproxy.FileChannel;
-import ren.doob.sshwebproxy.SshSession;
+import ren.doob.sshwebproxy.ShellChannel;
+
+import static ren.doob.sshwebproxy.MySsh.*;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * @author fudali
@@ -52,18 +62,62 @@ public class FileExecute extends SshBaseController{
 
         getSes().setAttribute(SESSION_FILEPATH , fileChannel.getCurrentDirectory());
         putR(SSH_INFORMATION , fileChannel.getCurrentDirectoryListing());
-        putR("nowpath" , fileChannel.getCurrentDirectory());
-
+        putR("nowpath" , getUserinfo().getName() + fileChannel.getCurrentDirectory());
         return getR();
     }
 
-    public FileChannel getFileChannel(){
-        String channelid = (String) getSes().getAttribute(SESSION_FILECHANNELID);
-        String connectionInfo = (String) getSes().getAttribute(SESSION_CONNECTIONINFO);
+    @RequestMapping("/download")
+    public void download() throws IOException {
+        HttpServletResponse response = getRes();
+        FileChannel fileChannel = getFileChannel();
+        String filename = getPara().get("downloadfilename");
+        String isdirectory = getPara().get("isdirectory");
+        if(isdirectory.equals("true")){
+            String zipdirectory = "zip " + filename + ".zip " + filename;
+            ShellChannel shellChannel = getShellChannel();
+            shellChannel.write(zipdirectory , true);
+            filename = filename + ".zip";
+        }
 
-        SshSession sshSession = new SshSession(getSes());
-        FileChannel fileChannel = sshSession.getSshConnection(connectionInfo).getFileChannel(channelid);
+        response.setContentType("application/x-download");
+        response.setHeader("Content-Disposition", "attachment; filename=" + filename);
 
-        return fileChannel;
+        // Start writing the output.
+        ServletOutputStream outputStream = response.getOutputStream();
+        fileChannel.downloadFile( filename, outputStream );
+
     }
+
+    @RequestMapping("/upload")
+    public void upload() throws FileUploadException {
+
+        FileChannel fileChannel = getFileChannel();
+        DiskFileUpload upload = new DiskFileUpload();
+        List files = upload.parseRequest( getReq() );
+        FileItem file = null;
+        String fileName = null;
+
+        try {
+            Iterator iter = files.iterator();
+            while (iter.hasNext()) {
+                FileItem fileItem = (FileItem) iter.next();
+                String fieldName;
+                if (fileItem.isFormField()) {
+                    fieldName = fileItem.getFieldName();
+                    if ("filename".equals(fieldName)) {
+                        fileName = fileItem.getString();
+                    }
+                } else {
+                    file = fileItem;
+                }
+            }
+
+            fileChannel.uploadFile(fileName , file.getInputStream());
+            putR(SSH_INFORMATION , 1);
+        }catch (Exception e){
+            e.printStackTrace();
+            putR(SSH_INFORMATION , 0);
+        }
+    }
+
 }

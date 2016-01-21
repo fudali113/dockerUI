@@ -8,6 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import = "ren.doob.common.CommonField" %>
+<%@ page import="ren.doob.sshwebproxy.SshConstants" %>
 <html>
 <head>
     <title>fileChannel</title>
@@ -20,7 +21,12 @@
 <body>
 <div>
     <div>
-        <h2><strong id="nowpath"></strong></h2>
+        <div class="col-md-8">
+            <h2><strong id="nowpath"></strong></h2>
+        </div>
+        <div class="col-md-4">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">上传文件</button>
+        </div>
     </div>
     <div>
         <table id="fileTable" class="table table-bordered">
@@ -60,6 +66,30 @@
         </div><!-- /input-group -->
     </div>
 </div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" align="cemter">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h2 class="modal-title" id="myModalLabel">
+                    <strong>上传文件</strong>
+                </h2>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form ENCTYPE="multipart/form-data" name="uploadFile" method="post" action="/doob/ssh/file/upload">
+                        重命名： <input type="text" name="filename" class="form-control" />
+                        <input type="file" name="file" />
+                        <input type="submit" value="上传" class="sucesss"/>
+                    </form>
+                </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
 </body>
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
