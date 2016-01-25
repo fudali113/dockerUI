@@ -16,6 +16,7 @@ import static ren.doob.sshwebproxy.MySsh.*;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 
@@ -53,9 +54,15 @@ public class FileExecute extends SshBaseController{
 
     @ResponseBody
     @RequestMapping("/cd")
-    public Object changeDirectory(){
+    public Object changeDirectory() throws IOException {
 
         FileChannel fileChannel = getFileChannel();
+        if (fileChannel == null ) {
+            HttpServletResponse response = getRes();
+            response.setContentType("application/json; charset=utf-8");
+            response.getWriter().append("{\"sshNoLogin\":\"1\"}");
+            return null;
+        }
         String path = getPara().get(REQUEST_CDDIRECTORY);
         if (path != null && !"".equals(path.trim()))
             fileChannel.changeDirectory(path);

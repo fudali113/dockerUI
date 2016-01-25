@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ren.doob.model.User;
 import ren.doob.serivces.UserMapperService;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * Created by Administrator on 2015-12-21.
  */
@@ -27,6 +29,13 @@ public class SysLogin extends BaseController{
         } else {
             Mc.putR("result" , 0);
         }
+        return Mc.getR();
+    }
+
+    @ResponseBody
+    @RequestMapping("/userinfo")
+    public Object userinfo(){
+        Mc.putR("userinfo" , getUserinfo());
         return Mc.getR();
     }
 }

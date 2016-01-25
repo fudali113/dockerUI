@@ -40,7 +40,12 @@ public class MySsh {
         String connectionInfo = (String) getSes().getAttribute(SESSION_CONNECTIONINFO);
 
         SshSession sshSession = new SshSession(getSes());
-        FileChannel fileChannel = sshSession.getSshConnection(connectionInfo).getFileChannel(channelid);
+        FileChannel fileChannel = null;
+        try {
+            fileChannel = sshSession.getSshConnection(connectionInfo).getFileChannel(channelid);
+        }catch (Exception e){
+            System.out.println("用户还没有登陆你的ssh账号！");
+        }
 
         return fileChannel;
     }

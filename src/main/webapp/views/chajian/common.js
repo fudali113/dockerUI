@@ -10,3 +10,10 @@ var loginRightsChucke = function (data) {
   }
   return false
 }
+
+var sshLoginRightsChucke = function(data){
+  if(data.sshNoLogin == "1"){
+    alert("请登录ssh")
+    return true
+  }
+}

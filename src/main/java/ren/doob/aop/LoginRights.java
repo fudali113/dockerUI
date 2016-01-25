@@ -6,11 +6,13 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import ren.doob.common.CommonField;
+import ren.doob.common.Mc;
 
 import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
+import java.io.IOException;
 
 /**
  * @author fudali
@@ -23,7 +25,7 @@ import java.util.HashMap;
 public class LoginRights {
 
     @Around("execution(* ren.doob.controller..*.*(..))")
-    public Object loginRights(ProceedingJoinPoint jp){
+    public Object loginRights(ProceedingJoinPoint jp) throws IOException {
 
         Object result = null ;
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
@@ -34,10 +36,12 @@ public class LoginRights {
                 return result;
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
-                return "error";
             }
         }
-        return "error" ;
+        HttpServletResponse response = Mc.getRes();
+        response.setContentType("application/json; charset=utf-8");
+        response.getWriter().append("{\"noLogin\":\"1\"}");
+        return result ;
 
     }
 

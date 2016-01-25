@@ -30,7 +30,7 @@
                                     <a href="#">申请容器</a>
                                 </li>
                                 <li>
-                                    <a href="/doob/pages/get/caozuo">管理容器</a>
+                                    <a href="/doob/pages/get/caozuo" onclick="return LoginRights();">管理容器</a>
                                 </li>
                                 <li>
                                     <a href="#">容器相关知识</a>
