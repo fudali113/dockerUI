@@ -55,27 +55,27 @@
 <div>
     <div class="col-md-11"  id = "index">
         <div class="bs-docs-section">
-            <iframe src="/doob/pages/get?page=zhuye"  scroling="yes"  width="100%" height="100%" name="float" frameborder="0" allowTransparency="true"></iframe>
+            <iframe src="/doob/pages/get/zhuye"  scroling="yes"  width="100%" height="100%" name="float" frameborder="0" allowTransparency="true"></iframe>
         </div>
     </div>
     <div class="col-md-11"  id = "info">
         <div class="bs-docs-section">
-            <iframe src="/doob/pages/get?page=zhuye"  scroling="yes"  width="100%" height="100%" name="float" frameborder="0" allowTransparency="true"></iframe>
+            <iframe src="/doob/pages/get/zhuye"  scroling="yes"  width="100%" height="100%" name="float" frameborder="0" allowTransparency="true"></iframe>
         </div>
     </div>
     <div class="col-md-11"  id = "computer">
         <div class="bs-docs-section">
-            <iframe src="/doob/pages/get?page=zhuye"  scroling="yes"  width="100%" height="100%" name="float" frameborder="0" allowTransparency="true"></iframe>
+            <iframe src="/doob/pages/get/zhuye"  scroling="yes"  width="100%" height="100%" name="float" frameborder="0" allowTransparency="true"></iframe>
         </div>
     </div>
     <div class="col-md-11"  id = "shell">
         <div class="bs-docs-section">
-            <iframe src="/doob/pages/get?page=shellChannel"  scroling="yes"  width="100%" height="100%" name="float" frameborder="0" allowTransparency="true"></iframe>
+            <iframe src="/doob/pages/get/shellChannel"  scroling="yes"  width="100%" height="100%" name="float" frameborder="0" allowTransparency="true"></iframe>
         </div>
     </div>
     <div class="col-md-11"  id = "upload">
         <div class="bs-docs-section">
-            <iframe src="/doob/pages/get?page=fileChannel"  scroling="yes"  width="100%" height="100%" name="float" frameborder="0" allowTransparency="true"></iframe>
+            <iframe src="/doob/pages/get/fileChannel"  scroling="yes"  width="100%" height="100%" name="float" frameborder="0" allowTransparency="true"></iframe>
         </div>
     </div>
 </div>

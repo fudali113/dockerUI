@@ -38,7 +38,7 @@ $(function () {
  */
 var upload = function(uploadpara){
     $.ajax({
-        type : "POST",
+        type : "GET",
         url : "/doob/ssh/file/cd",
         data : uploadpara,
         dataType : "json",
