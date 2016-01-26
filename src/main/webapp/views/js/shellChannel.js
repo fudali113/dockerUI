@@ -32,9 +32,7 @@ $(function(){
 
     $('#scml').click(function(){
         var mingl = {};
-        mingl.channelid = channelid;
         mingl.ssh_mingl = $('#mingl').val();
-        mingl.ConnectionInfo = ConnectionInfo;
         $.ajax({
             type : "POST",
             url : "/doob/ssh/shell/handle",
