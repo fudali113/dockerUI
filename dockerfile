@@ -1,5 +1,6 @@
-FROM tutum/tomcat:8.0
+FROM tomcat:latest
 
-RUN service tomcat start
 
 EXPOSE 8080
+
+CMD["service","tomcat","start"]
