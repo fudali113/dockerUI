@@ -16,66 +16,74 @@
 <link rel="stylesheet" href="/doob/views/chajian/bootstrap-vertical-menu.css">
 <link rel="stylesheet" type="text/css" href="/doob/views/css/index.css">
 <body>
-<div class="col-md-1">
-    <nav class="navbar navbar-vertical-left">
-        <ul class="nav navbar-nav">
-            <li>
-                <a href="#" title="index">
-                    <i class="fa fa-fw fa-lg fa-home"></i>
-                    <span>主页</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" title="info">
-                    <i class="fa fa-fw fa-lg fa-comments-o"></i>
-                    <span>信息</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" title="computer">
-                    <i class="fa fa-fw fa-lg fa-desktop"></i>
-                    <span>电脑</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" title="shell">
-                    <i class="fa fa-fw fa-lg fa-laptop"></i>
-                    <span>ssh</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" title="upload">
-                    <i class="fa fa-fw fa-lg fa-download "></i>
-                    <span>下载/上传</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</div>
-<div>
-    <div class="col-md-11"  id = "index">
-        <div class="bs-docs-section">
-            <iframe src="/doob/pages/get/zhuye"  scroling="yes"  width="100%" height="100%" name="float" frameborder="0" allowTransparency="true"></iframe>
-        </div>
+        <nav class="navbar navbar-vertical-left">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#" title="index">
+                        <i class="fa fa-fw fa-lg fa-home"></i>
+                        <span>主页</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="info">
+                        <i class="fa fa-fw fa-lg fa-comments-o"></i>
+                        <span>信息</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="computer">
+                        <i class="fa fa-fw fa-lg fa-desktop"></i>
+                        <span>电脑</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="shell">
+                        <i class="fa fa-fw fa-lg fa-laptop"></i>
+                        <span>ssh</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" title="upload">
+                        <i class="fa fa-fw fa-lg fa-download "></i>
+                        <span>下载/上传</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div>
+    <div style="width: 5% ; float:left">
+        oo
     </div>
-    <div class="col-md-11"  id = "info">
-        <div class="bs-docs-section">
-            <iframe src="/doob/pages/get/zhuye"  scroling="yes"  width="100%" height="100%" name="float" frameborder="0" allowTransparency="true"></iframe>
+    <div style="width: 95% ; float:left">
+        <div id="index">
+            <div class="bs-docs-section">
+                <iframe src="/doob/pages/get/zhuye" scroling="yes" width="100%" height="100%" name="float"
+                        frameborder="0" allowTransparency="true"></iframe>
+            </div>
         </div>
-    </div>
-    <div class="col-md-11"  id = "computer">
-        <div class="bs-docs-section">
-            <iframe src="/doob/pages/get/zhuye"  scroling="yes"  width="100%" height="100%" name="float" frameborder="0" allowTransparency="true"></iframe>
+        <div id="info">
+            <div class="bs-docs-section">
+                <iframe src="/doob/pages/get/zhuye" scroling="yes" width="100%" height="100%" name="float"
+                        frameborder="0" allowTransparency="true"></iframe>
+            </div>
         </div>
-    </div>
-    <div class="col-md-11"  id = "shell">
-        <div class="bs-docs-section">
-            <iframe src="/doob/pages/get/shellChannel"  scroling="yes"  width="100%" height="100%" name="float" frameborder="0" allowTransparency="true"></iframe>
+        <div id="computer">
+            <div class="bs-docs-section">
+                <iframe src="/doob/pages/get/zhuye" scroling="yes" width="100%" height="100%" name="float"
+                        frameborder="0" allowTransparency="true"></iframe>
+            </div>
         </div>
-    </div>
-    <div class="col-md-11"  id = "upload">
-        <div class="bs-docs-section">
-            <iframe src="/doob/pages/get/fileChannel"  scroling="yes"  width="100%" height="100%" name="float" frameborder="0" allowTransparency="true"></iframe>
+        <div id="shell">
+            <div class="bs-docs-section">
+                <iframe src="/doob/pages/get/shellChannel" scroling="yes" width="100%" height="100%" name="float"
+                        frameborder="0" allowTransparency="true"></iframe>
+            </div>
+        </div>
+        <div id="upload">
+            <div class="bs-docs-section">
+                <iframe src="/doob/pages/get/fileChannel" scroling="yes" width="100%" height="100%" name="float"
+                        frameborder="0" allowTransparency="true"></iframe>
+            </div>
         </div>
     </div>
 </div>

@@ -34,6 +34,8 @@
           <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.8.4" />
           <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />
           <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.8.1" />
+          <element id="library" level="project" name="Maven: com.squareup.okhttp:okhttp:2.7.2" />
+          <element id="library" level="project" name="Maven: com.squareup.okio:okio:1.6.0" />
         </element>
       </element>
       <element id="directory" name="META-INF">

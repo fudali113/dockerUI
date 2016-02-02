@@ -169,6 +169,13 @@
       <version>1.8.1</version>
     </dependency>
 
+    <!--网络交互docker api-->
+    <dependency>
+      <groupId>com.squareup.okhttp</groupId>
+      <artifactId>okhttp</artifactId>
+      <version>2.7.2</version>
+    </dependency>
+
   </dependencies>
 
 

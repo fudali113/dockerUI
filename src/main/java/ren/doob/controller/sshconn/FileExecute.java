@@ -79,7 +79,8 @@ public class FileExecute extends SshBaseController{
         FileChannel fileChannel = getFileChannel();
         String filename = getPara().get("downloadfilename");
         String isdirectory = getPara().get("isdirectory");
-        if(isdirectory.equals("true")){
+
+        if(isdirectory.equals("true")){ //如果下载的是dir，则打包zip下载，目前有问题
             String zipdirectory = "zip " + filename + ".zip " + filename;
             ShellChannel shellChannel = getShellChannel();
             shellChannel.write(zipdirectory , true);

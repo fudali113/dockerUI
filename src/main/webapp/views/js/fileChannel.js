@@ -60,7 +60,8 @@ var upload = function(uploadpara){
 
 /**
  * 获得信息并加载在页面
- * @param info
+ * @param oldinfo ajax请求瀘信息
+ * @param nowpath 当前路径
  */
 var loadinfo = function(oldinfo , nowpath){
     var guolv = function(info){
@@ -68,7 +69,7 @@ var loadinfo = function(oldinfo , nowpath){
         for(var i = 0 ; i < info.length ; i++){
             if(info[i].filename != '.' && info[i].filename != '..') newinfo.push(info[i])
         }
-        return newinfo
+        return newinfo  //过滤后瀘信息
     }
     info = guolv(oldinfo)
     var i = (yeshu-1)*meiyeshuju
