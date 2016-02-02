@@ -5,6 +5,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import static ren.doob.common.Mc.*;
 import static ren.doob.common.CommonField.*;
@@ -53,7 +54,7 @@ import java.util.List;
 public class FileExecute extends SshBaseController{
 
     @ResponseBody
-    @RequestMapping("/cd")
+    @RequestMapping(value = "/cd" ,method = RequestMethod.GET , produces="application/json;charset=UTF-8")
     public Object changeDirectory() throws IOException {
 
         FileChannel fileChannel = getFileChannel();
