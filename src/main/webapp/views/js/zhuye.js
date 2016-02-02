@@ -1,16 +1,16 @@
-/*var app = angular.module('containersApp', []);
+var app = angular.module('containersApp', []);
 app.controller('containers', function($scope , $http) {
-    var url="139.129.4.187:13131/containers/json"
+    var url="/doob/docker/containers/json"
     $http.get(url).success( function(response) {
         $scope.containers = response;
     });
-});*/
+});
 
-$(function(){
+/*$(function(){
 
     $.ajax({
         type : "POST",
-        url : "http://139.129.4.187:13131/containers/json",
+        url : "/doob/docker/containers/json",
         dataType : "json",
         success : function(data){
             loadContainers(data)
@@ -33,4 +33,4 @@ var loadContainers = function(container) {
     }
 
     $('#containers').html(html)
-}
+}*/

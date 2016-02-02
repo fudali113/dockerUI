@@ -37,16 +37,42 @@ public class DockerApiUtil {
 
     private final OkHttpClient client = new OkHttpClient();
 
-    public String getDockerApiJson(String dockerApi) throws IOException {
-        Request request = new Request.Builder()
+    /**
+     * 方便产生OkHttp Request
+     * @param dockerApi api字符串
+     * @return OkHttp Request对象
+     */
+    public Request getOkHttpRequest(String dockerApi){
+        return  new Request.Builder()
                 .url("http://139.129.4.187:13131/"+ dockerApi)
                 .build();
+    }
 
+    /**
+     * 根据api执行GET请求以查询结果
+     * @param dockerApi api 字符串
+     * @return json格式字符串结果
+     * @throws IOException
+     */
+    public String getDockerApiJson(String dockerApi) throws IOException {
+        Request request = getOkHttpRequest(dockerApi);
         Response response = client.newCall(request).execute();
 
         if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
 
         return response.body().string();
+    }
+
+    public String postDockerApi(String dockerApi){
+
+
+        return "";
+    }
+
+    public String deleteDockerApi(String dockerApi){
+
+
+        return "";
     }
 
 }

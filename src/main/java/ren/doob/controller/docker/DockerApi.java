@@ -48,7 +48,7 @@ public class DockerApi extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/{api}" , method = RequestMethod.GET , produces="application/json;charset=UTF-8")
-    public Object getApiJson(@PathVariable String api) throws IOException {
+    public Object getApi1Json(@PathVariable String api) throws IOException {
 
         return dockerApi.getDockerApiJson(api);
 
@@ -56,9 +56,17 @@ public class DockerApi extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/{api1}/{api2}" , method = RequestMethod.GET , produces="application/json;charset=UTF-8")
-    public Object getApi1Json(@PathVariable String api1 ,@PathVariable String api2) throws IOException {
+    public Object getApi2Json(@PathVariable String api1 ,@PathVariable String api2) throws IOException {
 
         return dockerApi.getDockerApiJson(api1+ "/" +api2);
+
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/{api1}/{api2}/{api3}" , method = RequestMethod.GET , produces="application/json;charset=UTF-8")
+    public Object getApi3Json(@PathVariable String api1 ,@PathVariable String api2 ,@PathVariable String api3) throws IOException {
+
+        return dockerApi.getDockerApiJson(api1 + "/" + api2 + "/" + api3);
 
     }
 }
