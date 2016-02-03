@@ -2,14 +2,14 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="Shortcut Icon" href="/doob/views/images/ooo.ico">
     <title>doob</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/doob/views/chajian/bootstrap-vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="/doob/views/css/index.css">
 </head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="/doob/views/chajian/bootstrap-vertical-menu.css">
-<link rel="stylesheet" type="text/css" href="/doob/views/css/index.css">
-
 <div class="container" style="width: 100%">
     <div class="row clearfix">
         <div class="col-md-12 column">
@@ -263,9 +263,8 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
-        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-        <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-        <script src="/doob/views/js/index.js"></script>
-
 </body>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="/doob/views/js/index.js"></script>
 </html>

@@ -3,6 +3,7 @@ var xinxi;
 
 $(function(){
 
+    $('#index').siblings().hide()
     $('li a').click(function(){
         var src = this.title;
         $('#'+src).show().siblings().hide()

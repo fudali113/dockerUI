@@ -12,6 +12,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="/views/css/error.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="Shortcut Icon" href="/doob/views/images/ooo.ico">
 </head>
 <body>
 

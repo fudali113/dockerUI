@@ -1,36 +1,32 @@
 var app = angular.module('containersApp', []);
 app.controller('containers', function($scope , $http) {
-    var url="/doob/docker/containers/json"
+
+    var url = "/doob/docker/containers/json"
     $http.get(url).success( function(response) {
         $scope.containers = response;
     });
-});
 
-/*$(function(){
+    $scope.getIC = function(obj , ic){
+        var url = obj.target.href
+        var href = url.split('#')[1]
 
-    $.ajax({
-        type : "POST",
-        url : "/doob/docker/containers/json",
-        dataType : "json",
-        success : function(data){
-            loadContainers(data)
-        },
-        error : function(){
-            alert('请求失败！')
-        }
-    })
+        $http.get(href).success(function(data){
+            if( ic == 'i' ) {
+                $scope.imageInfo = data
+                $scope.imageName = true
+                $scope.containerName = false
+                $scope.modelTitle = "镜像信息："
+            }
+            if( ic == 'c') {
+                $scope.containerInfo = data
+                $scope.containerName = true
+                $scope.imageName = false
+                $scope.modelTitle = "容器信息："
+            }
+        })
 
-})
-
-var loadContainers = function(container) {
-    var html = ""
-    for (var i = 0; i < data.length; i++) {
-        html += "<td><a href=" + container[i].Id + ">" + container[i].name + "</a></td>" +
-                "<td><a href=" + container.Image + ">" + container.Image + "</a></td>" +
-                "<td>" + container.Command + "</td>" +
-                "<td>" + container.Created + "</td>" +
-                "<td><span class=\"label label-" + container.Status + "\">" + container.Status + "</span></td>"
+        $('#myModal').modal('show');
     }
 
-    $('#containers').html(html)
-}*/
+});
+

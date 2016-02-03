@@ -7,13 +7,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="/doob/views/chajian/bootstrap-vertical-menu.css">
-<link rel="stylesheet" type="text/css" href="/doob/views/css/index.css">
 <head>
     <title>Title</title>
+    <link rel="Shortcut Icon" href="/doob/views/images/ooo.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/doob/views/chajian/bootstrap-vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="/doob/views/css/index.css">
 </head>
 <body>
 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">登陆终端</button>
@@ -82,9 +83,9 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
+</body>
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script src="/doob/views/js/shellChannel.js"></script>
 <script src="/doob/views/chajian/common.js"></script>
-</body>
 </html>
