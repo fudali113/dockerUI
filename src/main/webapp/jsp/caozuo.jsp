@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="/doob/views/chajian/bootstrap-vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="/doob/views/css/index.css">
 </head>
-<body>
+<body style="background: FloralWhite">
         <nav class="navbar navbar-vertical-left">
             <ul class="nav navbar-nav">
                 <li>
@@ -28,19 +28,19 @@
                 <li>
                     <a href="#" title="info">
                         <i class="fa fa-fw fa-lg fa-comments-o"></i>
-                        <span>信息</span>
+                        <span>日志</span>
                     </a>
                 </li>
                 <li>
                     <a href="#" title="computer">
                         <i class="fa fa-fw fa-lg fa-desktop"></i>
-                        <span>电脑</span>
+                        <span>演示平台</span>
                     </a>
                 </li>
                 <li>
                     <a href="#" title="shell">
                         <i class="fa fa-fw fa-lg fa-laptop"></i>
-                        <span>ssh</span>
+                        <span>Shell终端</span>
                     </a>
                 </li>
                 <li>
@@ -70,7 +70,7 @@
         </div>
         <div id="computer">
             <div class="bs-docs-section">
-                <iframe src="/doob/pages/get/zhuye" scroling="yes" width="100%" height="100%" name="float"
+                <iframe src="/doob/pages/get/yanshi" scroling="yes" width="100%" height="100%" name="float"
                         frameborder="0" allowTransparency="true"></iframe>
             </div>
         </div>

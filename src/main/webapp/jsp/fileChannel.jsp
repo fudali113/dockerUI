@@ -80,13 +80,29 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <form ENCTYPE="multipart/form-data" name="uploadFile" method="post" action="/doob/ssh/file/upload">
+                    <%--<form ENCTYPE="multipart/form-data" name="uploadFile" method="post" action="/doob/ssh/file/upload">
                         重命名： <input type="text" name="filename" class="form-control" />
                         <input type="file" name="file" />
                         <input type="submit" value="上传" class="sucesss"/>
+                    </form>--%>
+                    <form ENCTYPE="multipart/form-data" name="uploadFile" method="post" action="/doob/ssh/file/upload">
+                        <div class="form-group">
+                            <label for="name">重命名</label>
+                            <input type="text" class="form-control" id="name" name="filename" placeholder="请输入名称">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputfile">文件输入</label>
+                            <input type="file" id="inputfile" name="file">
+                            <p class="help-block">这里是块级帮助文本的实例。</p>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> 请打勾
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-default">上传</button>
                     </form>
                 </div>
-                </form>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->

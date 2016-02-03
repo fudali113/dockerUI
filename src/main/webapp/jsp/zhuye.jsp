@@ -16,10 +16,32 @@
     <link rel="stylesheet" href="/doob/views/chajian/bootstrap-vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="/doob/views/css/index.css">
 </head>
-<body ng-controller="containers">
+<body ng-controller="containers" style="background: FloralWhite">
 <div>
+    <h3><Strong>容器构建与查看</Strong></h3>
+</div>
+<div style="background:#F5F5F5">
     <div>
-        <h2 style="color: aqua"><Strong>你的容器：</Strong></h2>
+        <h2><Strong>创建一个新的容器</Strong></h2>
+        <Strong>总共{{containers.length}}个容器</Strong>
+        <p>构建你的容器并可以登陆shell终端管理你的容器</p>
+
+        <button type="button" class="btn btn-success" ng-click="openSignInModel()">创建一个新的容器</button>
+    </div>
+    <div><hr/></div>
+    <div>
+        <div style="float: left ; width: 50%">
+            nihao
+        </div>
+        <div style="float: right ; width: 50%">
+            docker
+        </div>
+    </div>
+</div>
+<div style="height: 30px"></div>
+<div style="background:#F5F5F5">
+    <div>
+        <h2><Strong>你的容器列表：</Strong></h2>
     </div>
     <div>
         <table class="table table-striped">
@@ -61,19 +83,34 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <div id="containerInfo" style="width: 50% ; float:left" ng-show="containerName">
-                        <table>
-                            <tr ng-model="containerInfo"><td>aa:</td><td>{{containerInfo.Name}}</td></tr>
+                    <div id="containerInfo" ng-show="modelShowValue == 1">
+                        <table style="width: 100%">
+                            <tr>
+                                <td style=" width: 30%"><Strong>aa:</Strong></td>
+                                <td style=" width: 70%"><Strong>{{containerInfo.Name}}</Strong></td>
+                            </tr>
                         </table>
                     </div>
-                    <div id="imageInfo" style="width: 50% ; float:left" ng-show="imageName">
-                        <table>
-                            <tr ng-model="imageInfo" ><td>oo:</td><td>{{imageInfo.Created}}</td></tr>
+                    <div id="imageInfo" ng-show="modelShowValue == 2">
+                        <table style="width: 100%">
+                            <tr>
+                                <td style=" width: 30%"><Strong>oo:</Strong></td>
+                                <td style=" width: 70%"><Strong>{{imageInfo.Created}}</Strong></td>
+                            </tr>
                         </table>
+                    </div>
+                    <div ng-show="modelShowValue == 3">
+
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" ng-show="modelShowValue == 3">
+                <button type="button" class="btn btn-warning"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-success" ng-click="signInContainer()">
+                    注册容器
+                </button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->

@@ -13,19 +13,27 @@ app.controller('containers', function($scope , $http) {
         $http.get(href).success(function(data){
             if( ic == 'i' ) {
                 $scope.imageInfo = data
-                $scope.imageName = true
-                $scope.containerName = false
+                $scope.modelShowValue = 2
                 $scope.modelTitle = "镜像信息："
             }
             if( ic == 'c') {
                 $scope.containerInfo = data
-                $scope.containerName = true
-                $scope.imageName = false
+                $scope.modelShowValue = 1
                 $scope.modelTitle = "容器信息："
             }
         })
 
         $('#myModal').modal('show');
+    }
+
+    $scope.openSignInModel = function(){
+        $scope.modelTitle = "注册一个新的容器："
+        $scope.modelShowValue = 3
+        $('#myModal').modal('show');
+    }
+
+    $scope.signInContainer = function(){
+
     }
 
 });
