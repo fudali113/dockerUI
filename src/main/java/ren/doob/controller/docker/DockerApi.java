@@ -1,5 +1,7 @@
 package ren.doob.controller.docker;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +45,8 @@ import java.io.IOException;
 @RequestMapping("/docker")
 public class DockerApi extends BaseController {
 
+    private Log log = LogFactory.getLog(DockerApi.class);
+
     @Autowired
     private DockerApiUtil dockerApi;
 
@@ -52,6 +56,7 @@ public class DockerApi extends BaseController {
 
         String path = Mc.getReq().getServletPath();
         String api = path.replaceAll("/docker/" , "").trim();
+        log.info(getUserinfo().getName() + "请求了docker remote api:" + api);
 
         return dockerApi.getDockerApiJson(api);
     }

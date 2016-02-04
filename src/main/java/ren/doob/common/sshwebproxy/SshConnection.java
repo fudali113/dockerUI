@@ -51,7 +51,6 @@ public class SshConnection implements SshConstants {
         }
         catch (ConfigurationException e)
         {
-            log.error( "Error configuring SSH Library: " + e, e );
             throw new RuntimeException( "Unable to initialize SSH Library: " + e, e );
         }
     }
@@ -106,8 +105,6 @@ public class SshConnection implements SshConstants {
 
         connectionInfo = getConnectionInfo( host, port, username );
 
-        if( log.isDebugEnabled() ) log.debug( connectionInfo + " - Attempting to Open Connection." );
-
         // Initialize the SSH library
         sshClient = new SshClient();
         sshClient.setSocketTimeout( 30000 );
@@ -120,8 +117,6 @@ public class SshConnection implements SshConstants {
         try
         {
             sshClient.connect(properties, new HostKeyVerificationImpl() );
-
-            log.debug( "Connect Successful." );
 
             // Initialize the authentication data.
             PasswordAuthenticationClient pwd = new PasswordAuthenticationClient();
@@ -143,7 +138,6 @@ public class SshConnection implements SshConstants {
         }
         catch( IOException ioException )
         {
-            log.warn( "IOException occured in SshConnection constructor.  " + ioException, ioException );
             throw new SshConnectException( "Unable to connect to host." );
         }
 
@@ -176,8 +170,6 @@ public class SshConnection implements SshConstants {
 
         connectionInfo = getConnectionInfo( host, port, username );
 
-        if( log.isDebugEnabled() ) log.debug( connectionInfo + " - Attempting to Open Connection." );
-
         // Initialize the SSH library
         sshClient = new SshClient();
         sshClient.setSocketTimeout( 30000 );
@@ -189,8 +181,6 @@ public class SshConnection implements SshConstants {
         try
         {
             sshClient.connect(properties, new HostKeyVerificationImpl() );
-
-            log.debug( "Connect Successful." );
 
             // Initialize the authentication data.
             PublicKeyAuthenticationClient publicKeyAuth = new PublicKeyAuthenticationClient();
@@ -208,7 +198,6 @@ public class SshConnection implements SshConstants {
                 throw new SshConnectException( "Authentication Error.  Invalid username or password." );
             }
 
-            log.debug( "Authentication Successful." );
         }
         catch( InvalidSshKeyException invalidSshKeyException )
         {
@@ -220,7 +209,6 @@ public class SshConnection implements SshConstants {
         }
         catch( IOException ioException )
         {
-            log.warn( "IOException occured in SshConnection constructor.  " + ioException, ioException );
             throw new SshConnectException( "Unable to connect to host." );
         }
 
@@ -282,7 +270,6 @@ public class SshConnection implements SshConstants {
      */
     public void close()
     {
-        if( log.isInfoEnabled() ) log.info( connectionInfo + " - Closing Connection." );
 
         Iterator shellChannels = channelMap.values().iterator();
         SshChannel shellChannel;
@@ -305,8 +292,6 @@ public class SshConnection implements SshConstants {
      */
     public FileChannel openFileChannel() throws SshConnectException
     {
-        if( log.isInfoEnabled() ) log.info( connectionInfo + " - Opening new FileChannel" );
-
         FileChannel fileChannel = new FileChannel( this, sshClient );
 
         // Generate a channelId for the channel and add it to the local map.
@@ -363,7 +348,6 @@ public class SshConnection implements SshConstants {
      */
     public ShellChannel openShellChannel() throws SshConnectException
     {
-        if( log.isInfoEnabled() ) log.info( connectionInfo + " - Opening new ShellChannel" );
 
         try
         {
@@ -378,7 +362,6 @@ public class SshConnection implements SshConstants {
             return shellChannel;
         }
         catch (IOException ioException) {
-            log.warn( "openShellChannel failed, unable to open Session Channel: " + ioException, ioException );
             throw new SshConnectException( "Unable to open SessionChannel." );
         }
     }

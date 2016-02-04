@@ -1,6 +1,8 @@
 package ren.doob.controller.sshconn;
 
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,12 +23,18 @@ import java.util.HashMap;
 @RequestMapping("/ssh")
 public class SshLogin extends SshBaseController {
 
+    private Log log = LogFactory.getLog(FileExecute.class);
+
+
     @ResponseBody
     @RequestMapping("/connection")
     public HashMap SSHLogin(){
         this.localField();
         ShellChannel shellChannel = connection();
         Mc.putR(CommonField.SSH_INFORMATION, shellChannel.getScreen());
+
+        log.info("用户"+getUserinfo().getName()+"登陆了shell终端");
+
         return Mc.getR();
     }
 

@@ -1,5 +1,7 @@
 package ren.doob.controller.sshconn;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,13 +25,19 @@ import java.util.HashMap;
 @RequestMapping("/ssh/shell")
 public class ShhExecute extends SshBaseController {
 
+    private Log log = LogFactory.getLog(FileExecute.class);
+
+
     @ResponseBody
-    @RequestMapping(value = "/handle" ,method = RequestMethod.GET , produces="application/json;charset=UTF-8")
+    @RequestMapping(value = "/handle", produces="application/json;charset=UTF-8")
     public HashMap sshml(){
         String ssh_mingl = getPara().get("ssh_mingl");
         ShellChannel shellChannel = getShellChannel();
         shellChannel.write(ssh_mingl,true);
         shellChannel.read();
+
+        log.info("用户"+getUserinfo().getName()+"进行了操作："+ ssh_mingl);
+
         Mc.putR(SSH_INFORMATION,shellChannel.getScreen());
         return Mc.getR();
     }

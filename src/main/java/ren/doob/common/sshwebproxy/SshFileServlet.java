@@ -108,7 +108,6 @@ public class SshFileServlet extends HttpServlet implements SshConstants {
             // Verify we received an action to perform.
             if( action == null || action.trim().length() == 0 )
             {
-                log.warn( "POST Request received without an action parameter." );
                 response.sendRedirect( PAGE_HOME );
             }
 
@@ -123,7 +122,6 @@ public class SshFileServlet extends HttpServlet implements SshConstants {
             }
             else
             {
-                log.warn( "POST Request received with an invalid action parameter: " + action );
                 response.sendRedirect( PAGE_HOME );
             }
         }
@@ -143,7 +141,6 @@ public class SshFileServlet extends HttpServlet implements SshConstants {
     private void download( HttpServletRequest request, HttpServletResponse response )
         throws IOException
     {
-        log.debug( "Download request received." );
 
         SshSession session = new SshSession( request );
         String connectionInfo = request.getParameter( PARAMETER_CONNECTION );
@@ -179,7 +176,6 @@ public class SshFileServlet extends HttpServlet implements SshConstants {
     private void upload( HttpServletRequest request, HttpServletResponse response )
         throws IOException
     {
-        log.debug( "Upload request received." );
 
         DiskFileUpload upload = new DiskFileUpload();
 
@@ -249,7 +245,6 @@ public class SshFileServlet extends HttpServlet implements SshConstants {
         catch (FileUploadException fileUploadException)
         {
             session.setErrorMessage( "Unable to upload file: " + fileUploadException.getMessage() );
-            log.warn( "Error uploading file from client: " + fileUploadException, fileUploadException );
         }
 
         response.sendRedirect( redirectPage );
@@ -266,7 +261,6 @@ public class SshFileServlet extends HttpServlet implements SshConstants {
     private void changeDirectory( HttpServletRequest request, HttpServletResponse response )
         throws IOException
     {
-        log.debug( "Download request received." );
         SshSession session = new SshSession( request );
         String connectionInfo = request.getParameter( PARAMETER_CONNECTION );
         String channelId = request.getParameter( PARAMETER_CHANNEL );

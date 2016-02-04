@@ -3,6 +3,8 @@ package ren.doob.controller.sshconn;
 import org.apache.commons.fileupload.DiskFileUpload;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,20 +54,27 @@ import java.util.List;
 @RequestMapping("/ssh/file")
 public class FileExecute extends SshBaseController{
 
+    private Log log = LogFactory.getLog(FileExecute.class);
+
+
     @ResponseBody
     @RequestMapping(value = "/cd" ,method = RequestMethod.GET , produces="application/json;charset=UTF-8")
     public Object changeDirectory() throws IOException {
 
+        String path = getPara().get(REQUEST_CDDIRECTORY);
         FileChannel fileChannel = getFileChannel();
         if (fileChannel == null ) {
             HttpServletResponse response = getRes();
             response.setContentType("application/json; charset=utf-8");
             response.getWriter().append("{\"sshNoLogin\":\"1\"}");
+            log.warn("用户"+getUserinfo().getName()+"未登录想进入"+ path);
             return null;
         }
-        String path = getPara().get(REQUEST_CDDIRECTORY);
+
         if (path != null && !"".equals(path.trim()))
             fileChannel.changeDirectory(path);
+
+        log.info("用户"+getUserinfo().getName()+"进行了"+ path);
 
         getSes().setAttribute(SESSION_FILEPATH , fileChannel.getCurrentDirectory());
         putR(SSH_INFORMATION , fileChannel.getCurrentDirectoryListing());
@@ -87,6 +96,8 @@ public class FileExecute extends SshBaseController{
             filename = filename + ".zip";
         }
 
+        log.info(getUserinfo().getName()+"下载了文件：" + filename);
+
         response.setContentType("application/x-download");
         response.setHeader("Content-Disposition", "attachment; filename=" + filename);
 
@@ -97,7 +108,7 @@ public class FileExecute extends SshBaseController{
     }
 
     @RequestMapping("/upload")
-    public void upload() throws FileUploadException {
+    public String upload() throws FileUploadException {
 
         FileChannel fileChannel = getFileChannel();
         DiskFileUpload upload = new DiskFileUpload();
@@ -126,6 +137,8 @@ public class FileExecute extends SshBaseController{
             e.printStackTrace();
             putR(SSH_INFORMATION , 0);
         }
+
+        return "fileChannel";
     }
 
 }

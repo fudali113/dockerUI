@@ -67,7 +67,6 @@ public class SshSession {
 
         // Otherwise, check for a user.
         String username = (String) session.getAttribute( USER );
-        if( log.isDebugEnabled() ) log.debug( "Verifying user is logged in.  Username: " + username );
         if( username == null )
         {
             return false;
@@ -145,7 +144,6 @@ public class SshSession {
         // If it has been closed, remove it and return null.
         else
         {
-            if( log.isDebugEnabled() ) log.debug( connectionInfo + " connection is closed, removing from session." );
             sshConnections.remove( connectionInfo );
             return null;
         }
@@ -163,12 +161,10 @@ public class SshSession {
         Map sshConnections = getConnectionMap();
         if( sshConnections.containsKey( connectionInfo ) )
         {
-            log.warn( "Error Adding new SshConnection. A connection already exists with the same connection info: " + connectionInfo );
             return false;
         }
 
         sshConnections.put( connectionInfo, sshConnection );
-        if( log.isDebugEnabled() ) log.debug( connectionInfo + " connection added to session.");
         return true;
     }
 
@@ -179,7 +175,6 @@ public class SshSession {
      */
     public synchronized void removeConnection( String connectionInfo )
     {
-        if( log.isDebugEnabled() ) log.debug( connectionInfo + " connection removed from session.");
         Map sshConnections = getConnectionMap();
         sshConnections.remove( connectionInfo );
     }

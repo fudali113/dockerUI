@@ -40,12 +40,8 @@
 
 package ren.doob.common.sshwebproxy;
 
-import org.apache.commons.logging.LogFactory;
-import org.apache.commons.logging.Log;
-
 import java.io.*;
 import java.util.List;
-
 import com.sshtools.j2ssh.SftpClient;
 import com.sshtools.j2ssh.SshClient;
 
@@ -63,9 +59,6 @@ public class FileChannel extends SshChannel implements SshConstants {
 
     /** The SftpClient */
     private SftpClient sftpClient;
-
-    /** Logger */
-    private static final Log log = LogFactory.getLog( FileChannel.class );
 
     //***************************************************************
     // Constructor
@@ -90,11 +83,9 @@ public class FileChannel extends SshChannel implements SshConstants {
         }
         catch (IOException ioException)
         {
-            log.warn( "FileChannel constructor failed, IOException occured while setting up channel to : " + sshConnection.getConnectionInfo() + ".  Exception: " + ioException, ioException );
             throw new SshConnectException( "Unable to establish File Connection.  IOExeption occured: " + ioException );
         }
 
-        if( log.isInfoEnabled() ) log.debug( "New FileChannel opened to: " + sshConnection.getConnectionInfo() );
     }
 
     //***************************************************************
@@ -109,7 +100,6 @@ public class FileChannel extends SshChannel implements SshConstants {
     public void close()
     {
         // Close Readers and Writers.
-        if( log.isInfoEnabled() ) log.debug( "Closing FileChannel connected to: " + sshConnection.getConnectionInfo() );
 
         try
         {
@@ -117,7 +107,7 @@ public class FileChannel extends SshChannel implements SshConstants {
         }
         catch( IOException ioException )
         {
-            log.warn( "IOException while closing FileChannel: " + ioException );
+            ioException.fillInStackTrace();
         }
     }
 
@@ -166,7 +156,7 @@ public class FileChannel extends SshChannel implements SshConstants {
         }
         catch (IOException ioException)
         {
-            log.info( "Error occured while getting directory listing: " + ioException );
+            ioException.printStackTrace();
             return null;
         }
     }
@@ -186,7 +176,7 @@ public class FileChannel extends SshChannel implements SshConstants {
         }
         catch (IOException ioException)
         {
-            log.info( "Error occured while changing directory listing: " + ioException );
+            ioException.printStackTrace();
             return false;
         }
     }

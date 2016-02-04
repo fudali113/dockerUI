@@ -356,7 +356,6 @@ public class VT100ShellChannel extends ShellChannel
             }
             else if( isControlChar( currentCharacter ) )
             {
-                if( log.isDebugEnabled() ) log.debug( "Ignoring unknown control character: " + (int) currentCharacter + " in cursorMode." );
             }
             else
             {
@@ -368,7 +367,6 @@ public class VT100ShellChannel extends ShellChannel
             // Treat CR and NL as normal characters in default mode.
             if( isControlChar( currentCharacter ) && currentCharacter != CTRL_NL && currentCharacter != CTRL_CR )
             {
-                if( log.isDebugEnabled() ) log.debug( "Ignoring unknown control character: " + (int) currentCharacter + " in normal mode." );
                 returnValue = true;
             }
         }
@@ -411,7 +409,6 @@ public class VT100ShellChannel extends ShellChannel
         }
         else if( currentCharacter == TERM_RLF )
         {
-            log.debug( "Received Reverse Line Feed Sequence: " + String.valueOf( controlSequence, 0, controlSequenceSize ) );
         }
         else if( currentCharacter == TERM_EES )
         {
@@ -419,7 +416,6 @@ public class VT100ShellChannel extends ShellChannel
             if( cursorRow == 0 && cursorColumn == 0 )
             {
                 clearScreen();
-                log.debug( "Cleared entire screen." );
             }
             // Othwerwise, wack the rest of this row and all of the other rows.
             else
@@ -440,13 +436,11 @@ public class VT100ShellChannel extends ShellChannel
                         clearLine( rowIndex );
                     }
                 }
-                if( log.isDebugEnabled() ) log.debug( "Cleared screen from row:column" + cursorRow + ":" + cursorColumn );
             }
         }
         else if( currentCharacter == TERM_EEL )
         {
             clearLine( cursorRow, cursorColumn );
-            if( log.isDebugEnabled() ) log.debug( "Cleared row from row:column" + cursorRow + ":" + cursorColumn );
         }
         else if( currentCharacter == TERM_MODE )
         {
@@ -454,11 +448,9 @@ public class VT100ShellChannel extends ShellChannel
             if( "?1".equals( mode ) )
             {
                 cursorMode = true;
-                log.debug( "Entering cursor mode." );
             }
             else
             {
-                log.warn( "Unknown mode requested: " + mode );
             }
         }
         else if( currentCharacter == TERM_MODE_RESET )
@@ -467,16 +459,13 @@ public class VT100ShellChannel extends ShellChannel
             if( "?1".equals( mode ) )
             {
                 cursorMode = false;
-                log.debug( "Exiting cursor mode." );
             }
             else
             {
-                log.warn( "Unknown mode requested: " + mode );
             }
         }
         else if( currentCharacter == TERM_SGR )
         {
-            log.warn( "SGR Requested but ignored: " + String.valueOf( controlSequence, 0, controlSequenceSize ) );
         }
         else
         {
@@ -496,12 +485,10 @@ public class VT100ShellChannel extends ShellChannel
     {
         if( currentCharacter == ESC_ALT_KEYPAD_APPLICATION )
         {
-            log.debug( "Application Keypad Mode Enabled." );
             return true;
         }
         if( currentCharacter == ESC_ALT_KEYPAD_NUMERIC )
         {
-            log.debug( "Numeric Keypad Mode Enabled." );
             return true;
         }
 
@@ -521,22 +508,18 @@ public class VT100ShellChannel extends ShellChannel
             case CURSOR_UP:
                 cursorRow = cursorRow - amount;
                 validateRow();
-                if( log.isDebugEnabled() ) log.debug( "Moved cursor up " + amount + " rows." );
                 break;
             case CURSOR_DOWN:
                 cursorRow = cursorRow + amount;
                 validateRow();
-                if( log.isDebugEnabled() ) log.debug( "Moved cursor down " + amount + " rows." );
                 break;
             case CURSOR_FORWARD:
                 cursorColumn = cursorColumn + amount;
                 validateColumn();
-                if( log.isDebugEnabled() ) log.debug( "Moved cursor forward " + amount + " columns." );
                 break;
             case CURSOR_BACK:
                 cursorColumn = cursorColumn - amount;
                 validateColumn();
-                if( log.isDebugEnabled() ) log.debug( "Moved cursor back " + amount + " columns." );
                 break;
             default:
                 log.error( "Invalid mode argument in move cursor! " + mode );
@@ -555,13 +538,11 @@ public class VT100ShellChannel extends ShellChannel
         String argumentString = String.valueOf( controlSequence, 0, controlSequenceSize );
         if( argumentString == null || argumentString.length() == 0 )
         {
-            log.debug( "Empty cursor argument, defaulting to 1.");
             return 1;
         }
         else
         {
             int argument =Integer.parseInt( argumentString );
-            if( log.isDebugEnabled() ) log.debug( "Cursor argument parsed as: " + argument );
             return argument;
         }
     }
@@ -581,7 +562,6 @@ public class VT100ShellChannel extends ShellChannel
 
         if( argumentString == null || argumentString.length() == 0 || index == -1)
         {
-            log.debug( "Empty cursor argument, defaulting to 1,1 (0,0).");
             position[0] = 0;
             position[1] = 0;
         }
@@ -608,7 +588,6 @@ public class VT100ShellChannel extends ShellChannel
             {
                 position[1] = Integer.parseInt( columnString ) - 1;
             }
-            if( log.isDebugEnabled() ) log.debug( "Cursor argument parsed as: " + position[0] + ":" + position[1] );
         }
 
         return position;

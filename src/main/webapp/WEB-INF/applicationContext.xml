@@ -5,12 +5,15 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:websocket="http://www.springframework.org/schema/websocket"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
      http://www.springframework.org/schema/beans/spring-beans.xsd
      http://www.springframework.org/schema/tx
 	 http://www.springframework.org/schema/tx/spring-tx.xsd
 	 http://www.springframework.org/schema/aop
 	 classpath:org\springframework\aop\config\spring-aop-4.0.xsd
+	 http://www.springframework.org/schema/websocket
+	 http://www.springframework.org/schema/websocket/spring-websocket.xsd
      http://www.springframework.org/schema/context
      http://www.springframework.org/schema/context/spring-context.xsd
      http://www.springframework.org/schema/mvc
@@ -52,5 +55,18 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="ren.doob.serivces.mapper"/>
     </bean>
+
+    <!--websocket-->
+    <bean class="org.springframework.web.socket.server.standard.ServletServerContainerFactoryBean">
+        <property name="maxTextMessageBufferSize" value="8192"/>
+        <property name="maxBinaryMessageBufferSize" value="8192"/>
+    </bean>
+
+    <websocket:handlers>
+        <websocket:mapping path="/myHandler" handler="myHandler"/>
+        <websocket:sockjs/>
+    </websocket:handlers>
+
+    <bean id="myHandler" class="ren.doob.common.websocket.MyHandler"/>
 
 </beans>

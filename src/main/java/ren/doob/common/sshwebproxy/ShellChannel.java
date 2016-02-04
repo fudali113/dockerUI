@@ -1,8 +1,6 @@
 
 package ren.doob.common.sshwebproxy;
 
-import org.apache.commons.logging.LogFactory;
-import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.io.*;
@@ -45,9 +43,6 @@ public class ShellChannel extends SshChannel implements SshConstants {
     /** The entire stored buffer. */
     private ArrayList buffer;
 
-    /** 创建一个日志对象 */
-    private static final Log log = LogFactory.getLog( ShellChannel.class );
-
 
     /**
      * Opens a vt100 terminal session transfer session with the server.
@@ -69,12 +64,10 @@ public class ShellChannel extends SshChannel implements SshConstants {
         {
             if( !sshChannel.requestPseudoTerminal("vt100", getScreenWidth(), getScreenHeight(), 0, 0, "") )
             {
-                log.warn( "ShellChannel constructor failed, unable to open PseudoTerminal for connection: " + sshConnection.getConnectionInfo() );
                 throw new SshConnectException( "Unable to establish PseudoTerminal for new ShellChannel." );
             }
             else if( !sshChannel.startShell() )
             {
-                log.warn( "ShellChannel constructor failed, unable to start shell on new channel for connection: " + sshConnection.getConnectionInfo() );
                 throw new SshConnectException( "Unable to start Shell for new ShellChannel." );
             }
 
@@ -85,7 +78,6 @@ public class ShellChannel extends SshChannel implements SshConstants {
         }
         catch( IOException ioException )
         {
-            log.warn( "ShellChannel constructor failed, IOException occured while setting up channel  for connection: " + sshConnection.getConnectionInfo() + ". IOException: " + ioException, ioException );
             throw new SshConnectException( "Unable to establish Shell Connection.  IOExeption occured: " + ioException );
         }
     }
@@ -100,8 +92,6 @@ public class ShellChannel extends SshChannel implements SshConstants {
     public void close()
     {
         // Close Readers and Writers.
-        if( log.isInfoEnabled() ) log.debug( "Closing ShellChannel connected to: " + sshConnection.getConnectionInfo() );
-
         if( reader != null )
         {
             try
@@ -110,7 +100,7 @@ public class ShellChannel extends SshChannel implements SshConstants {
             }
             catch (IOException ioException)
             {
-                log.warn( "Error closing BufferedReader for Shell Connection to: " + sshConnection.getConnectionInfo() + ".  IOException: " + ioException );
+                ioException.printStackTrace();
             }
             reader = null;
         }
@@ -129,7 +119,7 @@ public class ShellChannel extends SshChannel implements SshConstants {
             }
             catch (IOException ioException)
             {
-                log.warn( "Error closing SessionChannelClient  for Shell Connection to: " + sshConnection.getConnectionInfo() + ".  IOException: " + ioException );
+                ioException.printStackTrace();
             }
         }
     }
@@ -228,15 +218,13 @@ public class ShellChannel extends SshChannel implements SshConstants {
      */
     public void read()
     {
-        if( log.isDebugEnabled() ) log.debug( "read called for ShellConnection to: " + sshConnection.getConnectionInfo() );
-
         // We want to read even if the channel has been closed, because
         // the BufferedReader may have buffered some input, so do the
         // check after this read.  But if the reader is null, just
         // ignore the call.
         if( reader == null )
         {
-            log.warn( "read called on null reader.  Ignoring." );
+            System.out.println( "read called on null reader.  Ignoring." );
             return;
         }
 
@@ -257,7 +245,7 @@ public class ShellChannel extends SshChannel implements SshConstants {
             }
             catch (InterruptedException e)
             {
-                log.warn( "Read Pause interrupted in read()." );
+                e.printStackTrace();
             }
 
             // If there is data ready, go ahead and read it.
@@ -266,7 +254,6 @@ public class ShellChannel extends SshChannel implements SshConstants {
                 // read the data and run it through the processor.
                 int count = reader.read( inputBuffer );
                 input = process( inputBuffer, count );
-                if( log.isDebugEnabled() ) log.debug( "Read " + count + " characters from server." );
 
                 fillBuffer( input );
 
@@ -275,25 +262,22 @@ public class ShellChannel extends SshChannel implements SshConstants {
                 {
                     if( !reader.ready() )
                     {
-                        if( log.isDebugEnabled() ) log.debug( "ShellChannel for connecton: " + sshConnection.getConnectionInfo() + " Closed, closing streams." );
 
                         // Notify the sshConnection that this channel is closed.
                         sshConnection.closeChannel( this );
                     }
                     else
                     {
-                        if( log.isDebugEnabled() ) log.debug( "Connection Closed but there is more data to be read." );
                     }
                 }
             }
             else
             {
-                log.debug( "ShellChannel for connection: " + sshConnection.getConnectionInfo() + " has no data to read." );
             }
         }
         catch( IOException ioException )
         {
-            log.error( "Error reading ShellChannel for connection: " + sshConnection.getConnectionInfo() + ".  IOException while in read(): " + ioException, ioException );
+            ioException.printStackTrace();
         }
     }
 
@@ -309,22 +293,18 @@ public class ShellChannel extends SshChannel implements SshConstants {
         // Don't write if the channel is closed.
         if( !isConnected() )
         {
-            log.info( "Write call on closed ShellChannel for connection: " + sshConnection.getConnectionInfo() + ".  Ignoring." );
             return;
         }
 
         // Verify the writer is not null.
         if( writer == null )
         {
-            log.info( "Write call on closed ShellChannel Writer for connection: " + sshConnection.getConnectionInfo() + ".  Ignoring." );
             return;
         }
 
         // Encode the data for output.  Convert any control characters to
         // the correct char value.
         char[] output = encodeOutput( data );
-
-        if( log.isDebugEnabled() ) log.debug( "Wrote " + output.length + " characters to ShellChannel for connection: " + sshConnection.getConnectionInfo() );
 
         // Write the output, and send a new line if requested.
         writer.print( output );
@@ -370,7 +350,6 @@ public class ShellChannel extends SshChannel implements SshConstants {
         if( currentBufferSize > bufferMaxSize )
         {
             int trimCount = currentBufferSize - bufferMaxSize;
-            if( log.isDebugEnabled() ) log.debug( "Removing " + trimCount + " rows from the buffer." );
             for( int index = 0; index < trimCount; index++ )
             {
                 buffer.remove( 0 );
@@ -479,7 +458,6 @@ public class ShellChannel extends SshChannel implements SshConstants {
                 // Make sure we have a full sequence.
                 if( input.length() < (index + 3) )
                 {
-                    log.error( "Invalid input data.  Failed encoding.  There must be 2 characters after the # character." );
                     return new char[0];
                 }
 
@@ -491,13 +469,11 @@ public class ShellChannel extends SshChannel implements SshConstants {
                     {
                         ctrlPressed = true;
                     }
-                    if( log.isDebugEnabled() ) log.debug( "Encoded #" + charNumber + " to decimal: " + charValue );
                     index = index + 2;
                     translateBuffer[outputCount++] = (char) charValue;
                 }
                 catch( NumberFormatException numberFormatException )
                 {
-                    log.error( "Invalid input data.  failed encoding.  The control character did not contain a valid hex value." );
                     return new char[0];
                 }
             }

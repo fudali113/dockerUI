@@ -1,19 +1,10 @@
-package ren.doob.controller.pages;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import ren.doob.common.BaseController;
-import static ren.doob.common.Mc.*;
+package ren.doob.common.websocket;
 
 /**
  * @author fudali
- * @package ren.doob.controller.pages
- * @class handlepages
- * @date 2016-1-21
+ * @package ren.doob.common.websocket
+ * @class WebSocketConfig
+ * @date 2016-2-4
  * <p>
  * ━━━━━━神兽出没━━━━━━
  * 　　　┏┓　　　┏┓    Code
@@ -36,16 +27,26 @@ import static ren.doob.common.Mc.*;
  * <p>
  * ━━━━━━感觉萌萌哒━━━━━━
  */
-@Controller
-@RequestMapping("/pages")
-public class handlepages extends BaseController {
 
-    private Log log = LogFactory.getLog(handlepages.class);
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.socket.WebSocketHandler;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
+import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
+import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
 
-    @RequestMapping(value = "/get/{page}" , method = RequestMethod.GET)
-    public String get(@PathVariable String page){
-        log.info(getUserinfo().getName()+"获取了页面"+page);
-        return page;
+@Configuration
+@EnableWebSocket
+public class WebSocketConfig implements WebSocketConfigurer {
+
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        registry.addHandler(myHandler(), "/myHandler").withSockJS();
     }
+
+    @Bean
+    public WebSocketHandler myHandler() {
+        return new MyHandler();
+    }
+
 }
