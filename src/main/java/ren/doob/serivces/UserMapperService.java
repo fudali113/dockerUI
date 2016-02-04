@@ -3,8 +3,8 @@ package ren.doob.serivces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ren.doob.common.Parameter;
-import ren.doob.mapper.UserMapper;
-import ren.doob.model.User;
+import ren.doob.serivces.mapper.UserMapper;
+import ren.doob.serivces.model.User;
 
 /**
  * @author fudali

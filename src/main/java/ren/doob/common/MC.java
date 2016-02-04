@@ -1,6 +1,6 @@
 package ren.doob.common;
 
-import ren.doob.model.User;
+import ren.doob.serivces.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

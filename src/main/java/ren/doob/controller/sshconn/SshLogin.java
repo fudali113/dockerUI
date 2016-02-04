@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ren.doob.common.CommonField;
 import ren.doob.common.Mc;
 import ren.doob.common.SshBaseController;
-import ren.doob.sshwebproxy.*;
+import ren.doob.common.sshwebproxy.*;
 
 import java.util.HashMap;
 

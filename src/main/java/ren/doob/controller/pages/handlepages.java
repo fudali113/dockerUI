@@ -3,6 +3,7 @@ package ren.doob.controller.pages;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import ren.doob.common.BaseController;
 import static ren.doob.common.Mc.*;
 
@@ -37,7 +38,7 @@ import static ren.doob.common.Mc.*;
 @RequestMapping("/pages")
 public class handlepages extends BaseController {
 
-    @RequestMapping("/get/{page}")
+    @RequestMapping(value = "/get/{page}" , method = RequestMethod.GET)
     public String get(@PathVariable String page){
         return page;
     }

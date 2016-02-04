@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import ren.doob.model.User;
+import ren.doob.serivces.model.User;
 import ren.doob.serivces.UserMapperService;
-
-import javax.servlet.http.HttpSession;
 
 /**
  * Created by Administrator on 2015-12-21.

@@ -29,7 +29,7 @@
     </bean>
 
     <aop:aspectj-autoproxy />
-    <bean class="ren.doob.aop.LoginRights"/>
+    <bean class="ren.doob.common.aop.LoginRights"/>
 
     <!-- transaction support,事务管理支持bean-->
     <!-- PlatformTransactionMnager -->
@@ -50,7 +50,7 @@
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="ren.doob.mapper"/>
+        <property name="basePackage" value="ren.doob.serivces.mapper"/>
     </bean>
 
 </beans>

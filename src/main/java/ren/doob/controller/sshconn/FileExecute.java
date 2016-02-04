@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import static ren.doob.common.Mc.*;
 import static ren.doob.common.CommonField.*;
 import ren.doob.common.*;
-import ren.doob.sshwebproxy.FileChannel;
-import ren.doob.sshwebproxy.ShellChannel;
+import ren.doob.common.sshwebproxy.FileChannel;
+import ren.doob.common.sshwebproxy.ShellChannel;
 
-import static ren.doob.sshwebproxy.MySsh.*;
+import static ren.doob.common.sshwebproxy.MySsh.*;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 

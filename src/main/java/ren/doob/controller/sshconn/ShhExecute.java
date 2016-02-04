@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import static ren.doob.common.CommonField.*;
 import static ren.doob.common.Mc.*;
 import ren.doob.common.*;
-import ren.doob.sshwebproxy.ShellChannel;
-import static ren.doob.sshwebproxy.MySsh.*;
+import ren.doob.common.sshwebproxy.ShellChannel;
+import static ren.doob.common.sshwebproxy.MySsh.*;
 
 import java.util.HashMap;
 

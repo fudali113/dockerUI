@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ren.doob.serivces.mapper.UserMapper">
+
+    <select id="getLoginUser" parameterType="ren.doob.common.Parameter" resultType="ren.doob.serivces.model.User">
+          SELECT * FROM user where  NAME = #{accept.name}
+    </select>
+
+</mapper>
