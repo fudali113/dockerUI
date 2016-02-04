@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html ng-app="yanshiApp">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>演示平台</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -10,12 +10,49 @@
     <link rel="stylesheet" type="text/css" href="/doob/views/css/index.css">
 </head>
 <body>
-<div>
+<div ng-controller="logs">
     <div style="float: left ; width: 20%">
-        wocao
+        <div>
+            <h2><Strong>运行中的容器：</Strong></h2>
+        </div>
+        <hr/>
+        <div>
+            <div style="position:relative;border: 1px">
+                <img src="/doob/views/images/dockerImages/docker001.png" ng-click="changeNowCon($event)">
+                <span style="position:absolute; top:0; left:0;">容器1</span>
+            </div>
+            <div style="position:relative;border: 1px">
+                <img src="/doob/views/images/dockerImages/docker002.jpg" ng-click="changeNowCon($event)">
+                <span style="position:absolute; top:0; left:0;">容器2</span>
+            </div>
+            <div style="position:relative;border: 1px">
+                <img src="/doob/views/images/dockerImages/docker003.png" ng-click="changeNowCon($event)">
+                <span style="position:absolute; top:0; left:0;">容器3</span>
+            </div>
+        </div>
     </div>
     <div style="float: right ; width: 80%">
-        nihao
+        <div>
+            <h4><Strong>{{nowCon}}的日志信息！</Strong></h4>
+            <div class="dropdown">
+                <button type="button" class="btn dropdown-toggle" id="dropdownMenu1"
+                        data-toggle="dropdown">
+                    {{nowSelect}}
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                    <li role="presentation" ng-repeat="select in selectList">
+                        <a role="menuitem" tabindex="-1" href="#" ng-click="buttonChange($event)">{{select}}</a>
+                    </li>
+
+                    <li role="presentation" class="divider"></li>
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="#" ng-click="closeLogsInfo()">清空日志！</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <textarea class="form-control" rows="36" readonly="true">{{logsInfo}}</textarea>
     </div>
 </div>
 </body>
