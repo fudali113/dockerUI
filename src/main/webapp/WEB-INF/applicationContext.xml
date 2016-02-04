@@ -56,17 +56,17 @@
         <property name="basePackage" value="ren.doob.serivces.mapper"/>
     </bean>
 
-    <!--websocket-->
+    <!--websocket
     <bean class="org.springframework.web.socket.server.standard.ServletServerContainerFactoryBean">
         <property name="maxTextMessageBufferSize" value="8192"/>
         <property name="maxBinaryMessageBufferSize" value="8192"/>
     </bean>
 
     <websocket:handlers>
-        <websocket:mapping path="/myHandler" handler="myHandler"/>
+        <websocket:mapping path="/mywebsocket" handler="myHandler"/>
         <websocket:sockjs/>
     </websocket:handlers>
 
-    <bean id="myHandler" class="ren.doob.common.websocket.MyHandler"/>
+    <bean id="myHandler" class="ren.doob.common.websocket.MyHandler"/>-->
 
 </beans>

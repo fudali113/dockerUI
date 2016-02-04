@@ -34,6 +34,7 @@ import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
 
 
 @Configuration
@@ -41,7 +42,11 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 public class WebSocketConfig implements WebSocketConfigurer {
 
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(myHandler(), "/myHandler").withSockJS();
+
+        registry.addHandler(myHandler(),"/mywebsocket").addInterceptors(new HttpSessionHandshakeInterceptor());
+
+        registry.addHandler(myHandler(), "/sockjs/mywebsocket").addInterceptors(new HttpSessionHandshakeInterceptor())
+                .withSockJS();
     }
 
     @Bean
