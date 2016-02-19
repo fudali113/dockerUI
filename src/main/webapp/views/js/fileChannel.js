@@ -45,7 +45,7 @@ var upload = function(uploadpara){
         success : function(data){
             if (loginRightsChucke(data)) return
             if (sshLoginRightsChucke(data)) return
-            info = data.ssh_info == null ? alert('请求数据为空') : data.ssh_info;
+            else info = data.ssh_info == null ? alert('请求数据为空') : data.ssh_info;
             nowpath = data.nowpath;
             yeshu = 1
             if(info != null) loadinfo(info , nowpath)

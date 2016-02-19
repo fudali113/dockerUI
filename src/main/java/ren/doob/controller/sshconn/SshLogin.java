@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ren.doob.common.CommonField;
 import ren.doob.common.Mc;
+import static ren.doob.common.Mc.*;
 import ren.doob.common.SshBaseController;
 import ren.doob.common.sshwebproxy.*;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import java.util.HashMap;
 
@@ -31,10 +34,9 @@ public class SshLogin extends SshBaseController {
     public HashMap SSHLogin(){
         this.localField();
         ShellChannel shellChannel = connection();
-        Mc.putR(CommonField.SSH_INFORMATION, shellChannel.getScreen());
-
+        putR(CommonField.SSH_INFORMATION, shellChannel.getScreen());
+        putR("loginInfo" , getPara());
         log.info("用户"+getUserinfo().getName()+"登陆了shell终端");
-
         return Mc.getR();
     }
 
@@ -52,7 +54,7 @@ public class SshLogin extends SshBaseController {
 
         try{
             SshSession ss = new SshSession(Mc.getSes());
-            sshConnection = new SshConnection(ssh_ip,Integer.parseInt(ssh_host),ssh_name,ssh_pass);
+            sshConnection = new SshConnection(getPara().get("ssh_ip"),Integer.parseInt(getPara().get("ssh_host")),getPara().get("ssh_name"),getPara().get("ssh_pass"));
             ss.addSshConnection(sshConnection);
             shellChannel = sshConnection.openShellChannel();
             fileChannel = sshConnection.openFileChannel();

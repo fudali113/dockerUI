@@ -1,5 +1,7 @@
 var channelid;
 var xinxi;
+var yesandnologin = 0;
+var loginInfo = {}
 
 $(function(){
 
@@ -14,6 +16,15 @@ $(function(){
                 if(data.result == 0){
                     alert('请确认输入信息！')
                 }else {
+                    var loginAccept = data.loginInfo.accept
+                    var html = '连接信息：'+loginAccept.ssh_ip+':'+loginAccept.ssh_host+'@'+loginAccept.ssh_name+'<br/>'+
+                                '连接时间：'+getNowTime()
+                    $("#loginInfoDiv").html(html)
+                    loginInfo.name = loginAccept.ssh_name
+                    loginInfo.ip = loginAccept.ssh_ip
+                    loginInfo.port = loginAccept.ssh_host
+                    loginInfo.loginTime = getNowTime()
+                    yesandnologin = 1;
                     channelid = data.channelid;
                     xinxi = data.ssh_info;
                     ConnectionInfo = data.ConnectionInfo;
@@ -45,3 +56,28 @@ $(function(){
     });
     daovoice('update');
 })
+
+var loginInfoORLogin = function(){
+    if(yesandnologin == 0){
+        reLogin()
+    }else{
+        $("#loginFromDiv").hide()
+        $("#loginDiv").hide()
+        $("#loginInfoDiv").show()
+        $("#reLoginDiv").show()
+        $("#modelTitle").html("登陆信息")
+    }
+}
+
+var reLogin = function(){
+    $("#loginFromDiv").show()
+    $("#loginDiv").show()
+    $("#loginInfoDiv").hide()
+    $("#reLoginDiv").hide()
+    $("#modelTitle").html("登陆Shell")
+}
+
+var getNowTime = function(){
+    var d = new Date()
+    return d.getFullYear()+'-'+ (d.getMonth()+1)+'-'+ d.getDate()+' '+ d.getHours()+':'+ d.getMinutes()+':'+ d.getSeconds()+'    星期'+ d.getDay()
+}

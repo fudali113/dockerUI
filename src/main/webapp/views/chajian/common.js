@@ -13,7 +13,7 @@ var loginRightsChucke = function (data) {
 
 var sshLoginRightsChucke = function(data){
   if(data.sshNoLogin == "1"){
-    alert("请登录ssh")
+    //alert("请登录ssh")
     return true
   }
 }
