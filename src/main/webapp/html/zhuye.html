@@ -50,7 +50,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="container in containers">
-                    <td><a href="#/doob/docker/containers/{{ container.Id }}/json" ng-click = "getIC($event , 'c')">{{ container.Id}}</a></td>
+                    <td><a href="#/doob/docker/containers/{{ container.Id }}/json" ng-click = "getIC($event , 'c')">{{ container.Names}}</a></td>
                     <td><a href="#/doob/docker/images/{{ container.Image }}/json" ng-click = "getIC($event , 'i')">{{ container.Image }}</a></td>
                     <td>{{ container.Command}}</td>
                     <td>{{ container.Created }}</td>
@@ -64,7 +64,7 @@
 <%--模态框--%>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width : 700px ;">
         <div class="modal-content">
             <div class="modal-header" align="cemter">
                 <button type="button" class="close"
@@ -80,8 +80,28 @@
                     <div id="containerInfo" ng-show="modelShowValue == 1">
                         <table style="width: 100%">
                             <tr>
-                                <td style=" width: 30%"><Strong>aa:</Strong></td>
-                                <td style=" width: 70%"><Strong>{{containerInfo.Name}}</Strong></td>
+                                <td style=" width: 30%"><Strong>Id:</Strong></td>
+                                <td style=" width: 70%"><Strong>{{containerInfo.Id}}</Strong></td>
+                            </tr>
+                            <tr>
+                                <td style=" width: 30%"><Strong>创建时间:</Strong></td>
+                                <td style=" width: 70%"><Strong>{{containerInfo.Created}}</Strong></td>
+                            </tr>
+                            <tr>
+                                <td style=" width: 30%"><Strong>开放端口:</Strong></td>
+                                <td style=" width: 70%"><Strong>{{containerInfo.HostConfig.PortBindings}}</Strong></td>
+                            </tr>
+                            <tr>
+                                <td style=" width: 30%"><Strong>运行路径:</Strong></td>
+                                <td style=" width: 70%"><Strong>{{containerInfo.Path}}</Strong></td>
+                            </tr>
+                            <tr>
+                                <td style=" width: 30%"><Strong>IP地址:</Strong></td>
+                                <td style=" width: 70%"><Strong>{{containerInfo.NetworkSettings.IPAddress}}</Strong></td>
+                            </tr>
+                            <tr>
+                                <td style=" width: 30%"><Strong>状态:</Strong></td>
+                                <td style=" width: 70%"><Strong>{{containerInfo.State.Status}}</Strong></td>
                             </tr>
                         </table>
                     </div>
@@ -98,14 +118,34 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer" ng-show="modelShowValue == 3">
-                <button type="button" class="btn btn-warning"
-                        data-dismiss="modal">关闭
-                </button>
-                <button type="button" class="btn btn-success" ng-click="signInContainer()">
-                    注册容器
-                </button>
+            <div class="modal-footer">
+                <div ng-show="modelShowValue == 1">
+                    <button type="button" class="btn btn-success" >
+                        重启容器
+                    </button>
+                    <button type="button" class="btn btn-info" >
+                        commit
+                    </button>
+                    <button type="button" class="btn btn-warning">
+                        停止容器
+                    </button>
+                    <button type="button" class="btn btn-danger" >
+                        删除容器
+                    </button>
+                </div>
+                <div ng-show="modelShowValue == 2">
+
+                </div>
+                <div ng-show="modelShowValue == 3">
+                    <button type="button" class="btn btn-warning"
+                            data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-success" ng-click="signInContainer();">
+                        注册容器
+                    </button>
+                </div>
             </div>
+
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>

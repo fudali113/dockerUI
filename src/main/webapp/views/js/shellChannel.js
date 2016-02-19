@@ -6,7 +6,7 @@ $(function(){
         if(event.keyCode == "13") $('#scml').click();
     });
 
-    $('#sshdl').click(function(){
+    /*$('#sshdl').click(function(){
         $.ajax({
             type : "POST",
             url : "/doob/ssh/connection",
@@ -28,7 +28,7 @@ $(function(){
                 alert('请求失败！')
             }
         })
-    })
+    })*/
 
     $('#scml').click(function(){
         var mingl = {};

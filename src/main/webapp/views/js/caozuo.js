@@ -3,6 +3,32 @@ var xinxi;
 
 $(function(){
 
+    $('#sshdl').click(function(){
+        $.ajax({
+            type : "POST",
+            url : "/doob/ssh/connection",
+            data : $('#SSHlogin').serialize(),
+            dataType : "json",
+            success : function(data){
+                if (loginRightsChucke(data)) return
+                if(data.result == 0){
+                    alert('请确认输入信息！')
+                }else {
+                    channelid = data.channelid;
+                    xinxi = data.ssh_info;
+                    ConnectionInfo = data.ConnectionInfo;
+                    $('#shellreload').attr('src', $('#shellreload').attr('src'));
+                    $('#filereload').attr('src', $('#filereload').attr('src'));
+                    $('#myModal').modal('hide');
+                    dqxx();
+                }
+            },
+            error : function(){
+                alert('请求失败！')
+            }
+        })
+    })
+
     $('#index').siblings().hide()
     $('li a').click(function(){
         var src = this.title;

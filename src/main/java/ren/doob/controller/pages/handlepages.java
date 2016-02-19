@@ -36,13 +36,16 @@ import ren.doob.common.BaseController;
  * ━━━━━━感觉萌萌哒━━━━━━
  */
 @Controller
-@RequestMapping("/pages")
 public class HandlePages extends BaseController {
 
     private Log log = LogFactory.getLog(HandlePages.class);
 
+    @RequestMapping(value = "/index" , method = RequestMethod.GET)
+    public String Index(){
+        return "caozuo";
+    }
 
-    @RequestMapping(value = "/get/{page}" , method = RequestMethod.GET)
+    @RequestMapping(value = "/pages/get/{page}" , method = RequestMethod.GET)
     public String get(@PathVariable String page){
         log.info(getUserinfo().getName()+"获取了页面"+page);
         return page;
