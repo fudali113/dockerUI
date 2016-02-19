@@ -1,4 +1,7 @@
-package ren.doob.common;
+package ren.doob.common.util;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -33,6 +36,17 @@ import java.lang.reflect.Method;
  * @param <T> 参数类型
  */
 public class PathFoundClass<T> {
+
+    private PathFoundClass(){}
+
+    private static final PathFoundClass pathFoundClass = new PathFoundClass();
+    //单列模式
+    public static PathFoundClass getPathFoundClass(){
+        return pathFoundClass;
+    }
+
+    private static final ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+    private static final String packageName = "com.tianjian.dass.";
 
     private final String firstPackageName = "ren.doob.";
 
@@ -122,6 +136,10 @@ public class PathFoundClass<T> {
         }
 
         return object ;
+    }
+
+    private Object getObject(String aimBean) { //获取spring的bean
+        return applicationContext.getBean(aimBean);
     }
 
 }
