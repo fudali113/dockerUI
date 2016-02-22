@@ -1,8 +1,13 @@
 var app = angular.module('yanshiApp', []);
 app.controller('logs', function($scope , $http) {
-    $scope.nowCon = "容器1"
+    $scope.nowCon = "..."
     $scope.nowSelect = "所有"
     $scope.selectList = ['所有','系统','访问','应用']
+
+    var url = "/doob/docker/containers/json"
+    $http.get(url).success( function(response) {
+        $scope.containers = response;
+    });
 
     $scope.buttonChange = function(eve){
         $scope.nowSelect = eve.target.innerHTML

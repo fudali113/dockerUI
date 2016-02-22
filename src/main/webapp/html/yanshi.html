@@ -16,18 +16,10 @@
             <h2><Strong>运行中的容器：</Strong></h2>
         </div>
         <hr/>
-        <div>
+        <div ng-repeat="container in containers">
             <div style="position:relative;border: 1px">
                 <img src="/doob/views/images/dockerImages/docker001.png" ng-click="changeNowCon($event)">
-                <span style="position:absolute; top:0; left:0;">容器1</span>
-            </div>
-            <div style="position:relative;border: 1px">
-                <img src="/doob/views/images/dockerImages/docker002.jpg" ng-click="changeNowCon($event)">
-                <span style="position:absolute; top:0; left:0;">容器2</span>
-            </div>
-            <div style="position:relative;border: 1px">
-                <img src="/doob/views/images/dockerImages/docker003.png" ng-click="changeNowCon($event)">
-                <span style="position:absolute; top:0; left:0;">容器3</span>
+                <span style="position:absolute; top:0; left:0;">{{ container.Names}}</span>
             </div>
         </div>
     </div>
