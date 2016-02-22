@@ -30,7 +30,6 @@ public class SshLogin extends SshBaseController {
     @ResponseBody
     @RequestMapping("/connection")
     public HashMap SSHLogin(){
-        this.localField();
         ShellChannel shellChannel = connection();
         putR(CommonField.SSH_INFORMATION, shellChannel.getScreen());
         putR("loginInfo" , getPara());

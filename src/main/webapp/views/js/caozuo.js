@@ -28,10 +28,10 @@ $(function(){
                     channelid = data.channelid;
                     xinxi = data.ssh_info;
                     ConnectionInfo = data.ConnectionInfo;
-                    $('#shellreload').attr('src', $('#shellreload').attr('src'));
-                    $('#filereload').attr('src', $('#filereload').attr('src'));
                     $('#myModal').modal('hide');
-                    document.getElementById('shellreload').contentWindow.dqxx(data.ssh_info);
+                    //刷新两个页面
+                    $("#shellreload")[0].contentWindow.dqxx(data.ssh_info);
+                    $("#filereload")[0].contentWindow.upload({});
                 }
             },
             error : function(){
