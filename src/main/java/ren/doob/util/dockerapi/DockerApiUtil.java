@@ -4,6 +4,8 @@ import com.squareup.okhttp.*;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author fudali
@@ -63,16 +65,39 @@ public class DockerApiUtil {
         return response.body().string();
     }
 
-    public String postDockerApi(String dockerApi){
+    public Map postDockerApi(String dockerApi) throws IOException {
+
+        RequestBody formBody = new FormEncodingBuilder()
+                .build();
+        Request request = new Request.Builder()
+                .url("http://139.129.4.187:13131/"+ dockerApi)
+                .post(formBody)
+                .build();
 
 
-        return "";
+        return notGetRequestTotalMethod(request,dockerApi);
     }
 
-    public String deleteDockerApi(String dockerApi){
+    public Map deleteDockerApi(String dockerApi) throws IOException {
 
+        RequestBody formBody = new FormEncodingBuilder()
+                .build();
+        Request request = new Request.Builder()
+                .url("http://139.129.4.187:13131/"+ dockerApi)
+                .delete(formBody)
+                .build();
 
-        return "";
+        return notGetRequestTotalMethod(request,dockerApi);
+    }
+
+    private Map notGetRequestTotalMethod(Request request ,  String dockerApi) throws IOException {
+        Response response = client.newCall(request).execute();
+        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+
+        HashMap<String , String> map = new HashMap<String , String>();
+        map.put("statusCode" , response.code()+"");
+        map.put("responseBody" , response.body().string());
+        return map;
     }
 
 }

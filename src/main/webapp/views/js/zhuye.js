@@ -10,7 +10,7 @@ app.controller('containers', function($scope , $http) {
         var url = obj.target.href
         var href = url.split('#')[1]
 
-        $http.get(href).success(function(data){
+        $http.get(href).success(function(data){// i为image   c为 container
             if( ic == 'i' ) {
                 $scope.imageInfo = data
                 $scope.modelShowValue = 2
@@ -34,6 +34,19 @@ app.controller('containers', function($scope , $http) {
 
     $scope.signInContainer = function(){
 
+    }
+
+    $scope.deleteContainer = function () {
+        var handleurl = '/doob/docker/containers/' + $scope.containerInfo.Id
+        $http.delete(handleurl).success(function(data){
+            alert("delete success!")
+        })
+    }
+    $scope.handleContainer = function(handleName){
+        var handleurl = '/doob/docker/containers/' + $scope.containerInfo.Id + '/'+ handleName
+        $http.post(handleurl).success(function(data){
+            alert("handle success!")
+        })
     }
 
 });

@@ -4,14 +4,15 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ren.doob.common.BaseController;
 import ren.doob.common.Mc;
 import ren.doob.util.dockerapi.DockerApiUtil;
-
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * @author fudali
@@ -61,4 +62,25 @@ public class DockerApi extends BaseController {
         return dockerApi.getDockerApiJson(api);
     }
 
+    @ResponseBody   // /**表示获取路径下所有请求
+    @RequestMapping(value = "/**" , method = RequestMethod.POST , produces="application/json;charset=UTF-8")
+    public Object getApi2Json() throws IOException {
+
+        String path = Mc.getReq().getServletPath();
+        String api = path.replaceAll("/docker/" , "").trim();
+        log.info(getUserinfo().getName() + "请求了docker remote api:" + api);
+
+        Map<String,String> map = dockerApi.postDockerApi(api);
+        Mc.getRes().setStatus(Integer.parseInt(map.get("statusCode")));
+        return map.get("responseBody");
+    }
+
+    @ResponseBody   // /**表示获取路径下所有请求
+    @RequestMapping(value = "/containers/{id}" , method = RequestMethod.DELETE , produces="application/json;charset=UTF-8")
+    public Object deletecontainer(@PathVariable("id") String id) throws IOException {
+        String deleteDockerUrl = "containers/"+id;
+        Map<String,String> map = dockerApi.deleteDockerApi(deleteDockerUrl);
+        Mc.getRes().setStatus(Integer.parseInt(map.get("statusCode")));
+        return map.get("responseBody");
+    }
 }

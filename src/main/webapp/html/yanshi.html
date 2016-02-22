@@ -18,7 +18,7 @@
         <hr/>
         <div ng-repeat="container in containers">
             <div style="position:relative;border: 1px">
-                <img src="/doob/views/images/dockerImages/docker001.png" ng-click="changeNowCon($event)">
+                <img src="/doob/views/images/dockerImages/docker00{{index+1}}.png" ng-click="changeNowCon($event)">
                 <span style="position:absolute; top:0; left:0;">{{ container.Names}}</span>
             </div>
         </div>

@@ -120,16 +120,16 @@
             </div>
             <div class="modal-footer">
                 <div ng-show="modelShowValue == 1">
-                    <button type="button" class="btn btn-success" >
+                    <button type="button" class="btn btn-success" ng-click="handleContainer('restart');">
                         重启容器
                     </button>
                     <button type="button" class="btn btn-info" >
                         commit
                     </button>
-                    <button type="button" class="btn btn-warning">
+                    <button type="button" class="btn btn-warning" ng-click="handleContainer('stop');">
                         停止容器
                     </button>
-                    <button type="button" class="btn btn-danger" >
+                    <button type="button" class="btn btn-danger" ng-click="deleteContainer();">
                         删除容器
                     </button>
                 </div>
