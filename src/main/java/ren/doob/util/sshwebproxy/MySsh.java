@@ -1,4 +1,4 @@
-package ren.doob.common.sshwebproxy;
+package ren.doob.util.sshwebproxy;
 
 import ren.doob.common.Mc;
 
@@ -7,7 +7,7 @@ import static ren.doob.common.Mc.*;
 
 /**
  * @author fudali
- * @package ren.doob.common.sshwebproxy
+ * @package ren.doob.util.sshwebproxy
  * @class MySsh
  * @date 2016-1-21
  * <p>

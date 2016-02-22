@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import static ren.doob.common.Mc.*;
 import static ren.doob.common.CommonField.*;
 import ren.doob.common.*;
-import ren.doob.common.sshwebproxy.FileChannel;
-import ren.doob.common.sshwebproxy.ShellChannel;
+import ren.doob.util.sshwebproxy.FileChannel;
+import ren.doob.util.sshwebproxy.ShellChannel;
 
-import static ren.doob.common.sshwebproxy.MySsh.*;
+import static ren.doob.util.sshwebproxy.MySsh.*;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

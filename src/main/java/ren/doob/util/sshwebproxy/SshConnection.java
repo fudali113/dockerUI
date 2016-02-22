@@ -1,5 +1,5 @@
 
-package ren.doob.common.sshwebproxy;
+package ren.doob.util.sshwebproxy;
 
 import com.sshtools.j2ssh.SshClient;
 import com.sshtools.j2ssh.transport.HostKeyVerification;

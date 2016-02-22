@@ -1,4 +1,4 @@
-package ren.doob.common.util;
+package ren.doob.util;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -140,6 +140,10 @@ public class PathFoundClass<T> {
 
     private Object getObject(String aimBean) { //获取spring的bean
         return applicationContext.getBean(aimBean);
+    }
+
+    private Object getImpl(String aimMapperName) throws ClassNotFoundException {
+        return applicationContext.getBeansOfType(Class.forName(aimMapperName));
     }
 
 }

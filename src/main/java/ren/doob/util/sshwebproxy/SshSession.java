@@ -1,4 +1,4 @@
-package ren.doob.common.sshwebproxy;
+package ren.doob.util.sshwebproxy;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

@@ -28,6 +28,7 @@ public class SysLogin extends BaseController{
         User user = userMapperService.getUser(Mc.getPara());
         if (Mc.getPara().get("pass").equals(user.getPass())){
             Mc.getSes().setAttribute(CommonField.SESSION_USERINFO,user);
+            Mc.getSes().setAttribute(CommonField.NOWONLINE_USERNAME,user.getName());
             Mc.putR("userinfo" , user);
             log.info("用户"+user.getName()+"已经登陆！用户信息已存入session");
         } else {

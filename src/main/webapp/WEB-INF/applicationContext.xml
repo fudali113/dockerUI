@@ -67,6 +67,6 @@
         <websocket:sockjs/>
     </websocket:handlers>
 
-    <bean id="myHandler" class="ren.doob.common.websocket.MyHandler"/>-->
+    <bean id="myHandler" class="ren.doob.websocket.MyHandler"/>-->
 
 </beans>

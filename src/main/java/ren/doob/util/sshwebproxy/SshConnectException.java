@@ -1,7 +1,7 @@
 /**
  * 自定义一个关于ssh的异常
  */
-package ren.doob.common.sshwebproxy;
+package ren.doob.util.sshwebproxy;
 
 public class SshConnectException extends Exception {
 

@@ -1,8 +1,8 @@
-package ren.doob.common.websocket;
+package ren.doob.websocket;
 
 /**
  * @author fudali
- * @package ren.doob.common.websocket
+ * @package ren.doob.websocket
  * @class MyHandler
  * @date 2016-2-4
  * <p>
@@ -30,14 +30,23 @@ package ren.doob.common.websocket;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.*;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+import ren.doob.common.CommonField;
+import ren.doob.common.Mc;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class MyHandler extends TextWebSocketHandler {
+
+    private MyHandler(){}
+    private static final MyHandler myHandler = new MyHandler();
+    public static MyHandler getMyHandler(){
+        return myHandler;
+    }
+
+    public static final String WEBSOCKET = "myWebSocket";
 
     private static final Log logger;
 
@@ -54,8 +63,9 @@ public class MyHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         logger.debug("connect to the websocket success......");
+        Mc.getSes().setAttribute(WEBSOCKET , session);
         users.add(session);
-        String userName = (String) session.getAttributes().get("websocket_username");
+        String userName = (String) session.getAttributes().get(CommonField.NOWONLINE_USERNAME);
         if(userName!= null){
             //查询未读消息
             //int count = webSocketService.getUnReadNews((String) session.getAttributes().get("websocket_username"));
@@ -114,8 +124,9 @@ public class MyHandler extends TextWebSocketHandler {
      * @param message
      */
     public void sendMessageToUser(String userName, TextMessage message) {
+
         for (WebSocketSession user : users) {
-            if (user.getAttributes().get("websocket_username").equals(userName)) {
+            if (user.getAttributes().get(CommonField.NOWONLINE_USERNAME).equals(userName)) {
                 try {
                     if (user.isOpen()) {
                         user.sendMessage(message);
@@ -124,6 +135,19 @@ public class MyHandler extends TextWebSocketHandler {
                     e.printStackTrace();
                 }
                 break;
+            }
+        }
+    }
+
+    public void sendMessage(String message) {
+
+        WebSocketSession webSocketSession = (WebSocketSession)Mc.getSes().getAttribute(WEBSOCKET);
+        if(webSocketSession == null) return ;
+        if(webSocketSession.isOpen()) {
+            try {
+                webSocketSession.sendMessage(new TextMessage(message));
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }

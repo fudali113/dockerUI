@@ -10,9 +10,7 @@ import ren.doob.common.CommonField;
 import ren.doob.common.Mc;
 import static ren.doob.common.Mc.*;
 import ren.doob.common.SshBaseController;
-import ren.doob.common.sshwebproxy.*;
-import java.util.Date;
-import java.text.SimpleDateFormat;
+import ren.doob.util.sshwebproxy.*;
 
 import java.util.HashMap;
 

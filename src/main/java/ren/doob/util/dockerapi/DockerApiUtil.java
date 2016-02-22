@@ -1,4 +1,4 @@
-package ren.doob.common.dockerapi;
+package ren.doob.util.dockerapi;
 
 import com.squareup.okhttp.*;
 import org.springframework.stereotype.Service;
@@ -7,7 +7,7 @@ import java.io.IOException;
 
 /**
  * @author fudali
- * @package ren.doob.common.dockerapi
+ * @package ren.doob.util.dockerapi
  * @class DockerApi
  * @date 2016-2-2
  * <p>

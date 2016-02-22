@@ -1,8 +1,8 @@
-package ren.doob.common.sshwebproxy;
+package ren.doob.util.sshwebproxy;
 
 /**
  * @author fudali
- * @package ren.doob.common.sshwebproxy
+ * @package ren.doob.util.sshwebproxy
  * @class Test
  * @date 2016-1-6
  */

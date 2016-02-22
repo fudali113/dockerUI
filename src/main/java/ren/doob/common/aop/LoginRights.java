@@ -3,12 +3,14 @@ package ren.doob.common.aop;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
 import ren.doob.common.CommonField;
 import ren.doob.common.Mc;
-import ren.doob.common.websocket.MyHandler;
+import ren.doob.websocket.MyHandler;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -32,11 +34,8 @@ public class LoginRights {
         Object result = null ;
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
+        HttpServletResponse response = Mc.getRes();
 
-        //test websocket
-        MyHandler myHandler = new MyHandler();
-        myHandler.sendMessageToUsers(new TextMessage(Mc.getReq().getServletPath()));
-        System.out.print("wocao");
 
         if ( session.getAttribute(CommonField.SESSION_USERINFO) != null) {
             try {
@@ -44,15 +43,22 @@ public class LoginRights {
                 return result;
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
+                response.setContentType("application/json; charset=utf-8");
+                response.getWriter().append("{\"response\":\"请求出错\"}");
+                return null;
             }
         }
-        HttpServletResponse response = Mc.getRes();
+
         response.setContentType("application/json; charset=utf-8");
         response.getWriter().append("{\"noLogin\":\"1\"}");
-
-
         return result ;
 
+    }
+
+    @Before("execution(* ren.doob.controller..*.*(..))")
+    public void useWebSocketSendMessage(){
+        MyHandler myHandler = MyHandler.getMyHandler();
+        myHandler.sendMessage(Mc.getReq().getServletPath());
     }
 
 }

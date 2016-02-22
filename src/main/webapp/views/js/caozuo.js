@@ -31,7 +31,7 @@ $(function(){
                     $('#shellreload').attr('src', $('#shellreload').attr('src'));
                     $('#filereload').attr('src', $('#filereload').attr('src'));
                     $('#myModal').modal('hide');
-                    dqxx();
+                    document.getElementById('shellreload').contentWindow.dqxx(data.ssh_info);
                 }
             },
             error : function(){

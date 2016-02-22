@@ -1,5 +1,5 @@
 
-package ren.doob.common.sshwebproxy;
+package ren.doob.util.sshwebproxy;
 
 public interface SshConstants {
 

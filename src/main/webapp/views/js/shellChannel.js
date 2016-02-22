@@ -41,7 +41,7 @@ $(function(){
             success : function(data){
                 if (loginRightsChucke(data)) return
                 xinxi = data.ssh_info;
-                dqxx();
+                dqxx(xinxi);
             },
             error : function(){
                 alert('请求失败！')
@@ -60,7 +60,7 @@ $(function(){
  * 读取信息
  * @param xinxi
  */
-var dqxx = function(){
+var dqxx = function(xinxi){
     var html = "";
     for (var i=0 ;i < xinxi.length ;i++){
         if(xinxi[i] != "") html += xinxi[i]+"\n";

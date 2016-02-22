@@ -23,6 +23,8 @@ public class CommonField {
 
     public static final String REQUEST_CDDIRECTORY = "sshcdpath";
 
+    public static final String NOWONLINE_USERNAME = "nowOnlineUserName";
+
     public static final String PAGE_LOGIN = "login";
 
     public static final String PAGE_INDEX = "index";

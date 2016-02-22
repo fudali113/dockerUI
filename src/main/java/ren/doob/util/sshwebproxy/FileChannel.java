@@ -38,7 +38,7 @@
  * web@ericdaugherty.com
  *****************************************************************************/
 
-package ren.doob.common.sshwebproxy;
+package ren.doob.util.sshwebproxy;
 
 import java.io.*;
 import java.util.List;

@@ -1,8 +1,8 @@
-package ren.doob.common.websocket;
+package ren.doob.websocket;
 
 /**
  * @author fudali
- * @package ren.doob.common.websocket
+ * @package ren.doob.websocket
  * @class WebSocketConfig
  * @date 2016-2-4
  * <p>
@@ -51,7 +51,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
     @Bean
     public WebSocketHandler myHandler() {
-        return new MyHandler();
+        return MyHandler.getMyHandler();
     }
 
 }

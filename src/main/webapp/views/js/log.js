@@ -9,8 +9,10 @@ $(function () {
     $("#msgcount").append("<p>"+evnt.data+"</p>")
   };
   websocket.onerror = function (evnt) {
+    $("#msgcount").html("websocket is error")
   };
   websocket.onclose = function (evnt) {
+    $("#msgcount").html("websocket连接已经中断")
   }
 
 })

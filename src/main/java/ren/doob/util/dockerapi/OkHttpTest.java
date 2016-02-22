@@ -1,4 +1,4 @@
-package ren.doob.common.dockerapi;
+package ren.doob.util.dockerapi;
 
 import com.squareup.okhttp.*;
 
@@ -6,7 +6,7 @@ import java.io.IOException;
 
 /**
  * @author fudali
- * @package ren.doob.common.dockerapi
+ * @package ren.doob.util.dockerapi
  * @class OkHttpTest
  * @date 2016-2-2
  * <p>
