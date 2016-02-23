@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ren.doob.serivces.mapper.UserShellMapper">
+
+    <insert id="addShellTerminal" parameterType="ren.doob.common.Parameter">
+      INSERT INTO (ip,port,name,pass) VALUES (#{accept.ip},#{accept.port},#{accept.name},#{accept.pass})
+    </insert>
+
+    <select id="getMyTerminal" parameterType="ren.doob.common.Parameter" resultType="ren.doob.serivces.model.Shell">
+        SELECT * FROM user_shell where userid = #{accept.nowUserId}
+    </select>
+</mapper>

@@ -1,5 +1,6 @@
 package ren.doob.util.sshwebproxy;
 
+import ren.doob.common.CommonField;
 import ren.doob.common.Mc;
 
 import static ren.doob.common.CommonField.*;
@@ -34,6 +35,39 @@ import static ren.doob.common.Mc.*;
  */
 
 public class MySsh {
+
+    /**
+     * 根据连接信息连接ssh
+     * 并返回带有连接信息的已read的shellChannel对象
+     *
+     * @return 返回连接后可操作的一个shell
+     */
+    public static   ShellChannel connection(){
+
+        ShellChannel shellChannel = null;
+        FileChannel fileChannel = null;
+        SshConnection sshConnection = null;
+
+        try{
+            SshSession ss = new SshSession(Mc.getSes());
+            sshConnection = new SshConnection(getPara().get("ssh_ip"),Integer.parseInt(getPara().get("ssh_host")),getPara().get("ssh_name"),getPara().get("ssh_pass"));
+            ss.addSshConnection(sshConnection);
+            shellChannel = sshConnection.openShellChannel();
+            fileChannel = sshConnection.openFileChannel();
+
+        }catch (SshConnectException sce){
+            sce.printStackTrace();
+        }
+
+        if (shellChannel != null && sshConnection != null && fileChannel != null) {
+            Mc.getSes().setAttribute(CommonField.SESSION_SHELLCHANNELID , shellChannel.getChannelId());
+            Mc.getSes().setAttribute(CommonField.SESSION_CONNECTIONINFO , sshConnection.getConnectionInfo());
+            Mc.getSes().setAttribute(CommonField.SESSION_FILECHANNELID , fileChannel.getChannelId());
+            shellChannel.read();
+        }
+
+        return shellChannel;
+    }
 
     public static FileChannel getFileChannel(){
         String channelid = (String) getSes().getAttribute(SESSION_FILECHANNELID);

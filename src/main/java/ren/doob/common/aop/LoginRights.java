@@ -55,10 +55,10 @@ public class LoginRights {
 
     }
 
-    @Before("execution(* ren.doob.controller..*.*(..))")
+    /*@Before("execution(* ren.doob.controller..*.*(..))")
     public void useWebSocketSendMessage(){
         MyHandler myHandler = MyHandler.getMyHandler();
         myHandler.sendMessage(Mc.getReq().getServletPath());
-    }
+    }*/
 
 }

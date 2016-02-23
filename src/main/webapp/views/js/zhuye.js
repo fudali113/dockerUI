@@ -1,9 +1,13 @@
 var app = angular.module('containersApp', []);
 app.controller('containers', function($scope , $http) {
-
-    var url = "/doob/docker/containers/json"
-    $http.get(url).success( function(response) {
-        $scope.containers = response;
+    var url = new Array()
+    url[0] = "/doob/docker/containers/json"
+    url[1] = "/doob/docker/images/json"
+    $http.get(url[0]).success(function (response) {
+            $scope.containers = response;
+    });
+    $http.get(url[1]).success(function (response) {
+        $scope.images = response;
     });
 
     $scope.getIC = function(obj , ic){
@@ -36,8 +40,14 @@ app.controller('containers', function($scope , $http) {
 
     }
 
-    $scope.deleteContainer = function () {
+    $scope.deleteContainer = function (containers) {
         var handleurl = '/doob/docker/containers/' + $scope.containerInfo.Id
+        $http.delete(handleurl).success(function(data){
+            alert("delete success!")
+        })
+    }
+    $scope.deleteImage = function(id){
+        var handleurl = '/doob/docker/images/' + id
         $http.delete(handleurl).success(function(data){
             alert("delete success!")
         })

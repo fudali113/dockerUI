@@ -76,11 +76,16 @@ public class DockerApi extends BaseController {
     }
 
     @ResponseBody   // /**表示获取路径下所有请求
-    @RequestMapping(value = "/containers/{id}" , method = RequestMethod.DELETE , produces="application/json;charset=UTF-8")
-    public Object deletecontainer(@PathVariable("id") String id) throws IOException {
-        String deleteDockerUrl = "containers/"+id;
-        Map<String,String> map = dockerApi.deleteDockerApi(deleteDockerUrl);
-        Mc.getRes().setStatus(Integer.parseInt(map.get("statusCode")));
-        return map.get("responseBody");
+    @RequestMapping(value = "/{IorC}/{id}" , method = RequestMethod.DELETE , produces="application/json;charset=UTF-8")
+    public Object deletecontainer(@PathVariable("id") String id , @PathVariable("IorC") String IorC) throws IOException {
+        if("containers".equals(IorC) || "images".equals(IorC)) {
+            String deleteDockerUrl = IorC + "/" + id;
+            Map<String, String> map = dockerApi.deleteDockerApi(deleteDockerUrl);
+            Mc.getRes().setStatus(Integer.parseInt(map.get("statusCode")));
+            return map.get("responseBody");
+        }else{
+            Mc.getRes().setStatus(404);
+            return null;
+        }
     }
 }

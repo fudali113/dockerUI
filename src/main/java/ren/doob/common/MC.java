@@ -76,7 +76,12 @@ public class Mc {
     public static Parameter getPara(){
         return parameterThreadLocal.get();
     }
-
+    public static Parameter putP(String s,String o){
+        Parameter p = Mc.getPara();
+        p.put(s , o);
+        parameterThreadLocal.set(p);
+        return p;
+    }
     /**
      * 快速取值
      * @return

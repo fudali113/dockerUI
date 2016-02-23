@@ -6,55 +6,34 @@ $(function(){
         if(event.keyCode == "13") $('#scml').click();
     });
 
-    /*$('#sshdl').click(function(){
-        $.ajax({
-            type : "POST",
-            url : "/doob/ssh/connection",
-            data : $('#SSHlogin').serialize(),
-            dataType : "json",
-            success : function(data){
-               if (loginRightsChucke(data)) return
-                if(data.result == 0){
-                    alert('请确认输入信息！')
-                }else {
-                    channelid = data.channelid;
-                    xinxi = data.ssh_info;
-                    ConnectionInfo = data.ConnectionInfo;
-                    $('#myModal').modal('hide');
-                    dqxx();
-                }
-            },
-            error : function(){
-                alert('请求失败！')
-            }
-        })
-    })*/
-
-    $('#scml').click(function(){
-        var mingl = {};
-        mingl.ssh_mingl = $('#mingl').val();
-        $.ajax({
-            type : "POST",
-            url : "/doob/ssh/shell/handle",
-            data : mingl,
-            dataType : "json",
-            success : function(data){
-                if (loginRightsChucke(data)) return
-                xinxi = data.ssh_info;
-                dqxx(xinxi);
-            },
-            error : function(){
-                alert('请求失败！')
-            }
-        })
-
-        $('#mingl').val('');
-
-    })
+    load()
+    $('#scml').click(load())
 
     loclafocusblur();
 
 })
+
+var load = function(){
+    var mingl = {};
+    mingl.ssh_mingl = $('#mingl').val();
+    $.ajax({
+        type : "POST",
+        url : "/doob/ssh/shell/handle",
+        data : mingl,
+        dataType : "json",
+        success : function(data){
+            if (loginRightsChucke(data)) return
+            xinxi = data.ssh_info;
+            dqxx(xinxi);
+        },
+        error : function(){
+            alert('请求失败！')
+        }
+    })
+
+    $('#mingl').val('');
+
+}
 
 /**
  * 读取信息
