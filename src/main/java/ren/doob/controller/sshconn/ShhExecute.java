@@ -32,6 +32,7 @@ public class ShhExecute extends SshBaseController {
     public HashMap sshml(){
         String ssh_mingl = getPara().get("ssh_mingl");
         ShellChannel shellChannel = getShellChannel();
+        if(shellChannel == null) return null;
         if(!"".equals(ssh_mingl.trim())) {
             shellChannel.write(ssh_mingl,true);
         }

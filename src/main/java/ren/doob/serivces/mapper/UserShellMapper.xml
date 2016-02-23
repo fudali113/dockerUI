@@ -3,7 +3,7 @@
 <mapper namespace="ren.doob.serivces.mapper.UserShellMapper">
 
     <insert id="addShellTerminal" parameterType="ren.doob.common.Parameter">
-      INSERT INTO (ip,port,name,pass) VALUES (#{accept.ip},#{accept.port},#{accept.name},#{accept.pass})
+      INSERT INTO user_shell (userid,ip,port,name,pass) VALUES (#{accept.nowUserId},#{accept.ssh_ip},#{accept.ssh_host},#{accept.ssh_name},#{accept.ssh_pass})
     </insert>
 
     <select id="getMyTerminal" parameterType="ren.doob.common.Parameter" resultType="ren.doob.serivces.model.Shell">

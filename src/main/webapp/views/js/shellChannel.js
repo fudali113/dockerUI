@@ -25,9 +25,6 @@ var load = function(){
             if (loginRightsChucke(data)) return
             xinxi = data.ssh_info;
             dqxx(xinxi);
-        },
-        error : function(){
-            alert('请求失败！')
         }
     })
 

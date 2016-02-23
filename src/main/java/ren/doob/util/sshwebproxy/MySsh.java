@@ -63,6 +63,7 @@ public class MySsh {
             Mc.getSes().setAttribute(CommonField.SESSION_SHELLCHANNELID , shellChannel.getChannelId());
             Mc.getSes().setAttribute(CommonField.SESSION_CONNECTIONINFO , sshConnection.getConnectionInfo());
             Mc.getSes().setAttribute(CommonField.SESSION_FILECHANNELID , fileChannel.getChannelId());
+            Mc.getSes().setAttribute("loginInfo",getPara());
             shellChannel.read();
         }
 
@@ -94,10 +95,12 @@ public class MySsh {
 
         String channelid = (String) Mc.getSes().getAttribute(SESSION_SHELLCHANNELID);
         String connectionInfo = (String) Mc.getSes().getAttribute(SESSION_CONNECTIONINFO);
-
+        ShellChannel shellChannel = null;
         SshSession sshSession = new SshSession(Mc.getSes());
-        ShellChannel shellChannel = sshSession.getSshConnection(connectionInfo).getShellChannel(channelid);
-
+        SshConnection sshConnection = sshSession.getSshConnection(connectionInfo);
+        if (sshConnection != null){
+            shellChannel = sshConnection.getShellChannel(channelid);
+        }
         return shellChannel;
     }
 }

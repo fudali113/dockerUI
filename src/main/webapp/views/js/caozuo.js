@@ -5,6 +5,23 @@ var loginInfo = {}
 
 $(function(){
 
+    $.get("/doob/ssh/isCon",function(data){
+        shellConLoad(data)
+    })
+
+    $.get("/doob/ssh/hostInfo",function(data){
+        var hostInfoList = data.hostInfo
+        var html=""
+        for(i=0;i<hostInfoList.length;i++){
+            html += '<tr>'+
+                        '<td>'+hostInfoList[i].ip+'</td>'+
+                        '<td>'+hostInfoList[i].port+'</td>'+
+                        '<td>'+hostInfoList[i].name+'</td>'+
+                    '</tr>'
+        }
+        $('#shellHostInfo').html(html)
+    })
+
     $('#sshdl').click(function(){
         $.ajax({
             type : "POST",
@@ -16,22 +33,7 @@ $(function(){
                 if(data.result == 0){
                     alert('请确认输入信息！')
                 }else {
-                    var loginAccept = data.loginInfo.accept
-                    var html = '连接信息：'+loginAccept.ssh_ip+':'+loginAccept.ssh_host+'@'+loginAccept.ssh_name+'<br/>'+
-                                '连接时间：'+getNowTime()
-                    $("#loginInfoDiv").html(html)
-                    loginInfo.name = loginAccept.ssh_name
-                    loginInfo.ip = loginAccept.ssh_ip
-                    loginInfo.port = loginAccept.ssh_host
-                    loginInfo.loginTime = getNowTime()
-                    yesandnologin = 1;
-                    channelid = data.channelid;
-                    xinxi = data.ssh_info;
-                    ConnectionInfo = data.ConnectionInfo;
-                    $('#myModal').modal('hide');
-                    //刷新两个页面
-                    $("#shellreload")[0].contentWindow.dqxx(data.ssh_info);
-                    $("#filereload")[0].contentWindow.upload({});
+                    shellConLoad(data)
                 }
             },
             error : function(){
@@ -56,6 +58,25 @@ $(function(){
     });
     daovoice('update');
 })
+
+var shellConLoad = function(data){
+    var loginAccept = data.loginInfo.accept
+    var html = '连接信息：'+loginAccept.ssh_ip+':'+loginAccept.ssh_host+'@'+loginAccept.ssh_name+'<br/>'+
+        '连接时间：'+getNowTime()
+    $("#loginInfoDiv").html(html)
+    loginInfo.name = loginAccept.ssh_name
+    loginInfo.ip = loginAccept.ssh_ip
+    loginInfo.port = loginAccept.ssh_host
+    loginInfo.loginTime = getNowTime()
+    yesandnologin = 1;
+    channelid = data.channelid;
+    xinxi = data.ssh_info;
+    ConnectionInfo = data.ConnectionInfo;
+    $('#myModal').modal('hide');
+    //刷新两个页面
+    $("#shellreload")[0].contentWindow.dqxx(data.ssh_info);
+    $("#filereload")[0].contentWindow.upload({});
+}
 
 var loginInfoORLogin = function(){
     if(yesandnologin == 0){

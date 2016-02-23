@@ -30,11 +30,20 @@ package ren.doob.serivces.model;
 
 public class Shell {
 
+    private Integer id;
     private Integer userid;
     private String ip;
     private Integer port;
     private String name;
     private String pass;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getUserid() {
         return userid;

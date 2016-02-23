@@ -1,7 +1,7 @@
 package ren.doob.common;
 
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +21,7 @@ import static ren.doob.common.Mc.*;
 @Controller
 public class SysLogin extends BaseController{
 
-    private Log log = LogFactory.getLog(SysLogin.class);
+    private static Logger log = Logger.getLogger(SysLogin.class);
 
 
     @Autowired
@@ -33,10 +33,8 @@ public class SysLogin extends BaseController{
     @RequestMapping("/login")
     public Object login(){
         User user = userMapperService.getUser(Mc.getPara());
-        System.out.println(user.getId());
         ArrayList<Shell> shellList = userShellMapper.getMyTerminal(Mc.putP("nowUserId" , user.getId().toString()));
         if(shellList.size() > 0){
-            System.out.println("00");
             Shell shell = shellList.get(0);
             putP("ssh_ip",shell.getIp());
             putP("ssh_host",shell.getPort().toString());
