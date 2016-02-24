@@ -21,11 +21,11 @@ $(function(){
         $('#signin').click(function(){
                 $.ajax({
                         type : "POST",
-                        url : "/doob/signin",
+                        url : "/doob/signup",
                         data : $('#zhuce').serialize(),
                         dataType : "json",
                         success : function(data){
-                                if(data.signin == 1) {
+                                if(data.signup == 1) {
                                         alert('注册成功！')
                                         $('#firstname').val($('#name').val())
                                         $('#lastname').val($('#pass').val())

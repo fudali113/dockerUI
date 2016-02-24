@@ -1,4 +1,4 @@
-package ren.doob.controller.sshconn;
+package ren.doob.controller.login;
 
 import org.apache.commons.fileupload.DiskFileUpload;
 import org.apache.commons.fileupload.FileItem;

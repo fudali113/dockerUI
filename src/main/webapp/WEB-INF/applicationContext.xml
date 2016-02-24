@@ -32,7 +32,7 @@
     </bean>
 
     <aop:aspectj-autoproxy />
-    <bean class="ren.doob.common.aop.LoginRights"/>
+    <bean class="ren.doob.common.LoginRights"/>
 
     <!-- transaction support,事务管理支持bean-->
     <!-- PlatformTransactionMnager -->

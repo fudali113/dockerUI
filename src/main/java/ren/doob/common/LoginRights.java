@@ -1,4 +1,4 @@
-package ren.doob.common.aop;
+package ren.doob.common;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -28,7 +28,7 @@ import java.io.IOException;
 @Aspect
 public class LoginRights {
 
-    @Around("execution(* ren.doob.controller..*.*(..))")
+    @Around("execution(* ren.doob.controller.login..*.*(..))")
     public Object loginRights(ProceedingJoinPoint jp) throws IOException {
 
         Object result = null ;

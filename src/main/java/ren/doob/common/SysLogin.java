@@ -56,10 +56,10 @@ public class SysLogin extends BaseController{
     }
 
     @ResponseBody
-    @RequestMapping(value = "/signin" ,method = RequestMethod.POST)
+    @RequestMapping(value = "/signup" ,method = RequestMethod.POST)
     public Object signin(){
         int insert = userMapperService.signin(Mc.getPara());
-        putR("signin" , insert);
+        putR("signup" , insert);
         return Mc.getR();
     }
 
