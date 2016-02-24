@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html xmlns:text-align="http://www.w3.org/1999/xhtml" xmlns:margin="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="Shortcut Icon" href="/doob/views/images/ooo.ico">
@@ -201,60 +201,76 @@
     </div>
 </div>
 
-<div class="col-md-11"  id = "iframe">
-    <div class="bs-docs-section">
-        <!-- <h1 id="overview" class="page-header">任务提报</h1> -->
-        <iframe src="/doob/views/jsp/error.jsp"  scroling="yes"  width="100%" height="90%" name="float" frameborder="0" allowTransparency="true">
-        </iframe>
-
-    </div>
-</div>
-
-
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header" align="cemter">
-                <button type="button" class="close"
-                        data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
-                <h2 class="modal-title" id="myModalLabel">
-                    <strong>登陆</strong>
-                </h2>
-            </div>
             <div class="modal-body">
-                <form class="form-horizontal" role="form" id="denglu">
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-2 control-label">登录名：</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="firstname"
-                                   placeholder="请输入登录名" name="name">
+                <ul id="myTab" class="nav nav-tabs">
+                    <li class="active" style="width: 50%">
+                        <a href="#home" data-toggle="tab" onclick="{$('#login').show();$('#signin').hide();}">
+                            登陆
+                        </a>
+                    </li>
+                    <li style="width: 50%"><a href="#ios" data-toggle="tab" onclick="{$('#login').hide();$('#signin').show();}">注册</a></li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade in active" id="home">
+                        <div style="height: 31px"></div>
+                        <div>
+                            <form class="form-horizontal" role="form" id="denglu">
+                                <div class="form-group">
+                                    <label for="firstname" class="col-sm-2 control-label">登录名：</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="firstname"
+                                               placeholder="请输入登录名" name="name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastname" class="col-sm-2 control-label">密码：</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="lastname"
+                                               placeholder="请输入密码" name="pass">
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="lastname" class="col-sm-2 control-label">密码：</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="lastname"
-                                   placeholder="请输入密码" name="pass">
+                    <div class="tab-pane fade" id="ios">
+                        <div style="height: 31px"></div>
+                        <div>
+                            <form class="form-horizontal" role="form" id="zhuce">
+                                <div class="form-group">
+                                    <label for="name" class="col-sm-2 control-label">登录名：</label>
+                                    <div class="col-sm-10" >
+                                        <input type="text" class="form-control" id="name"
+                                               placeholder="请输入登录名" name="name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pass" class="col-sm-2 control-label">密码：</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="pass"
+                                               placeholder="请输入密码" name="pass" >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="xingm" class="col-sm-2 control-label">姓名：</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="xingm"
+                                               placeholder="请输入姓名" name="xingm">
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> 请记住我
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning"
-                        data-dismiss="modal">关闭
+                <button type="button" class="btn btn-warning" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-success" id="signin">
+                    注册
                 </button>
                 <button type="button" class="btn btn-success" id="login">
                     登陆

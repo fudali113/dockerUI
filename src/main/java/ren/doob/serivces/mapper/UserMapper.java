@@ -14,4 +14,5 @@ import ren.doob.serivces.model.User;
 public interface UserMapper {
 
     public User getLoginUser(Parameter parameter);
+    public int signin(Parameter parameter);
 }

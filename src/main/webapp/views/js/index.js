@@ -1,10 +1,10 @@
 $(function(){
 
-        $('#iframe').hide();
+        $('#login').show();$('#signin').hide();
 
         $('#login').click(function(){
                 $.ajax({
-                        type : "GET",
+                        type : "POST",
                         url : "/doob/login",
                         data : $('#denglu').serialize(),
                         dataType : "json",
@@ -14,6 +14,26 @@ $(function(){
                                 }else{
                                         alert('登陆失败！')
                                 }
+                        }
+                })
+        })
+
+        $('#signin').click(function(){
+                $.ajax({
+                        type : "POST",
+                        url : "/doob/signin",
+                        data : $('#zhuce').serialize(),
+                        dataType : "json",
+                        success : function(data){
+                                if(data.signin == 1) {
+                                        alert('注册成功！')
+                                        $('#firstname').val($('#name').val())
+                                        $('#lastname').val($('#pass').val())
+                                }
+                                else alert("注册失败！")
+                        },
+                        error : function(data){
+                                alert('注册失败！')
                         }
                 })
         })
@@ -32,14 +52,13 @@ $(function(){
 })
 
 var userinfo = function(data){//登陆后把登陆按钮换为用户名
-        $('#userinfo').after('<a href="#" id="userinfo_name">' + data.userinfo.name + '</a>')
-            .hide()
+        $('#userinfo').html(data.userinfo.name)
         $('#myModal').modal('hide');
 }
 
 var LoginRights = function(){//检查是否登陆
-        var userinfo = $('#userinfo_name').html();
-        if(userinfo == '' || userinfo == undefined){
+        var userinfo = $('#userinfo').html();
+        if(userinfo == '登陆/注册'){
                 $('#myModal').modal('show');
                 return false;
         }

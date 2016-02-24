@@ -1,4 +1,4 @@
-package ren.doob.controller.pages;
+package ren.doob.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

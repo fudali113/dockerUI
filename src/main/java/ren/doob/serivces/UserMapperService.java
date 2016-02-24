@@ -23,4 +23,8 @@ public class UserMapperService {
 
         return um.getLoginUser(parameter);
     }
+
+    public int signin(Parameter parameter){
+        return um.signin(parameter);
+    }
 }

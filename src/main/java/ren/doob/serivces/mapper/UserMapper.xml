@@ -6,4 +6,8 @@
           SELECT * FROM user where  NAME = #{accept.name}
     </select>
 
+    <insert id="signin"  parameterType="ren.doob.common.Parameter">
+          INSERT INTO user (name,pass,xingm) VALUES (#{accept.name},#{accept.pass},#{accept.xingm})
+    </insert>
+
 </mapper>
