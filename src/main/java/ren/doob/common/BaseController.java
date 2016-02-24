@@ -51,7 +51,7 @@ public class BaseController {
      */
     protected User getUserinfo(){
         if (Mc.userThreadLocal.get() == null) {
-            User user = (User) Mc.sessionThreadLocal.get().getAttribute(CommonField.SESSION_USERINFO);
+            User user = (User) Mc.getSes().getAttribute(CommonField.SESSION_USERINFO);
             Mc.userThreadLocal.set(user);
         }
         return Mc.userThreadLocal.get();

@@ -25,6 +25,10 @@ public class CommonField {
 
     public static final String NOWONLINE_USERNAME = "nowOnlineUserName";
 
+    public static final String SESSION_SHELLS = "myShells";
+
+    public static final String SESSION_SHELLID = "onlineShell";
+
     public static final String PAGE_LOGIN = "login";
 
     public static final String PAGE_INDEX = "index";

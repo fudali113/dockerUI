@@ -2,6 +2,9 @@ package ren.doob.util.sshwebproxy;
 
 import ren.doob.common.CommonField;
 import ren.doob.common.Mc;
+import ren.doob.serivces.model.Shell;
+
+import java.util.ArrayList;
 
 import static ren.doob.common.CommonField.*;
 import static ren.doob.common.Mc.*;
@@ -68,6 +71,21 @@ public class MySsh {
         }
 
         return shellChannel;
+    }
+
+    public static void reconnection(ArrayList<Shell> shells , int NO) throws SshConnectException {
+        Shell shell = null;
+        for(Shell s : shells){
+            if(s.getId() == NO)  shell = s;
+        }
+        if(shell == null) {
+            throw new SshConnectException("shells 参数不能为null");
+        }
+        putP("ssh_ip",shell.getIp());
+        putP("ssh_host",shell.getPort().toString());
+        putP("ssh_name",shell.getName());
+        putP("ssh_pass",shell.getPass());
+        MySsh.connection();
     }
 
     public static FileChannel getFileChannel(){

@@ -9,18 +9,7 @@ $(function(){
         shellConLoad(data)
     })
 
-    $.get("/doob/ssh/hostInfo",function(data){
-        var hostInfoList = data.hostInfo
-        var html=""
-        for(i=0;i<hostInfoList.length;i++){
-            html += '<tr>'+
-                        '<td>'+hostInfoList[i].ip+'</td>'+
-                        '<td>'+hostInfoList[i].port+'</td>'+
-                        '<td>'+hostInfoList[i].name+'</td>'+
-                    '</tr>'
-        }
-        $('#shellHostInfo').html(html)
-    })
+    gethostinfo()
 
     $('#sshdl').click(function(){
         $.ajax({
@@ -34,6 +23,7 @@ $(function(){
                     alert('请确认输入信息！')
                 }else {
                     shellConLoad(data)
+                    gethostinfo()
                 }
             },
             error : function(){
@@ -58,6 +48,22 @@ $(function(){
     });
     daovoice('update');
 })
+
+var gethostinfo = function(){
+    $.get("/doob/ssh/hostInfo",function(data){
+        var hostInfoList = data.hostInfo
+        var html=""
+        for(i=0;i<hostInfoList.length;i++){
+            var onlineshellid = hostInfoList[i].id == data.onlineShell ? '  class="success"':''
+            html += '<tr '+onlineshellid+' onclick="recon('+hostInfoList[i].id+')">'+
+                '<td>'+hostInfoList[i].ip+'</td>'+
+                '<td>'+hostInfoList[i].port+'</td>'+
+                '<td>'+hostInfoList[i].name+'</td>'+
+                '</tr>'
+        }
+        $('#shellHostInfo').html(html)
+    })
+}
 
 var shellConLoad = function(data){
     var loginAccept = data.loginInfo.accept
@@ -101,4 +107,21 @@ var reLogin = function(){
 var getNowTime = function(){
     var d = new Date()
     return d.getFullYear()+'-'+ (d.getMonth()+1)+'-'+ d.getDate()+' '+ d.getHours()+':'+ d.getMinutes()+':'+ d.getSeconds()+'    星期'+ d.getDay()
+}
+
+var recon = function(no){
+    $.ajax({
+        type : "POST",
+        url : "/doob/ssh/recon/"+no,
+        dataType : "json",
+        success : function(data){
+            if(data.recon == 0) alert("重行登陆失败！")
+            else{
+                gethostinfo()
+                //刷新两个页面
+                $("#shellreload")[0].contentWindow.load();
+                $("#filereload")[0].contentWindow.upload({});
+            }
+        }
+    })
 }

@@ -32,7 +32,7 @@ public class LoginRights {
     public Object loginRights(ProceedingJoinPoint jp) throws IOException {
 
         Object result = null ;
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpServletRequest request = Mc.getReq();//((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
         HttpServletResponse response = Mc.getRes();
 

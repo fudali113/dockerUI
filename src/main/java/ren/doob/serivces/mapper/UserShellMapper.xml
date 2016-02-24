@@ -7,6 +7,6 @@
     </insert>
 
     <select id="getMyTerminal" parameterType="ren.doob.common.Parameter" resultType="ren.doob.serivces.model.Shell">
-        SELECT * FROM user_shell where userid = #{accept.nowUserId}
+    SELECT * FROM user_shell where userid = #{accept.nowUserId}
     </select>
 </mapper>

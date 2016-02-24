@@ -50,6 +50,7 @@ app.controller('containers', function($scope , $http) {
         var handleurl = '/doob/docker/images/' + id
         $http.delete(handleurl).success(function(data){
             alert("delete success!")
+
         })
     }
     $scope.handleContainer = function(handleName){
