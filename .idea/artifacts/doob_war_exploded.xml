@@ -35,6 +35,7 @@
           <element id="library" level="project" name="Maven: com.squareup.okhttp:okhttp:2.7.2" />
           <element id="library" level="project" name="Maven: com.squareup.okio:okio:1.6.0" />
           <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
+          <element id="library" level="project" name="Maven: io.netty:netty-all:5.0.0.Alpha2" />
         </element>
       </element>
       <element id="directory" name="META-INF">
