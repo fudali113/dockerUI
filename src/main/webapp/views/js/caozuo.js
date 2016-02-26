@@ -12,22 +12,25 @@ $(function(){
     gethostinfo()
 
     $('#sshdl').click(function(){
+        $('#sshdl').attr('disabled',true)
         $.ajax({
             type : "POST",
             url : "/doob/ssh/connection",
             data : $('#SSHlogin').serialize(),
             dataType : "json",
             success : function(data){
-                if (loginRightsChucke(data)) return
+                if (loginRightsChucke(data))
                 if(data.result == 0){
                     alert('请确认输入信息！')
-                }else {
-                    shellConLoad(data)
-                    gethostinfo()
+                    return
                 }
+                shellConLoad(data)
+                gethostinfo()
+                $('#sshdl').attr('disabled',false)
             },
             error : function(){
                 alert('请求失败！')
+                $('#sshdl').attr('disabled',false)
             }
         })
     })
