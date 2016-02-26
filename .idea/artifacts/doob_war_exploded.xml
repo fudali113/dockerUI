@@ -36,6 +36,9 @@
           <element id="library" level="project" name="Maven: com.squareup.okio:okio:1.6.0" />
           <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
           <element id="library" level="project" name="Maven: io.netty:netty-all:5.0.0.Alpha2" />
+          <element id="library" level="project" name="Maven: org.apache.geronimo.specs:geronimo-servlet_3.0_spec:1.0" />
+          <element id="library" level="project" name="Maven: javax.servlet:servlet-api:3.0-alpha-1" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-test:4.2.4.RELEASE" />
         </element>
       </element>
       <element id="directory" name="META-INF">

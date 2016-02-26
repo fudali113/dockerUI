@@ -4,6 +4,10 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.handler.codec.http.FullHttpRequest;
+import io.netty.handler.codec.http.LastHttpContent;
+import org.springframework.beans.factory.annotation.Configurable;
 
 /**
  * @author fudali
@@ -33,20 +37,16 @@ import io.netty.channel.ChannelHandlerContext;
  * ━━━━━━感觉萌萌哒━━━━━━
  */
 
-public class MyAppHandler extends ChannelHandlerAdapter{
+@Configurable
+public class MyAppHandler extends SimpleChannelInboundHandler<FullHttpRequest>{
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        ByteBuf byteBuf = (ByteBuf) msg;
-        byte[] req = new byte[byteBuf.readableBytes()];
-        byteBuf.readBytes(req);
-        String body = new String(req , "UTF-8");
+    protected void messageReceived(ChannelHandlerContext channelHandlerContext, FullHttpRequest request) throws Exception {
+        if (!request.decoderResult().isSuccess()){
+            channelHandlerContext.writeAndFlush(LastHttpContent.EMPTY_LAST_CONTENT);
+        }
 
-        System.out.println("recevie over :" + body);
-
-        String currentTime = "oo".equals(body) ? new java.util.Date(System.currentTimeMillis()).toString() : "bad order";
-        ByteBuf resp = Unpooled.copiedBuffer(currentTime.getBytes());
-        ctx.write(resp);
+        channelHandlerContext.writeAndFlush(LastHttpContent.EMPTY_LAST_CONTENT);
     }
 
     @Override
@@ -58,4 +58,5 @@ public class MyAppHandler extends ChannelHandlerAdapter{
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         ctx.close();
     }
+
 }
