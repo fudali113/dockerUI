@@ -88,6 +88,7 @@ public class SshLogin extends SshBaseController {
         ArrayList<Shell> shells = (ArrayList<Shell>) Mc.getSes().getAttribute(CommonField.SESSION_SHELLS);
         reconnection(shells,NO);
         putR("recon" , 1);
+        getSes().setAttribute(CommonField.SESSION_SHELLID,NO);
         return Mc.getR();
     }
 

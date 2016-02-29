@@ -7,7 +7,7 @@ $(function(){
     });
 
     load()
-    $('#scml').click(load())
+    $('#scml').click(function(){load()})
 
     loclafocusblur();
 
