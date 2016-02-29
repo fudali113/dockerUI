@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ren.doob.serivces.mapper.UserConMapper">
+
+    <insert id="addCon" parameterType="HashMap">
+            INSERT INTO user_container (userid,containerid,containername) VALUES (#{userid},#{id},#{name})
+    </insert>
+
+</mapper>

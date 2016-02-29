@@ -91,7 +91,6 @@ public class SshConnection implements SshConstants {
      * @throws  如果连接尝试失败的任何理由将导致SshConnectException抛出。
      */
     public SshConnection( String host, int port, String username, String password )
-        throws SshConnectException
     {
         this();
 
@@ -100,7 +99,7 @@ public class SshConnection implements SshConstants {
             username == null || username.trim().length() == 0 ||
             password == null || password.trim().length() == 0 )
         {
-            throw new SshConnectException( "Missing parameter.  All parameters must be at least one character." );
+            log.error( "Missing parameter.  All parameters must be at least one character." );
         }
 
         connectionInfo = getConnectionInfo( host, port, username );
@@ -127,18 +126,18 @@ public class SshConnection implements SshConstants {
             int result = sshClient.authenticate(pwd);
             if( result != AuthenticationProtocolState.COMPLETE )
             {
-                throw new SshConnectException( "Authentication Error.  Invalid username or password." );
+                log.error( "Authentication Error.  Invalid username or password." );
             }
 
             log.debug( "Authentication Successful." );
         }
         catch( UnknownHostException unknownHostException )
         {
-            throw new SshConnectException( "Unable to connect.  Unknown host." );
+            log.error( "Unable to connect.  Unknown host." );
         }
         catch( IOException ioException )
         {
-            throw new SshConnectException( "Unable to connect to host." );
+            log.error( "Unable to connect to host." );
         }
 
         // Success!
@@ -346,9 +345,8 @@ public class SshConnection implements SshConstants {
      * @return a newly opened ShellChannel
      * @throws SshConnectException if the channel could not be opened.
      */
-    public ShellChannel openShellChannel() throws SshConnectException
+    public ShellChannel openShellChannel()
     {
-
         try
         {
             SessionChannelClient sessionChannelClient = sshClient.openSessionChannel();
@@ -362,8 +360,11 @@ public class SshConnection implements SshConstants {
             return shellChannel;
         }
         catch (IOException ioException) {
-            throw new SshConnectException( "Unable to open SessionChannel." );
+            log.error( "Unable to open SessionChannel." );
+        } catch (SshConnectException e) {
+            e.printStackTrace();
         }
+        return null;
     }
 
 

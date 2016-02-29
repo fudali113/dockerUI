@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ren.doob.common.BaseController;
 import ren.doob.common.Mc;
 import ren.doob.util.dockerapi.DockerApiUtil;
+import ren.doob.util.sshwebproxy.ShellChannel;
+import ren.doob.util.sshwebproxy.SshConnectException;
+import ren.doob.util.sshwebproxy.SystemShell;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -87,5 +91,11 @@ public class DockerApi extends BaseController {
             Mc.getRes().setStatus(404);
             return null;
         }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/createCon/{imageName}/{name}" , method = RequestMethod.POST , produces="application/json;charset=UTF-8")
+    public void create(@PathVariable("name") String name ){
+
     }
 }
