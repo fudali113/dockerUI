@@ -5,10 +5,35 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.handler.codec.http.FullHttpRequest;
-import io.netty.handler.codec.http.LastHttpContent;
+import io.netty.handler.codec.http.*;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.web.servlet.DispatcherServlet;
 
+import static io.netty.handler.codec.http.HttpHeaderNames.CONTENT_TYPE;
+import static io.netty.handler.codec.http.HttpResponseStatus.BAD_REQUEST;
+import static io.netty.handler.codec.http.HttpResponseStatus.INTERNAL_SERVER_ERROR;
+import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
+import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.handler.stream.ChunkedStream;
+import io.netty.util.CharsetUtil;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.Map.Entry;
+
+import javax.servlet.Servlet;
+import javax.servlet.ServletContext;
+
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.web.util.UriUtils;
 /**
  * @author fudali
  * @package ren.doob.netty
@@ -37,16 +62,46 @@ import org.springframework.beans.factory.annotation.Configurable;
  * ━━━━━━感觉萌萌哒━━━━━━
  */
 
-@Configurable
 public class MyAppHandler extends SimpleChannelInboundHandler<FullHttpRequest>{
 
+    private final Servlet servlet;
+
+    private final ServletContext servletContext;
+
+    public MyAppHandler(Servlet servlet) {
+        this.servlet = servlet;
+        this.servletContext = servlet.getServletConfig().getServletContext();
+    }
+
     @Override
-    protected void messageReceived(ChannelHandlerContext channelHandlerContext, FullHttpRequest request) throws Exception {
-        if (!request.decoderResult().isSuccess()){
-            channelHandlerContext.writeAndFlush(LastHttpContent.EMPTY_LAST_CONTENT);
+    protected void messageReceived(ChannelHandlerContext ctx, FullHttpRequest request) throws Exception {
+        if (!request.decoderResult().isSuccess()) {
+            sendError(ctx, BAD_REQUEST);
+            return;
         }
 
-        channelHandlerContext.writeAndFlush(LastHttpContent.EMPTY_LAST_CONTENT);
+        MockHttpServletRequest servletRequest = createServletRequest(request);
+        MockHttpServletResponse servletResponse = new MockHttpServletResponse();
+
+        this.servlet.service(servletRequest, servletResponse);
+
+        HttpResponseStatus status = HttpResponseStatus.valueOf(servletResponse.getStatus());
+        HttpResponse response = new DefaultHttpResponse(HTTP_1_1, status);
+
+        for (String name : servletResponse.getHeaderNames()) {
+            for (Object value : servletResponse.getHeaderValues(name)) {
+                response.headers().addObject(name , value);
+            }
+        }
+
+        // Write the initial line and the header.
+        ctx.write(response);
+
+        InputStream contentStream = new ByteArrayInputStream(servletResponse.getContentAsByteArray());
+
+        // Write the content.
+        ChannelFuture writeFuture = ctx.write(new ChunkedStream(contentStream));
+        writeFuture.addListener(ChannelFutureListener.CLOSE);
     }
 
     @Override
@@ -56,7 +111,71 @@ public class MyAppHandler extends SimpleChannelInboundHandler<FullHttpRequest>{
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        cause.printStackTrace();
+        if (ctx.channel().isActive()) {
+            sendError(ctx, INTERNAL_SERVER_ERROR);
+        }
         ctx.close();
+    }
+
+    private static void sendError(ChannelHandlerContext ctx, HttpResponseStatus status) {
+        FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, status);
+        response.headers().set(CONTENT_TYPE, "text/plain; charset=UTF-8");
+        response.content().writeBytes(Unpooled.copiedBuffer(
+                "Failure: " + status.toString() + "\r\n",
+                CharsetUtil.UTF_8));
+
+        System.out.println("http chuli shibai");
+
+        // Close the connection as soon as the error message is sent.
+        ctx.write(response).addListener(ChannelFutureListener.CLOSE);
+    }
+
+    private MockHttpServletRequest createServletRequest(FullHttpRequest httpRequest) {
+        UriComponents uriComponents = UriComponentsBuilder.fromUriString(httpRequest.uri()).build();
+
+        MockHttpServletRequest servletRequest = new MockHttpServletRequest(this.servletContext);
+        servletRequest.setRequestURI(uriComponents.getPath());
+        servletRequest.setPathInfo(uriComponents.getPath());
+        servletRequest.setMethod(httpRequest.method().toString());
+
+        if (uriComponents.getScheme() != null) {
+            servletRequest.setScheme(uriComponents.getScheme());
+        }
+        if (uriComponents.getHost() != null) {
+            servletRequest.setServerName(uriComponents.getHost());
+        }
+        if (uriComponents.getPort() != -1) {
+            servletRequest.setServerPort(uriComponents.getPort());
+        }
+
+        for (CharSequence name : httpRequest.headers().names()) {
+            for (CharSequence value : httpRequest.headers().getAll(name)) {
+                servletRequest.addHeader(name.toString(), value.toString());
+            }
+        }
+
+        servletRequest.setContent(httpRequest.content().array());
+
+        try {
+            if (uriComponents.getQuery() != null) {
+                String query = UriUtils.decode(uriComponents.getQuery(), "UTF-8");
+                servletRequest.setQueryString(query);
+            }
+
+            for (Entry<String, List<String>> entry : uriComponents.getQueryParams().entrySet()) {
+                for (String value : entry.getValue()) {
+                    servletRequest.addParameter(
+                            UriUtils.decode(entry.getKey(), "UTF-8"),
+                            UriUtils.decode(value, "UTF-8"));
+                }
+            }
+        }
+        catch (UnsupportedEncodingException ex) {
+            // shouldn't happen
+        }
+
+        return servletRequest;
     }
 
 }

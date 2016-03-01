@@ -38,7 +38,7 @@ public class StartSpringAndNetty {
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
         AppConfig appConfig = ac.getBean(AppConfig.class);
         try{
-            appConfig.bind(3131);
+            appConfig.bind(13131);
         }catch (Exception e){
             e.printStackTrace();
             System.out.println("端口绑定失败");

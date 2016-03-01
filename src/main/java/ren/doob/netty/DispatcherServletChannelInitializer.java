@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import org.springframework.mock.web.MockServletConfig;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.context.support.XmlWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 /**
  * @author fudali
@@ -41,27 +42,29 @@ import org.springframework.web.servlet.DispatcherServlet;
  */
 
 public class DispatcherServletChannelInitializer extends ChannelInitializer<SocketChannel> {
-    /*private final DispatcherServlet dispatcherServlet;
+
+    private final DispatcherServlet dispatcherServlet;
 
     public DispatcherServletChannelInitializer() throws ServletException {
 
         MockServletContext servletContext = new MockServletContext();
         MockServletConfig servletConfig = new MockServletConfig(servletContext);
+        servletConfig.addInitParameter("contextConfigLocation","classpath:/META-INF/spring/root-context.xml");
+        servletContext.addInitParameter("contextConfigLocation","classpath:/META-INF/spring/root-context.xml");
 
-        AnnotationConfigWebApplicationContext wac = new AnnotationConfigWebApplicationContext();
+        //AnnotationConfigWebApplicationContext wac = new AnnotationConfigWebApplicationContext();
+        XmlWebApplicationContext wac = new XmlWebApplicationContext();
+
+        //ClassPathXmlApplicationContext wac = new ClassPathXmlApplicationContext();
         wac.setServletContext(servletContext);
         wac.setServletConfig(servletConfig);
-        wac.register(SpringConfig.class);
+        wac.setConfigLocations("classpath:/dispatcher-servlet.xml","classpath:/applicationContext.xml");
+        //wac.register(WebConfig.class);
         wac.refresh();
 
         this.dispatcherServlet = new DispatcherServlet(wac);
         this.dispatcherServlet.init(servletConfig);
-
-        //set spring config in xml
-        //this.dispatcherServlet = new DispatcherServlet();
-        //this.dispatcherServlet.setContextConfigLocation("classpath*:/applicationContext.xml");
-        //this.dispatcherServlet.init(servletConfig);
-    }*/
+    }
 
     @Override
     public void initChannel(SocketChannel channel) throws Exception {
@@ -78,6 +81,6 @@ public class DispatcherServletChannelInitializer extends ChannelInitializer<Sock
         pipeline.addLast("aggregator", new HttpObjectAggregator(65536));
         pipeline.addLast("encoder", new HttpResponseEncoder());
         pipeline.addLast("chunkedWriter", new ChunkedWriteHandler());
-        pipeline.addLast("handler", new MyAppHandler());
+        pipeline.addLast("handler", new MyAppHandler(this.dispatcherServlet));
     }
 }
