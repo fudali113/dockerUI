@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import static io.netty.handler.codec.http.HttpHeaderNames.CONTENT_TYPE;
-import static io.netty.handler.codec.http.HttpResponseStatus.BAD_REQUEST;
+import static io.netty.handler.codec.http.HttpResponseStatus.*;
 import static io.netty.handler.codec.http.HttpResponseStatus.INTERNAL_SERVER_ERROR;
 import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 import io.netty.buffer.Unpooled;
@@ -20,9 +20,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.stream.ChunkedStream;
 import io.netty.util.CharsetUtil;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -80,13 +78,36 @@ public class MyAppHandler extends SimpleChannelInboundHandler<FullHttpRequest>{
             return;
         }
 
+        if (request.uri().equals("/") || request.uri() == null){
+            FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, OK);
+            response.headers().set(CONTENT_TYPE, "text/html; charset=UTF-8");
+
+            StringBuffer sb = new StringBuffer();
+            FileReader file = new FileReader("index.html");
+            try {
+                BufferedReader reader = new BufferedReader(file);
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }finally {
+                file.close();
+            }
+
+            response.content().writeBytes(Unpooled.copiedBuffer(sb, CharsetUtil.UTF_8));
+
+            ctx.write(response).addListener(ChannelFutureListener.CLOSE);
+        }
+
         MockHttpServletRequest servletRequest = createServletRequest(request);
         MockHttpServletResponse servletResponse = new MockHttpServletResponse();
 
         this.servlet.service(servletRequest, servletResponse);
 
         HttpResponseStatus status = HttpResponseStatus.valueOf(servletResponse.getStatus());
-        HttpResponse response = new DefaultHttpResponse(HTTP_1_1, status);
+        DefaultFullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, status);
 
         for (String name : servletResponse.getHeaderNames()) {
             for (Object value : servletResponse.getHeaderValues(name)) {
@@ -134,10 +155,14 @@ public class MyAppHandler extends SimpleChannelInboundHandler<FullHttpRequest>{
     private MockHttpServletRequest createServletRequest(FullHttpRequest httpRequest) {
         UriComponents uriComponents = UriComponentsBuilder.fromUriString(httpRequest.uri()).build();
 
+        System.out.println(httpRequest.uri());
+
         MockHttpServletRequest servletRequest = new MockHttpServletRequest(this.servletContext);
         servletRequest.setRequestURI(uriComponents.getPath());
         servletRequest.setPathInfo(uriComponents.getPath());
         servletRequest.setMethod(httpRequest.method().toString());
+
+        System.out.println(uriComponents.getPath() +"--->"+httpRequest.method().toString());
 
         if (uriComponents.getScheme() != null) {
             servletRequest.setScheme(uriComponents.getScheme());
