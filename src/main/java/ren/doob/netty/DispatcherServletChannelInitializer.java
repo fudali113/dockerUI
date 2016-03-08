@@ -10,7 +10,6 @@ import io.netty.handler.stream.ChunkedWriteHandler;
 import javax.servlet.ServletException;
 import org.springframework.mock.web.MockServletConfig;
 import org.springframework.mock.web.MockServletContext;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 /**
@@ -52,14 +51,11 @@ public class DispatcherServletChannelInitializer extends ChannelInitializer<Sock
         servletConfig.addInitParameter("contextConfigLocation","classpath:/META-INF/spring/root-context.xml");
         servletContext.addInitParameter("contextConfigLocation","classpath:/META-INF/spring/root-context.xml");
 
-        //AnnotationConfigWebApplicationContext wac = new AnnotationConfigWebApplicationContext();
         XmlWebApplicationContext wac = new XmlWebApplicationContext();
 
-        //ClassPathXmlApplicationContext wac = new ClassPathXmlApplicationContext();
         wac.setServletContext(servletContext);
         wac.setServletConfig(servletConfig);
         wac.setConfigLocations("classpath:/dispatcher-servlet.xml","classpath:/applicationContext.xml");
-        //wac.register(WebConfig.class);
         wac.refresh();
 
         this.dispatcherServlet = new DispatcherServlet(wac);
@@ -68,14 +64,8 @@ public class DispatcherServletChannelInitializer extends ChannelInitializer<Sock
 
     @Override
     public void initChannel(SocketChannel channel) throws Exception {
-        // Create a default pipeline implementation.
+
         ChannelPipeline pipeline = channel.pipeline();
-
-        // Uncomment the following line if you want HTTPS
-        //SSLEngine engine = SecureChatSslContextFactory.getServerContext().createSSLEngine();
-        //engine.setUseClientMode(false);
-        //pipeline.addLast("ssl", new SslHandler(engine));
-
 
         pipeline.addLast("decoder", new HttpRequestDecoder());
         pipeline.addLast("aggregator", new HttpObjectAggregator(65536));

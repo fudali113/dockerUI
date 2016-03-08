@@ -23,7 +23,7 @@ import java.util.HashMap;
 
 @Controller
 @RequestMapping("/ssh/shell")
-public class ShhExecute extends SshBaseController {
+public class ShhExecute extends BaseController {
 
     private Log log = LogFactory.getLog(FileExecute.class);
 

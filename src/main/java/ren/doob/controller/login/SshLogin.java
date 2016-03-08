@@ -8,18 +8,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import ren.doob.common.BaseController;
 import ren.doob.common.CommonField;
 import ren.doob.common.Mc;
 import static ren.doob.common.Mc.*;
 import static ren.doob.util.sshwebproxy.MySsh.*;
 import ren.doob.common.Parameter;
-import ren.doob.common.SshBaseController;
-import ren.doob.controller.login.FileExecute;
 import ren.doob.serivces.UserShellService;
 import ren.doob.serivces.model.Shell;
 import ren.doob.serivces.model.User;
 import ren.doob.util.sshwebproxy.*;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -31,7 +29,7 @@ import java.util.HashMap;
  */
 @Controller
 @RequestMapping("/ssh")
-public class SshLogin extends SshBaseController {
+public class SshLogin extends BaseController {
 
     private Log log = LogFactory.getLog(FileExecute.class);
     @Autowired

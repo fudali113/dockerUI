@@ -1,9 +1,12 @@
 package ren.doob.util.dockerapi;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ren.doob.serivces.UserConService;
 import ren.doob.util.sshwebproxy.SystemShell;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author fudali
@@ -35,6 +38,11 @@ import java.util.ArrayList;
 @Service
 public class DockerUserNameSpace {
 
+    @Autowired
+    private UserConService userConService;
+
+    private HashMap para = new HashMap<String,String>();
+
     public boolean createCon(Integer userId ,String imageName, String ConName){
         String ConID = null;
         ArrayList<String> result = SystemShell.createCon(imageName, ConName);
@@ -43,8 +51,10 @@ public class DockerUserNameSpace {
                 ConID = i;
             }
         }
-
-        return true;
+        if (ConID != null) {
+            if(userConService.addCon(para) > 0) return true;
+        }
+        return false;
     }
 
 }

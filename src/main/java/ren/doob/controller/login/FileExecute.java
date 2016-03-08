@@ -52,7 +52,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/ssh/file")
-public class FileExecute extends SshBaseController{
+public class FileExecute extends BaseController{
 
     private Log log = LogFactory.getLog(FileExecute.class);
 

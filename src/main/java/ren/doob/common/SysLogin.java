@@ -1,6 +1,5 @@
 package ren.doob.common;
 
-import org.apache.commons.logging.Log;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +13,7 @@ import ren.doob.serivces.UserMapperService;
 import ren.doob.util.sshwebproxy.MySsh;
 import ren.doob.util.sshwebproxy.SshConnectException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import static ren.doob.common.Mc.*;
 /**
@@ -53,6 +53,12 @@ public class SysLogin extends BaseController{
             "登陆密码为："+Mc.getPara().get("pass")+ "--->正确密码为"+user.getPass());
         }
         return Mc.getR();
+    }
+
+    @RequestMapping("/out")
+    public void out() throws IOException {
+        getSes().invalidate();
+        getRes().sendRedirect("/doob/");
     }
 
     @ResponseBody
