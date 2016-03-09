@@ -42,21 +42,20 @@ public class DockerUserNameSpace {
     private UserConService userConService;
     private Parameter parameter = new Parameter();
 
-    public boolean createCon(Integer userId ,String imageName, String ConName){
+    public int createCon(Parameter parameter ){
+        int addnum = 0;
         String ConID = null;
-        ArrayList<String> result = SystemShell.createCon(imageName, ConName);
+        ArrayList<String> result = SystemShell.createCon(parameter);
         for(String i : result){
             if(i.trim().length() == 64 && i.toLowerCase().equals(i)){
                 ConID = i;
             }
         }
         if (ConID != null) {
-            parameter.put("userid",userId.toString());
             parameter.put("id",ConID);
-            parameter.put("name",ConName);
-            if(userConService.addCon(parameter) > 0) return true;
+            addnum = userConService.addCon(parameter);
         }
-        return false;
+        return addnum;
     }
 
 }

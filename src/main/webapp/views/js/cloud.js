@@ -6,22 +6,22 @@ app.directive('runparameter', function() {
                     '<div class="div_horizontal">' +
                         '<div align="center"><a class="btn btn-success" ng-click="addpara()"> <i class="fa fa-plus-square fa-lg"></i>添加参数 </a></div>' +
                         '<div ng-repeat="paraid in paraids">'+
-                            '<div class="div_horizontal"><input type="text" class="form-control" id="key_{{paraid}}" name="key_{{paraid}}" placeholder="参数名{{paraid}}"></div>' +
-                            '<div class="div_horizontal"><input type="text" class="form-control" id="value_{{paraid}}" name="value_{{paraid}}" placeholder="参数值{{paraid}}"></div>' +
+                            '<div class="div_horizontal"><input type="text" class="form-control" id="para_key_{{paraid}}" name="para_key_{{paraid}}" placeholder="参数名{{paraid}}"></div>' +
+                            '<div class="div_horizontal"><input type="text" class="form-control" id="para_value_{{paraid}}" name="para_value_{{paraid}}" placeholder="参数值{{paraid}}"></div>' +
                         '</div>'+
                     '</div>' +
                     '<div class="div_horizontal">' +
                         '<div align="center"><a class="btn btn-success" ng-click="addport()"> <i class="fa fa-plus-square fa-lg"></i>添加端口 </a></div>' +
                         '<div ng-repeat="portid in portids">'+
-                            '<div class="div_horizontal"><input type="text" class="form-control" id="key_{{portid}}" name="key_{{portid}}" placeholder="主机端口{{portid}}"></div>' +
-                            '<div class="div_horizontal"><input type="text" class="form-control" id="value_{{portid}}" name="value_{{portid}}" placeholder="容器端口{{portid}}"></div>' +
+                            '<div class="div_horizontal"><input type="text" class="form-control" id="port_key_{{portid}}" name="port_key_{{portid}}" placeholder="主机端口{{portid}}"></div>' +
+                            '<div class="div_horizontal"><input type="text" class="form-control" id="port_value_{{portid}}" name="port_value_{{portid}}" placeholder="容器端口{{portid}}"></div>' +
                         '</div>'+
                     '</div>' +
                 '</div>',
         replace: true ,
         link : function(scope , element){
-            scope.paraids = []
-            scope.portids = []
+            scope.paraids = new Array()
+            scope.portids = new Array()
             var i = scope.paraids.push(1)
             var j = scope.portids.push(1)
             scope.addpara = function(){
@@ -34,6 +34,7 @@ app.directive('runparameter', function() {
     };
 });
 app.controller('containers', function($scope , $http) {
+    $scope.fromData = {}
     var url = new Array()
     url[0] = "/doob/docker/containers/json"
     url[1] = "/doob/docker/images/json"
@@ -71,7 +72,19 @@ app.controller('containers', function($scope , $http) {
     }
 
     $scope.signInContainer = function(){
-
+        var url = '/doob/docker/create/' + $scope.fromData.conName
+        var parameterArray = jQuery('#createCon').serializeArray()
+        var paras = {}
+        for(i=0;i<parameterArray.length;i++){
+            paras[parameterArray[i].name] = parameterArray[i].value
+        }
+        $http({
+            method: 'POST',
+            url: url,
+            params : paras ,
+        }).success(function(data){
+            alert(data)
+        })
     }
 
     $scope.deleteContainer = function (containers) {

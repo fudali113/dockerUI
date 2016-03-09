@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ren.doob.common.BaseController;
 import ren.doob.common.Mc;
 import ren.doob.util.dockerapi.DockerApiUtil;
+import ren.doob.util.dockerapi.DockerUserNameSpace;
 import ren.doob.util.sshwebproxy.ShellChannel;
 import ren.doob.util.sshwebproxy.SshConnectException;
 import ren.doob.util.sshwebproxy.SystemShell;
@@ -54,6 +55,8 @@ public class DockerApi extends BaseController {
 
     @Autowired
     private DockerApiUtil dockerApi;
+    @Autowired
+    private DockerUserNameSpace dockerUserNameSpace;
 
     @ResponseBody   // /**表示获取路径下所有请求
     @RequestMapping(value = "/**" , method = RequestMethod.GET , produces="application/json;charset=UTF-8")
@@ -79,7 +82,7 @@ public class DockerApi extends BaseController {
         return map.get("responseBody");
     }
 
-    @ResponseBody   // /**表示获取路径下所有请求
+    @ResponseBody   //
     @RequestMapping(value = "/{IorC}/{id}" , method = RequestMethod.DELETE , produces="application/json;charset=UTF-8")
     public Object deletecontainer(@PathVariable("id") String id , @PathVariable("IorC") String IorC) throws IOException {
         if("containers".equals(IorC) || "images".equals(IorC)) {
@@ -94,8 +97,10 @@ public class DockerApi extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/createCon/{imageName}/{name}" , method = RequestMethod.POST , produces="application/json;charset=UTF-8")
-    public void create(@PathVariable("name") String name ){
-
+    @RequestMapping(value = "/create/{name}" , method = RequestMethod.POST , produces="application/json;charset=UTF-8")
+    public Object create(@PathVariable("name") String name){
+        Mc.putP("name" , name);
+        Mc.putP("userid" , getUserinfo().getId().toString());
+        return dockerUserNameSpace.createCon(Mc.getPara());
     }
 }

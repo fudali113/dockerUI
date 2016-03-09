@@ -152,13 +152,13 @@
                             <div class="form-group">
                                 <label for="ssh1" class="col-sm-2 control-label">镜像名：</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="ssh1" name="imageName" placeholder="容器基于何种镜像启动">
+                                    <input type="text" class="form-control" id="ssh1" name="imageName" placeholder="容器基于何种镜像启动" ng-model="fromData.imageName">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="ssh2" class="col-sm-2 control-label">容器名：</label>
+                                <label for="conName" class="col-sm-2 control-label">容器名：</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="ssh2" name="conName" placeholder="为即将启动的容器命名">
+                                    <input type="text" class="form-control" id="conName" name="conName" placeholder="为即将启动的容器命名" ng-model="fromData.conName">
                                 </div>
                             </div>
                             <runparameter></runparameter> <!--angularJS directive-->
