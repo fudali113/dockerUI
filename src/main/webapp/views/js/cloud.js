@@ -1,4 +1,38 @@
 var app = angular.module('containersApp', []);
+app.directive('runparameter', function() {
+    return {
+        restrict: 'E',
+        template: '<div class="form-group">' +
+                    '<div class="div_horizontal">' +
+                        '<div align="center"><a class="btn btn-success" ng-click="addpara()"> <i class="fa fa-plus-square fa-lg"></i>添加参数 </a></div>' +
+                        '<div ng-repeat="paraid in paraids">'+
+                            '<div class="div_horizontal"><input type="text" class="form-control" id="key_{{paraid}}" name="key_{{paraid}}" placeholder="参数名{{paraid}}"></div>' +
+                            '<div class="div_horizontal"><input type="text" class="form-control" id="value_{{paraid}}" name="value_{{paraid}}" placeholder="参数值{{paraid}}"></div>' +
+                        '</div>'+
+                    '</div>' +
+                    '<div class="div_horizontal">' +
+                        '<div align="center"><a class="btn btn-success" ng-click="addport()"> <i class="fa fa-plus-square fa-lg"></i>添加端口 </a></div>' +
+                        '<div ng-repeat="portid in portids">'+
+                            '<div class="div_horizontal"><input type="text" class="form-control" id="key_{{portid}}" name="key_{{portid}}" placeholder="主机端口{{portid}}"></div>' +
+                            '<div class="div_horizontal"><input type="text" class="form-control" id="value_{{portid}}" name="value_{{portid}}" placeholder="容器端口{{portid}}"></div>' +
+                        '</div>'+
+                    '</div>' +
+                '</div>',
+        replace: true ,
+        link : function(scope , element){
+            scope.paraids = []
+            scope.portids = []
+            var i = scope.paraids.push(1)
+            var j = scope.portids.push(1)
+            scope.addpara = function(){
+                i = scope.paraids.push(i+1)
+            }
+            scope.addport = function(){
+                j = scope.portids.push(j+1)
+            }
+        }
+    };
+});
 app.controller('containers', function($scope , $http) {
     var url = new Array()
     url[0] = "/doob/docker/containers/json"
@@ -31,7 +65,7 @@ app.controller('containers', function($scope , $http) {
     }
 
     $scope.openSignInModel = function(){
-        $scope.modelTitle = "注册一个新的容器："
+        $scope.modelTitle = "创建一个新的容器："
         $scope.modelShowValue = 3
         $('#myModal').modal('show');
     }
