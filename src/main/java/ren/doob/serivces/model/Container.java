@@ -1,15 +1,10 @@
-package ren.doob.serivces.mapper;
-
-import ren.doob.common.Parameter;
-import ren.doob.serivces.model.Container;
-
-import java.util.ArrayList;
+package ren.doob.serivces.model;
 
 /**
  * @author fudali
- * @package ren.doob.serivces.mapper
- * @class UserConMapper
- * @date 2016-2-29
+ * @package ren.doob.serivces.model
+ * @class Container
+ * @date 2016-3-9
  * <p>
  * ━━━━━━神兽出没━━━━━━
  * 　　　┏┓　　　┏┓    Code
@@ -33,8 +28,42 @@ import java.util.ArrayList;
  * ━━━━━━感觉萌萌哒━━━━━━
  */
 
-public interface UserConMapper {
-    public int addCon(Parameter parameter);
-    public int deleteCon(Parameter parameter);
-    public ArrayList<Container> getCon(Parameter parameter);
+public class Container {
+
+    private Integer id;
+    private Integer userid;
+    private String containerid;
+    private String containername;
+
+    public String getContainerid() {
+        return containerid;
+    }
+
+    public void setContainerid(String containerid) {
+        this.containerid = containerid;
+    }
+
+    public String getContainername() {
+        return containername;
+    }
+
+    public void setContainername(String containername) {
+        this.containername = containername;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getUserid() {
+        return userid;
+    }
+
+    public void setUserid(Integer userid) {
+        this.userid = userid;
+    }
 }

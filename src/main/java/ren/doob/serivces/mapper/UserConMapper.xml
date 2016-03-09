@@ -2,8 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="ren.doob.serivces.mapper.UserConMapper">
 
-    <insert id="addCon" parameterType="HashMap">
-            INSERT INTO user_container (userid,containerid,containername) VALUES (#{userid},#{id},#{name})
+    <select id="getCon" resultType="ren.doob.serivces.model.Container" parameterType="ren.doob.common.Parameter">
+        SELECT * FROM user_container
+        <include refid="selectWhereSql" />
+    </select>
+
+    <insert id="addCon" parameterType="ren.doob.common.Parameter">
+        INSERT INTO user_container (userid,containerid,containername) VALUES (#{accept.userid},#{accept.id},#{accept.name})
     </insert>
+
+    <delete id="deleteCon" parameterType="ren.doob.common.Parameter">
+        DELETE FROM user_container
+        <include refid="deleteWhereSql" />
+    </delete>
+
+    <sql id="selectWhereSql">
+        <where>
+            <if test="accept.userid != null">
+                userid = #{accept.userid}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="deleteWhereSql">
+        <where>
+            <if test="accept.id != null">
+                containerid = #{accept.id}
+            </if>
+            <if test="accept.name != null">
+                AND containername = #{accept.name}
+            </if>
+        </where>
+    </sql>
 
 </mapper>

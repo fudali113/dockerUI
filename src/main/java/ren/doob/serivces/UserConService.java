@@ -2,9 +2,11 @@ package ren.doob.serivces;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ren.doob.common.Parameter;
 import ren.doob.serivces.mapper.UserConMapper;
+import ren.doob.serivces.model.Container;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  * @author fudali
@@ -39,8 +41,16 @@ public class UserConService {
     @Autowired
     private UserConMapper userConMapper;
 
-    public int addCon(HashMap hashMap){
-        return userConMapper.addCon(hashMap);
+    public int addCon(Parameter parameter){
+        return userConMapper.addCon(parameter);
+    }
+
+    public int deleteCon(Parameter parameter){
+        return userConMapper.deleteCon(parameter);
+    }
+
+    public ArrayList<Container> getCon(Parameter parameter){
+        return userConMapper.getCon(parameter);
     }
 
 }
