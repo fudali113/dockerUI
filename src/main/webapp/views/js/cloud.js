@@ -4,14 +4,14 @@ app.directive('runparameter', function() {
         restrict: 'E',
         template: '<div class="form-group">' +
                     '<div class="div_horizontal">' +
-                        '<div align="center"><a class="btn btn-success" ng-click="addpara()"> <i class="fa fa-plus-square fa-lg"></i>添加参数 </a></div>' +
+                        '<div align="center"><a class="btn btn-success" ng-click="addpara()"> <i class="fa fa-plus-square fa-lg"></i>添加运行参数 </a></div>' +
                         '<div ng-repeat="paraid in paraids">'+
                             '<div class="div_horizontal"><input type="text" class="form-control" id="para_key_{{paraid}}" name="para_key_{{paraid}}" placeholder="参数名{{paraid}}"></div>' +
                             '<div class="div_horizontal"><input type="text" class="form-control" id="para_value_{{paraid}}" name="para_value_{{paraid}}" placeholder="参数值{{paraid}}"></div>' +
                         '</div>'+
                     '</div>' +
                     '<div class="div_horizontal">' +
-                        '<div align="center"><a class="btn btn-success" ng-click="addport()"> <i class="fa fa-plus-square fa-lg"></i>添加端口 </a></div>' +
+                        '<div align="center"><a class="btn btn-success" ng-click="addport()"> <i class="fa fa-plus-square fa-lg"></i>添加端口映射 </a></div>' +
                         '<div ng-repeat="portid in portids">'+
                             '<div class="div_horizontal"><input type="text" class="form-control" id="port_key_{{portid}}" name="port_key_{{portid}}" placeholder="主机端口{{portid}}"></div>' +
                             '<div class="div_horizontal"><input type="text" class="form-control" id="port_value_{{portid}}" name="port_value_{{portid}}" placeholder="容器端口{{portid}}"></div>' +
@@ -38,7 +38,6 @@ app.controller('containers', function($scope , $http) {
     var url = new Array()
     url[0] = "/doob/docker/containers/json"
     url[1] = "/doob/docker/images/json"
-    $scope.init()
 
     $scope.init = function() {
         $http.get(url[0]).success(function (response) {
@@ -48,6 +47,8 @@ app.controller('containers', function($scope , $http) {
             $scope.images = response;
         });
     }
+
+    $scope.init()
 
     $scope.getIC = function(obj , ic){
         var url = obj.target.href
