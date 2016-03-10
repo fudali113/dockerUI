@@ -40,13 +40,13 @@ public class DockerUserNameSpace {
 
     @Autowired
     private UserConService userConService;
-    private Parameter parameter = new Parameter();
 
     public int createCon(Parameter parameter ){
         int addnum = 0;
         String ConID = null;
         ArrayList<String> result = SystemShell.createCon(parameter);
         for(String i : result){
+            System.out.println(i);
             if(i.trim().length() == 64 && i.toLowerCase().equals(i)){
                 ConID = i;
             }

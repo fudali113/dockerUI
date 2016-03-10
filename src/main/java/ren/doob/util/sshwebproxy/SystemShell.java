@@ -2,6 +2,7 @@ package ren.doob.util.sshwebproxy;
 
 import org.springframework.stereotype.Service;
 import ren.doob.common.Parameter;
+import ren.doob.util.dockerapi.CreateDockerShellString;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,7 +50,7 @@ public class SystemShell {
     }
 
     public static ArrayList<String> createCon(Parameter parameter){
-        String createOrder = createRunString(parameter);
+        String createOrder = CreateDockerShellString.createRunString(parameter);
         shellChannel.read();
         String[] before = shellChannel.getScreen();
         shellChannel.write(createOrder , true);
@@ -66,51 +67,6 @@ public class SystemShell {
             if(count == 0) result.add(i);
         }
         return result;
-    }
-
-    private static String createRunString(Parameter parameter){
-        HashMap<String,String> runPara = new HashMap();
-        HashMap<String,String> portPara = new HashMap();
-        HashMap<String,String> map = parameter.getAccept();
-
-        StringBuffer runParaString = new StringBuffer("");
-        StringBuffer portParaString = new StringBuffer("");
-        StringBuffer runString = new StringBuffer("");
-        String conNameString = " --name " + parameter.get("conName");
-        String imageName = " "+parameter.get("imageName");
-
-        for(Map.Entry<String,String> para : map.entrySet()){
-            String key = para.getKey();
-            String value = key.replaceAll("key","value");
-            if(key.contains("para_key_")){
-                runPara.put(map.get(key),map.get(value));
-            }else if(key.contains("port_key_")){
-                portPara.put(map.get(key),map.get(value));
-            }
-        }
-        if(runPara.containsKey("--name")) runPara.remove("--name");
-        for (String parakey : runPara.keySet()){
-            String value = runPara.get(parakey);
-            if(parakey.trim().contains(" ") || value.trim().contains(" ")) return "运行参数中不能出现空格！！！";
-            runParaString.append(parakey + " " + value + " ");
-        }
-        if(!portPara.isEmpty()) {
-            portParaString.append(" -p ");
-            for (String parakey : portPara.keySet()) {
-                String value = portPara.get(parakey);
-                try {
-                    Integer.parseInt(parakey);
-                    Integer.parseInt(value);
-                }catch (NumberFormatException e){
-                    continue;
-                }
-                if(parakey != null && !parakey.equals("") && value != null && !value.equals(""))
-                    portParaString.append(parakey + ":" + value + " ");
-            }
-        }
-
-        runString.append("docker run ").append(runParaString).append(portParaString).append(conNameString).append(imageName);
-        return runString.toString();
     }
 
 }

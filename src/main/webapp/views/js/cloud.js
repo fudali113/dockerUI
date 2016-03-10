@@ -38,12 +38,16 @@ app.controller('containers', function($scope , $http) {
     var url = new Array()
     url[0] = "/doob/docker/containers/json"
     url[1] = "/doob/docker/images/json"
-    $http.get(url[0]).success(function (response) {
+    $scope.init()
+
+    $scope.init = function() {
+        $http.get(url[0]).success(function (response) {
             $scope.containers = response;
-    });
-    $http.get(url[1]).success(function (response) {
-        $scope.images = response;
-    });
+        });
+        $http.get(url[1]).success(function (response) {
+            $scope.images = response;
+        });
+    }
 
     $scope.getIC = function(obj , ic){
         var url = obj.target.href
@@ -83,26 +87,29 @@ app.controller('containers', function($scope , $http) {
             url: url,
             params : paras ,
         }).success(function(data){
-            alert(data)
+            $scope.init()
+            jQuery('#myModal').modal('hide');
         })
     }
 
     $scope.deleteContainer = function (containers) {
         var handleurl = '/doob/docker/containers/' + $scope.containerInfo.Id
         $http.delete(handleurl).success(function(data){
+            $scope.init()
             alert("delete success!")
         })
     }
     $scope.deleteImage = function(id){
         var handleurl = '/doob/docker/images/' + id
         $http.delete(handleurl).success(function(data){
+            $scope.init()
             alert("delete success!")
-
         })
     }
     $scope.handleContainer = function(handleName){
         var handleurl = '/doob/docker/containers/' + $scope.containerInfo.Id + '/'+ handleName
         $http.post(handleurl).success(function(data){
+            $scope.init()
             alert("handle success!")
         })
     }

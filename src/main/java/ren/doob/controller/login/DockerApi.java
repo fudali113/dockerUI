@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ren.doob.common.BaseController;
 import ren.doob.common.Mc;
+import ren.doob.serivces.model.User;
 import ren.doob.util.dockerapi.DockerApiUtil;
 import ren.doob.util.dockerapi.DockerUserNameSpace;
 import ren.doob.util.sshwebproxy.ShellChannel;
@@ -99,8 +100,9 @@ public class DockerApi extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/create/{name}" , method = RequestMethod.POST , produces="application/json;charset=UTF-8")
     public Object create(@PathVariable("name") String name){
-        Mc.putP("name" , name);
-        Mc.putP("userid" , getUserinfo().getId().toString());
+        User onlineUser = getUserinfo();
+        Mc.putP("name" , onlineUser.getName()+"_"+name);//为每个用户的容器名添加前缀，避免相同而导致创建出错
+        Mc.putP("userid" , onlineUser.getId().toString());
         return dockerUserNameSpace.createCon(Mc.getPara());
     }
 }
