@@ -49,7 +49,7 @@ public class SystemShell {
         return sshConnection;
     }
 
-    public static ArrayList<String> createCon(Parameter parameter){
+    synchronized public static ArrayList<String> createCon(Parameter parameter){//同步保证数据正确
         String createOrder = CreateDockerShellString.createRunString(parameter);
         shellChannel.read();
         String[] before = shellChannel.getScreen();

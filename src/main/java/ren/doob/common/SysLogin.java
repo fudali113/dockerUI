@@ -13,6 +13,7 @@ import ren.doob.serivces.UserMapperService;
 import ren.doob.util.sshwebproxy.MySsh;
 import ren.doob.util.sshwebproxy.SshConnectException;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import static ren.doob.common.Mc.*;
@@ -35,12 +36,17 @@ public class SysLogin extends BaseController{
     @RequestMapping(value = "/login" ,method = RequestMethod.POST)
     public Object login() throws SshConnectException {
         User user = userMapperService.getUser(Mc.getPara());
-        ArrayList<Shell> shells = userShellService.getMyTerminal(Mc.putP("nowUserId" , user.getId().toString()));
-        if(shells.size() > 0){
-            MySsh.reconnection(shells,shells.get(0).getId());
-            Mc.getSes().setAttribute(CommonField.SESSION_SHELLS , shells);
-            Mc.getSes().setAttribute(CommonField.SESSION_SHELLID , shells.get(0).getId());
-        }
+        Parameter parameter = Mc.putP("nowUserId", user.getId().toString());
+        HttpSession session = Mc.getSes();
+
+        new Thread(() -> {
+            ArrayList<Shell> shells = userShellService.getMyTerminal(parameter);
+            if (shells.size() > 0) {
+                Shell shell = shells.get(0);
+                MySsh.connection(shell.getIp(),shell.getPort(),shell.getName(),shell.getPass(),session);
+                session.setAttribute(CommonField.SESSION_SHELLS, shells);
+                session.setAttribute(CommonField.SESSION_SHELLID, shells.get(0).getId());
+            }}).start();
 
         if (Mc.getPara().get("pass").equals(user.getPass())){
             Mc.getSes().setAttribute(CommonField.SESSION_USERINFO,user);

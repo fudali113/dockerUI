@@ -2,8 +2,10 @@ package ren.doob.util.sshwebproxy;
 
 import ren.doob.common.CommonField;
 import ren.doob.common.Mc;
+import ren.doob.common.SysLogin;
 import ren.doob.serivces.model.Shell;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 import static ren.doob.common.CommonField.*;
@@ -73,13 +75,38 @@ public class MySsh {
         return shellChannel;
     }
 
-    public static void reconnection(ArrayList<Shell> shells , int NO) throws SshConnectException {
+    public static  void connection(String ip, Integer port, String name, String pass, HttpSession session){
+        ShellChannel shellChannel = null;
+        FileChannel fileChannel = null;
+        SshConnection sshConnection = null;
+
+        try{
+            SshSession ss = new SshSession(session);
+            sshConnection = new SshConnection(ip,port,name,pass);
+            ss.addSshConnection(sshConnection);
+            shellChannel = sshConnection.openShellChannel();
+            fileChannel = sshConnection.openFileChannel();
+
+        }catch (SshConnectException sce){
+            sce.printStackTrace();
+        }
+
+        if (shellChannel != null && sshConnection != null && fileChannel != null) {
+            session.setAttribute(CommonField.SESSION_SHELLCHANNELID , shellChannel.getChannelId());
+            session.setAttribute(CommonField.SESSION_CONNECTIONINFO , sshConnection.getConnectionInfo());
+            session.setAttribute(CommonField.SESSION_FILECHANNELID , fileChannel.getChannelId());
+            session.setAttribute("loginInfo",getPara());
+            shellChannel.read();
+        }
+    }
+
+    public static void reconnection(ArrayList<Shell> shells , int NO) {
         Shell shell = null;
         for(Shell s : shells){
             if(s.getId() == NO)  shell = s;
         }
         if(shell == null) {
-            throw new SshConnectException("shells 参数不能为null");
+            System.out.println("shells 参数不能为null");
         }
         putP("ssh_ip",shell.getIp());
         putP("ssh_host",shell.getPort().toString());

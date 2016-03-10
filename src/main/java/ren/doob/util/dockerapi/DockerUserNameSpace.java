@@ -41,7 +41,7 @@ public class DockerUserNameSpace {
     @Autowired
     private UserConService userConService;
 
-    public int createCon(Parameter parameter ){
+    synchronized public int createCon(Parameter parameter ){//同步保证数据正确
         int addnum = 0;
         String ConID = null;
         ArrayList<String> result = SystemShell.createCon(parameter);
