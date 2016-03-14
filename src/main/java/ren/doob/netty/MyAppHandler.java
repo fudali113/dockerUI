@@ -76,7 +76,7 @@ public class MyAppHandler extends SimpleChannelInboundHandler<FullHttpRequest>{
             response.headers().set(CONTENT_TYPE, "text/html; charset=UTF-8");
 
             StringBuffer sb = new StringBuffer();
-            FileReader file = new FileReader("index.html");
+            FileReader file = new FileReader("D:\\fudali1\\doob\\src\\main\\webapp\\index.html");
             try {
                 BufferedReader reader = new BufferedReader(file);
                 String line = null;

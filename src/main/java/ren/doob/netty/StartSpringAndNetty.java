@@ -35,7 +35,7 @@ import ren.doob.netty.AppConfig;
 public class StartSpringAndNetty {
 
     public static void main(String[] args){
-        ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+        ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml","dispatcher-servlet.xml");
         AppConfig appConfig = ac.getBean(AppConfig.class);
         try{
             appConfig.bind(13131);
