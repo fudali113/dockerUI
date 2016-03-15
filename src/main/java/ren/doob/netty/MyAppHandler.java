@@ -71,7 +71,7 @@ public class MyAppHandler extends SimpleChannelInboundHandler<FullHttpRequest>{
             return;
         }
 
-        if (request.uri().equals("/") || request.uri() == null){
+        if (request.uri().equals("/") || request.uri() == null){//请求地址为 / 时返回index.html页面
             FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, OK);
             response.headers().set(CONTENT_TYPE, "text/html; charset=UTF-8");
 
@@ -94,7 +94,7 @@ public class MyAppHandler extends SimpleChannelInboundHandler<FullHttpRequest>{
             ctx.write(response).addListener(ChannelFutureListener.CLOSE);
         }
 
-        MockHttpServletRequest servletRequest = createServletRequest(request);
+        MockHttpServletRequest servletRequest = createServletRequest(request);//转化netty request为j2ee规范
         MockHttpServletResponse servletResponse = new MockHttpServletResponse();
 
         this.servlet.service(servletRequest, servletResponse);

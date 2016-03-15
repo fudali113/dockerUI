@@ -1,14 +1,15 @@
-package ren.doob.netty;
+package ren.doob.common;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ren.doob.netty.AppConfig;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author fudali
- * @package ren.doob
- * @class StartSpringAndNetty
- * @date 2016-2-25
+ * @package ren.doob.common
+ * @class Test
+ * @date 2016-3-14
  * <p>
  * ━━━━━━神兽出没━━━━━━
  * 　　　┏┓　　　┏┓    Code
@@ -32,20 +33,11 @@ import ren.doob.netty.AppConfig;
  * ━━━━━━感觉萌萌哒━━━━━━
  */
 
-public class StartSpringAndNetty {
+public class Test {
 
-    public static void main(String[] args){
-        ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml","dispatcher-servlet.xml");
-        AppConfig appConfig = ac.getBean(AppConfig.class);
-        int port = 13131;
-
-        try{
-            if(args.length > 0) port = Integer.parseInt(args[0]);
-            appConfig.bind(port);
-        }catch (Exception e){
-            e.printStackTrace();
-            System.out.println("端口绑定失败");
-        }
-    }
+    HashMap hashMap = new HashMap();
+    ArrayList arrayList = new ArrayList();
+    LinkedList linkedList = new LinkedList();
+    ConcurrentHashMap concurrentHashMap = new ConcurrentHashMap();
 
 }
