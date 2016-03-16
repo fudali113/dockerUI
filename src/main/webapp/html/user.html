@@ -38,20 +38,23 @@
             <div id="myTabContent" class="tab-content">
                 <div class="tab-pane fade in active" id="userinfo">
                     <table class="table table-striped">
-                        <tr style="height: 100px"><td style="width: 25%"><Strong>用户名</Strong></td><td><input type="text" class="form-control" value="{{userinfo.name}}" disabled="disabled" /></td></tr>
+                        <tr style="height: 100px">
+                            <td style="width: 25%"><Strong>用户名</Strong></td>
+                            <td><input type="text" class="form-control" disabled="disabled" ng-model="updatePara.name"/></td>
+                        </tr>
                         <tr style="height: 100px"><td style="width: 25%"><strong>手机号</strong></td><td>
                             <div class="input-group">
-                                <input type="text" class="form-control" value="{{userinfo.phone}}"/>
+                                <input type="text" class="form-control" ng-model="updatePara.phone"/>
                                 <span class="input-group-btn">
-                                     <button type="button" class="btn btn-default">保存更改</button>
+                                     <button type="button" class="btn btn-default" ng-click="update()">保存更改</button>
                                 </span>
                             </div>
                         </td></tr>
                         <tr style="height: 100px"><td style="width: 25%"><strong>邮箱</strong></td><td>
                             <div class="input-group">
-                                <input type="text" class="form-control" value="{{userinfo.email}}"/>
+                                <input type="text" class="form-control" ng-model="updatePara.email"/>
                                 <span class="input-group-btn">
-                                     <button type="button" class="btn btn-default">保存更改</button>
+                                     <button type="button" class="btn btn-default" ng-click="update()">保存更改</button>
                                 </span>
                             </div>
                         </td></tr>
@@ -69,20 +72,18 @@
                                         <div class="form-group">
                                             <label for="firstname" class="col-sm-2 control-label">新密码</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="firstname"
-                                                       placeholder="请输入新密码">
+                                                <input type="text" class="form-control" id="firstname" placeholder="请输入新密码" ng-model="updatePara.pass">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="lastname" class="col-sm-2 control-label">确认新密码</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="lastname"
-                                                       placeholder="请输入相同的新密码">
+                                                <input type="text" class="form-control" id="lastname" placeholder="请输入相同的新密码" ng-model="updatePara.pass1">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-offset-2 col-sm-10">
-                                                <button type="submit" class="btn btn-default">保存更改</button>
+                                                <button type="submit" class="btn btn-default" ng-click="update()">保存更改</button>
                                             </div>
                                         </div>
                                     </form>

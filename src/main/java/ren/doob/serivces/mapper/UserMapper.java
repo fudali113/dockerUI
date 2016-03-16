@@ -15,4 +15,6 @@ public interface UserMapper {
 
     public User getLoginUser(Parameter parameter);
     public int signin(Parameter parameter);
+    public int updateUserData(Parameter parameter);
+
 }

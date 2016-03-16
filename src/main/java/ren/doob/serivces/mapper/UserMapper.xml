@@ -10,4 +10,26 @@
           INSERT INTO user (name,pass,xingm) VALUES (#{accept.name},#{accept.pass},#{accept.xingm})
     </insert>
 
+    <update id="updateUserData" parameterType="ren.doob.common.Parameter">
+        UPDATE user
+        <set>
+            <if test="accept.phone != null">
+                phone = #{accept.phone}
+            </if>
+            <if test="accept.email != null">
+                email = #{accept.email}
+            </if>
+            <if test="accept.conmax != null">
+                conmax = #{accept.conmax}
+            </if>
+            <if test="accept.imagemax != null">
+                imagemax = #{accept.imagemax}
+            </if>
+            <if test="accept.pass != null">
+                pass = #{accept.pass}
+            </if>
+        </set>
+        where id = #{accept.id}
+    </update>
+
 </mapper>
