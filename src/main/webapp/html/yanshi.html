@@ -19,7 +19,7 @@
         <div ng-repeat="container in containers">
             <div style="position:relative;border: 1px">
                 <img ng-src="/doob/views/images/dockerImages/docker00{{index+1}}.png" ng-click="changeNowCon($event)">
-                <span style="position:absolute; top:0; left:0;">{{ container.Names}}</span>
+                <span style="position:absolute; top:0; left:0;" ng-bind="amendConName(container.Names)"></span>
             </div>
         </div>
     </div>

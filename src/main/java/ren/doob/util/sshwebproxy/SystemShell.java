@@ -5,6 +5,7 @@ import ren.doob.common.Parameter;
 import ren.doob.util.dockerapi.CreateDockerShellString;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,6 +41,7 @@ public class SystemShell {
 
     private static final SshConnection sshConnection = new SshConnection("139.129.4.187", 22, "root", "fudali133B");
     private static final   ShellChannel shellChannel = sshConnection.openShellChannel();
+    private static int beforeArrayLength = 0;
 
 
     public static ShellChannel getSystemShell(){
@@ -47,6 +49,16 @@ public class SystemShell {
     }
     public static SshConnection getSshConnection(){
         return sshConnection;
+    }
+
+    synchronized public static String[] runShell(String shell){
+        shellChannel.read();
+        shellChannel.write(shell , true);
+        shellChannel.read();
+        String[] after = shellChannel.getScreen();
+        String[] result = Arrays.copyOfRange(after,beforeArrayLength,after.length-1);
+        beforeArrayLength = result.length;
+        return result;
     }
 
     synchronized public static ArrayList<String> createCon(Parameter parameter){//同步保证数据正确

@@ -105,4 +105,11 @@ public class DockerApi extends BaseController {
         Mc.putP("userid" , onlineUser.getId().toString());
         return dockerUserNameSpace.createCon(Mc.getPara());
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/containers/{nameORid}/logs" , method = RequestMethod.GET , produces="application/json;charset=UTF-8")
+    public Object getLogs(@PathVariable("nameORid") String nameORid){
+        String shell = "docker logs -t --tail=all "+nameORid;
+        return SystemShell.runShell(shell);
+    }
 }
