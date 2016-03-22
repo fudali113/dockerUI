@@ -51,6 +51,7 @@ public class LoginRights {
 
         response.setContentType("application/json; charset=utf-8");
         response.getWriter().append("{\"noLogin\":\"1\"}");
+        response.sendRedirect("/doob/");
         return result ;
 
     }

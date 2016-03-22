@@ -18,7 +18,7 @@ app.controller('logs', function($scope , $http) {
 
     $scope.buttonChange = function(eve){
         $scope.nowSelect = eve.target.innerHTML
-        if($scope.nowSelect == $scope.selectList[0]){
+        if($scope.nowSelect == $scope.selectList[0] || $scope.nowSelect == $scope.selectList[1]){
             $scope.logsInfo = $scope.syslogs
         }else{
             $scope.logsInfo = '我不是全部的log'

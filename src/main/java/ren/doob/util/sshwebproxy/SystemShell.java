@@ -41,7 +41,6 @@ public class SystemShell {
 
     private static final SshConnection sshConnection = new SshConnection("139.129.4.187", 22, "root", "fudali133B");
     private static final   ShellChannel shellChannel = sshConnection.openShellChannel();
-    private static int beforeArrayLength = 0;
 
 
     public static ShellChannel getSystemShell(){
@@ -51,23 +50,24 @@ public class SystemShell {
         return sshConnection;
     }
 
-    synchronized public static String[] runShell(String shell){
+    synchronized public static ArrayList<String> runShell(String shell){
         shellChannel.read();
+        String[] before = shellChannel.getScreen();
+        System.out.println(shell);
+        System.out.println(before);
         shellChannel.write(shell , true);
         shellChannel.read();
         String[] after = shellChannel.getScreen();
-        String[] result = Arrays.copyOfRange(after,beforeArrayLength,after.length-1);
-        beforeArrayLength = result.length;
-        return result;
+        System.out.println(after);
+        return arrayDiff(after,before);
     }
 
     synchronized public static ArrayList<String> createCon(Parameter parameter){//同步保证数据正确
         String createOrder = CreateDockerShellString.createRunString(parameter);
-        shellChannel.read();
-        String[] before = shellChannel.getScreen();
-        shellChannel.write(createOrder , true);
-        shellChannel.read();
-        String[] after = shellChannel.getScreen();
+        return runShell(createOrder);
+    }
+
+    private static ArrayList<String> arrayDiff(String[] after , String[] before ){
         ArrayList<String> result = new ArrayList<String>();
         for(String i : after){
             int count = 0;
