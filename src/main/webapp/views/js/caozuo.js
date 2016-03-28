@@ -36,11 +36,13 @@ $(function(){
     })
 
     $('#index').siblings().hide()
-    $('li a').click(function(){
+    $('#mymenuul > li a').click(function(){
         var src = this.title;
         $('#'+src).show().siblings().hide()
-        $(this).addClass("active").siblings().removeClass("active")
+        $('#mymenuul > li a').removeClass("mymenuactive")
+        $(this).addClass("mymenuactive")
     })
+
 
     daovoice('init', {
         app_id: "29ab36ab",
@@ -118,7 +120,7 @@ var recon = function(no){
         url : "/doob/ssh/recon/"+no,
         dataType : "json",
         success : function(data){
-            if(data.recon == 0) alert("重行登陆失败！")
+            if(data.recon == 0) alert("重新登陆失败！")
             else{
                 gethostinfo()
                 //刷新两个页面

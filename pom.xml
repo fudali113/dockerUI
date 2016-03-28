@@ -208,12 +208,6 @@
       <artifactId>scala-compiler</artifactId>
       <version>${scala.version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.specs2</groupId>
-      <artifactId>specs2_2.11</artifactId>
-      <version>3.7</version>
-      <scope>test</scope>
-    </dependency>
 
   </dependencies>
 
@@ -263,13 +257,6 @@
         <directory>src/main/java</directory>
         <includes>
           <include>**/*.xml</include>
-        </includes>
-        <filtering>true</filtering>
-      </resource>
-      <resource>
-        <directory>src/main/scala</directory>
-        <includes>
-          <include>**/*.scala</include>
         </includes>
         <filtering>true</filtering>
       </resource>
