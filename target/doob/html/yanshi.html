@@ -16,7 +16,7 @@
         <hr/>
         <div ng-repeat="container in containers">
             <figure contenteditable="true" ng-click="changeNowCon($event)">
-                <img ng-src="getDockerPng($index)" alt="container.Names" contenteditable="false"/>
+                <img ng-src="{{getDockerPng($index)}}" alt="{{container.Names}}" contenteditable="false"/>
                 <figcaption contenteditable="false" ng-bind="amendConName(container.Names)"></figcaption>
             </figure>
         </div>
