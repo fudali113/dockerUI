@@ -6,49 +6,92 @@
     <link rel="Shortcut Icon" href="/doob/views/images/ooo.ico">
     <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="/doob/views/css/database.css">
 </head>
-<style type="text/css">
-    .myimage{
-        width: 100%;
-        height: auto;
-    }
-</style>
-<body ng-controller="database">
+<body ng-app="database">
+<div>
+    <div class="mynav">
+        <div style="float: left ;width:89% ; height: 13% ">
+            <font size="8" color="aqua">建立一个数据库实例</font><br/>
+            <font size="4" color="aqua">选择一个数据镜像，点击并创建一个属于自己的云数据库</font>
+        </div>
+        <div style="height: 13%; width: 10% ; float: right ; background: darkgray;position: relative; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px;">my database</div>
+    </div>
+    <div style="float: left;width: 1%"></div>
+</div>
 <div ng-controller="datacon">
-    <div style="float: left ; width: 33% ; height: auto">
-        <div style="position:relative;border: 1px">
-            <img src="/doob/views/images/database/mysql.png" class="myimage">
-            <span style="position:absolute; top:0; left:0;">mysql</span>
-        </div>
+    <div class="imagediv" ng-click="clickimage(event)">
+        <figure contenteditable="true">
+            <img src="/doob/views/images/database/mysql.png" alt="jump, mysql" contenteditable="false" />
+            <figcaption contenteditable="false">
+                <button type="button" class="btn btn-default" ng-click="createDatabase()">mysql!</button>
+            </figcaption>
+        </figure>
     </div>
-    <div style="float: left ; width: 33% ; height: auto">
-        <div style="position:relative;border: 1px">
-            <img src="/doob/views/images/database/postgresql.png" class="myimage">
-            <span style="position:absolute; top:0; left:0;">postgre</span>
-        </div>
+    <div class="imagediv">
+        <figure contenteditable="true">
+            <img src="/doob/views/images/database/postgresql.png" alt="jump, postgresql" contenteditable="false" />
+            <figcaption contenteditable="false">
+                <button type="button" class="btn btn-default" ng-click="createDatabase()">postgresql!</button>
+            </figcaption>
+        </figure>
     </div>
-    <div style="float: left ; width: 33% ; height: auto">
-        <div style="position:relative;border: 1px">
-            <img src="/doob/views/images/database/mongodb.png" class="myimage">
-            <span style="position:absolute; top:0; left:0;">monggo</span>
-        </div>
-    </div>
-
-    <div style="float: left ; width: 33% ; height: auto">
-        <div style="position:relative;border: 1px">
-            <img src="/doob/views/images/database/redis.png" class="myimage">
-            <span style="position:absolute; top:0; left:0;">redis</span>
-        </div>
-    </div>
-
-    <div style="float: left ; width: 33% ; height: auto">
-        <div style="position:relative;border: 1px">
-            <img src="/doob/views/images/database/golang.png" class="myimage">
-            <span style="position:absolute; top:0; left:0;">golang</span>
-        </div>
+    <div class="imagediv">
+        <figure contenteditable="true">
+            <img src="/doob/views/images/database/mongodb.png" alt="jump, mongodb" contenteditable="false" />
+            <figcaption contenteditable="false">
+                <button type="button" class="btn btn-default" ng-click="createDatabase()">mongodb!</button>
+            </figcaption>
+        </figure>
     </div>
 
+    <div class="imagediv">
+        <figure contenteditable="true">
+            <img src="/doob/views/images/database/redis.png" alt="jump, redis" contenteditable="false" />
+            <figcaption contenteditable="false">
+                <button type="button" class="btn btn-default" ng-click="createDatabase()">redis!</button>
+            </figcaption>
+        </figure>
+    </div>
+
+    <div class="imagediv">
+        <figure contenteditable="true">
+            <img src="/doob/views/images/database/golang.png" alt="jump, golang" contenteditable="false" />
+            <figcaption contenteditable="false">
+                <button type="button" class="btn btn-default" ng-click="createDatabase()">golang!</button>
+            </figcaption>
+        </figure>
+    </div>
+    <div class="imagediv">
+        <figure contenteditable="true">
+            <img src="/doob/views/images/database/redis.png" alt="jump, redis" contenteditable="false" />
+            <figcaption contenteditable="false">
+                <button type="button" class="btn btn-default" ng-click="createDatabase()">redis!</button>
+            </figcaption>
+        </figure>
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" align="cemter">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h2 class="modal-title">
+                    <strong id="modelTitle">创建数据库</strong>
+                </h2>
+            </div>
+            <div class="modal-body">
+               我是数据库创建条件
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-success" id="sshdl">登陆</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
 </div>
 </body>
 <script src="//cdn.bootcss.com/angular.js/1.4.8/angular.min.js"></script>

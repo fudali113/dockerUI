@@ -1,0 +1,64 @@
+.myimage{
+    width: 100%;
+    height: auto;
+}
+
+.imagediv{
+    float: left ;
+    width: 24.5% ;
+    height: auto;
+}
+
+.mynav{
+    position: relative;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: lightseagreen ;
+    float: left ;
+    width: 99%
+}
+
+figure {
+    width: 100%;
+    float: left;
+    margin: 0 20px 0 0;
+    background: white;
+    border: 10px solid white;
+    -webkit-box-shadow: 0 3px 10px #ccc;
+    -moz-box-shadow: 0 3px 10px #ccc;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transition: all 0.7s ease;
+    -moz-transition: all 1s ease;
+    position: relative;
+}
+figcaption {
+    text-align: center;
+    display: block;
+    font-size: 12px;
+    font-style: italic;
+}
+figure img {
+    width: 100%; /* Scale down */
+}
+
+figure:hover {
+    -webkit-transform: rotate(-1deg);
+    -moz-transform: rotate(1deg);
+    -webkit-box-shadow: 0 3px 10px #666;
+    -moz-box-shadow: 0 3px 10px #666;
+}
+figure:focus {
+    outline: none;
+    -webkit-transform: rotate(-3deg) scale(1.3);
+    -moz-transform: rotate(-3deg) scale(1.3);
+    -webkit-box-shadow: 0 3px 10px #666;
+    -moz-box-shadow: 0 3px 10px #666;
+    z-index: 9999;
+}
+
+.button:focus{
+    background: white;
+    color: mediumspringgreen;
+}
