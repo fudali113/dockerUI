@@ -1,0 +1,203 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html ng-app="containersApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>云</title>
+    <link rel="Shortcut Icon" href="/doob/views/images/ooo.ico">
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <style type="text/css">
+    .div_horizontal{
+        width: 50% ;
+        float: left ;
+    }
+    </style>
+</head>
+<body ng-controller="containers" style="background: FloralWhite">
+<div>
+    <h3><Strong>容器构建与查看</Strong></h3>
+</div>
+<div style="background:#F5F5F5">
+    <div>
+        <h2><Strong>创建一个新的容器</Strong></h2>
+        <Strong>总共{{containers.length}}个容器</Strong>
+        <p>构建你的容器并可以登陆shell终端管理你的容器</p>
+
+        <button type="button" class="btn btn-success" ng-click="openSignInModel()">创建一个新的容器</button>
+    </div>
+</div>
+<div style="height: 10px"></div>
+<div style="background:#F5F5F5">
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active" style="width: 30%">
+            <a href="#home" data-toggle="tab">
+                容器
+            </a>
+        </li>
+        <li style="width: 30%"><a href="#ios" data-toggle="tab">镜像</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content" style="overflow:scroll;height: 68%">
+        <div class="tab-pane fade in active" id="home">
+            <div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>容器名</th>
+                        <th>镜像</th>
+                        <th>运行终端</th>
+                        <th>创建</th>
+                        <th>状态</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="container in containers">
+                        <td><a href="#/doob/docker/containers/{{ container.Id }}/json" ng-click = "getIC($event , 'c')">{{ container.Names}}</a></td>
+                        <td><a href="#/doob/docker/images/{{ container.Image }}/json" ng-click = "getIC($event , 'i')">{{ container.Image }}</a></td>
+                        <td>{{ container.Command}}</td>
+                        <td>{{ container.Created }}</td>
+                        <td>{{ container.Status }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="ios">
+            <div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>镜像标签</th>
+                        <th>镜像ID</th>
+                        <th>父镜像ID</th>
+                        <th>创建</th>
+                        <th>大小</th>
+                        <th>虚拟大小</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="image in images">
+                        <td><select class="form-control"><option ng-repeat="repo in image.RepoTags">{{repo}}</option></select></td>
+                        <td>{{ image.Id.substr(0,10) }}</td>
+                        <td>{{ image.ParentId.substr(0,10)}}</td>
+                        <td>{{ image.Created }}</td>
+                        <td>{{ image.Size }}</td>
+                        <td>{{ image.VirtualSize}}</td>
+                        <td><button ng-click="deleteImage(image.Id)" type="button" class="btn btn-danger">删除</button></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%--模态框--%>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width : 700px ;">
+        <div class="modal-content">
+            <div class="modal-header" align="cemter">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h2 class="modal-title">
+                    <strong>{{modelTitle}}</strong>
+                </h2>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div id="containerInfo" ng-show="modelShowValue == 1">
+                        <table style="width: 100%">
+                            <tr>
+                                <td style=" width: 30%"><Strong>Id:</Strong></td>
+                                <td style=" width: 70%"><Strong>{{containerInfo.Id}}</Strong></td>
+                            </tr>
+                            <tr>
+                                <td style=" width: 30%"><Strong>创建时间:</Strong></td>
+                                <td style=" width: 70%"><Strong>{{containerInfo.Created}}</Strong></td>
+                            </tr>
+                            <tr>
+                                <td style=" width: 30%"><Strong>开放端口:</Strong></td>
+                                <td style=" width: 70%"><Strong>{{containerInfo.NetworkSettings.Ports}}</Strong></td>
+                            </tr>
+                            <tr>
+                                <td style=" width: 30%"><Strong>运行路径:</Strong></td>
+                                <td style=" width: 70%"><Strong>{{containerInfo.Path}}</Strong></td>
+                            </tr>
+                            <tr>
+                                <td style=" width: 30%"><Strong>IP地址:</Strong></td>
+                                <td style=" width: 70%"><Strong>{{containerInfo.NetworkSettings.IPAddress}}</Strong></td>
+                            </tr>
+                            <tr>
+                                <td style=" width: 30%"><Strong>状态:</Strong></td>
+                                <td style=" width: 70%"><Strong>{{containerInfo.State.Status}}</Strong></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="imageInfo" ng-show="modelShowValue == 2">
+                        <table style="width: 100%">
+                            <tr>
+                                <td style=" width: 30%"><Strong>oo:</Strong></td>
+                                <td style=" width: 70%"><Strong>{{imageInfo.Created}}</Strong></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div ng-show="modelShowValue == 3">
+                        <form class="form-horizontal" role="form" id="createCon">
+                            <div class="form-group">
+                                <label for="ssh1" class="col-sm-2 control-label">镜像名：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="ssh1" name="imageName" placeholder="容器基于何种镜像启动" ng-model="fromData.imageName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="conName" class="col-sm-2 control-label">容器名：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="conName" name="conName" placeholder="为即将启动的容器命名" ng-model="fromData.conName">
+                                </div>
+                            </div>
+                            <runparameter></runparameter> <!--angularJS directive-->
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div ng-show="modelShowValue == 1">
+                    <button type="button" class="btn btn-success" ng-click="handleContainer('restart');">
+                        重启容器
+                    </button>
+                    <button type="button" class="btn btn-info" >
+                        commit
+                    </button>
+                    <button type="button" class="btn btn-warning" ng-click="handleContainer('stop');">
+                        停止容器
+                    </button>
+                    <button type="button" class="btn btn-danger" ng-click="deleteContainer();">
+                        删除容器
+                    </button>
+                </div>
+                <div ng-show="modelShowValue == 2">
+
+                </div>
+                <div ng-show="modelShowValue == 3">
+                    <button type="button" class="btn btn-warning"
+                            data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-success" ng-click="signInContainer();">
+                        创建容器
+                    </button>
+                </div>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+</body>
+<script src="//cdn.bootcss.com/angular.js/1.4.8/angular.min.js"></script>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="/doob/views/js/cloud.js"></script>
+<script src="/doob/views/chajian/common.js"></script>
+</html>
