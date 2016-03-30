@@ -1,4 +1,11 @@
 var app = angular.module('containersApp', []);
+
+app.filter('containerNameFilter',function (){
+    return function (input){
+        return input[0]
+    }
+})
+
 app.directive('runparameter', function() {
     return {
         restrict: 'E',
@@ -113,6 +120,21 @@ app.controller('containers', function($scope , $http) {
             $scope.init()
             alert("handle success!")
         })
+    }
+
+    var count = 0  //点击切换图像切换页面
+    $scope.conOrImg = true
+    $scope.nowShowPage = "容器"
+
+    $scope.selectPage = function(){
+            if (count % 2 == 1) {
+                $scope.conOrImg = true
+                $scope.nowShowPage = "容器"
+            }else {
+                $scope.conOrImg = false
+                $scope.nowShowPage = "镜像"
+            }
+            count++
     }
 
 });

@@ -7,23 +7,91 @@
     <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
+<style>
+    .mynav{
+        position: relative;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        background: lightseagreen ;
+        float: left ;
+        width: 99% ;
+        padding: 15px 0px 10px 0px;
+        color: aqua;
+    }
+
+    .myRightNav{
+        -moz-border-radius: 6px;
+        -webkit-border-radius: 6px;
+        width: 100%;
+        margin: 0 0 0 0;
+        border: 1px solid aquamarine;
+    }
+
+    .myActive{
+        background: aquamarine;
+    }
+
+    figure {
+        width: 100%;
+        float: left;
+        margin: 0 20px 0 0;
+        background: aquamarine;
+        border: 10px solid aquamarine;
+        -webkit-box-shadow: 0 3px 10px #ccc;
+        -moz-box-shadow: 0 3px 10px #ccc;
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -webkit-transition: all 0.7s ease;
+        -moz-transition: all 1s ease;
+        position: relative;
+        -moz-border-radius: 6px;
+        -webkit-border-radius: 6px;
+    }
+    figcaption {
+        text-align: center;
+        display: block;
+        font-size: 12px;
+        font-style: italic;
+    }
+    figure img {
+        width: 100%; /* Scale down */
+    }
+
+    figure:hover {
+        -webkit-transform: rotate(-1deg);
+        -moz-transform: rotate(1deg);
+        -webkit-box-shadow: 0 3px 10px #666;
+        -moz-box-shadow: 0 3px 10px #666;
+    }
+</style>
 <body ng-app="userApp">
-<div ng-controller="user">
-    <div style="height: 30px"></div>
-    <div>
-        <div style="float: right;color: white">00000000</div>
-        <div style="float: right">
-            <div class="btn-group open">
-                <a class="btn btn-success dropdown-toggle" href="#" data-toggle="dropdown">
-                    <i class="fa fa-fw fa-lg fa-user"></i>
-                    {{userinfo.name}}
-                </a>
+<div ng-controller="user" class="mynav">
+    <div style="width: 20% ; height: 100% ; float: left ;">
+        <div height="30%">
+            <figure contenteditable="true">
+                <img src="/doob/views/images/database/golang.png" alt="{{updatePara.name}}" contenteditable="false" />
+                <figcaption contenteditable="false">
+                    <strong style="color: #e67e22">{{updatePara.name}}</strong><br/>
+                    <strong style="color: #e67e22">{{updatePara.phone}}</strong><br/>
+                    <strong style="color: #e67e22">{{updatePara.email}}</strong>
+                </figcaption>
+            </figure>
+        </div>
+        <div>
+            <div class="myRightNav myActive" align="center">
+                <div style="float: left;width: 96%"><h3><strong>用户信息</strong></h3></div>
+                <div style="float: left;width: 4%"><h3><strong>></strong></h3></div>
+            </div>
+            <div class="myRightNav" align="center">
+                <div style="float: left;width: 96%"><h3><strong>账户信息</strong></h3></div>
+                <div style="float: left;width: 4%"><h3><strong>></strong></h3></div>
             </div>
         </div>
     </div>
-    <div>
-        <div style="float: left;width:3%"></div>
-        <div style="float: left;width:94%">
+    <div style="float: left ; width: 80%">
+        <div style="float: left;width:3%"><h2></h2></div>
+        <div style="float: left;width:94%" style="padding: 10px 5px 0px 0px">
             <ul id="myTab" class="nav nav-tabs">
                 <li class="active" style="width: 30%">
                     <a href="#userinfo" data-toggle="tab">
@@ -92,8 +160,9 @@
                 <div class="tab-pane fade in active" id="accountinfo">
 
                 </div>
-        </div>
+            </div>
         <div style="float: left;width:3%"></div>
+        </div>
     </div>
 </div>
 </body>

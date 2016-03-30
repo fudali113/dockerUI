@@ -11,33 +11,47 @@
         width: 50% ;
         float: left ;
     }
+     .mynav{
+         position: relative;
+         -moz-border-radius: 10px;
+         -webkit-border-radius: 10px;
+         border-radius: 10px;
+         background: lightseagreen ;
+         float: left ;
+         width: 99% ;
+         padding: 5px 0px 10px 0px;
+         color: aqua;
+     }
+    .myimagerotate{
+        height: 100% ;
+        width: auto;
+    }
     </style>
 </head>
 <body ng-controller="containers" style="background: FloralWhite">
-<div>
-    <h3><Strong>容器构建与查看</Strong></h3>
-</div>
-<div style="background:#F5F5F5">
-    <div>
-        <h2><Strong>创建一个新的容器</Strong></h2>
-        <Strong>总共{{containers.length}}个容器</Strong>
-        <p>构建你的容器并可以登陆shell终端管理你的容器</p>
+<div  class="mynav">
+    <div style="float: left;width: 50%">
+        <div>
+            <h3><Strong>容器构建与查看</Strong></h3>
+        </div>
+        <div>
+            <div >
+                <h2><Strong>创建一个新的容器</Strong></h2>
+                <Strong>总共{{containers.length}}个容器</Strong>
+                <p>构建你的容器并可以登陆shell终端管理你的容器</p>
 
-        <button type="button" class="btn btn-success" ng-click="openSignInModel()">创建一个新的容器</button>
+                <button type="button" class="btn btn-success" ng-click="openSignInModel()">创建一个新的容器</button>
+            </div>
+        </div>
+    </div>
+    <div style=" float: right ; height:25% ;">
+        <image ng-src="/doob/views/images/database/change.png" alt="切换按钮" title="点击切换当前页面" class="myimagerotate"  ng-click="selectPage()"></image>
     </div>
 </div>
-<div style="height: 10px"></div>
-<div style="background:#F5F5F5">
-    <ul id="myTab" class="nav nav-tabs">
-        <li class="active" style="width: 30%">
-            <a href="#home" data-toggle="tab">
-                容器
-            </a>
-        </li>
-        <li style="width: 30%"><a href="#ios" data-toggle="tab">镜像</a></li>
-    </ul>
-    <div id="myTabContent" class="tab-content" style="overflow:scroll;height: 68%">
-        <div class="tab-pane fade in active" id="home">
+<div style="background:#F5F5F5 ; padding: 10px 5px 0px 0px" >
+    <strong><h2>{{nowShowPage}}</h2></strong>
+    <div style="overflow:scroll;height: 67%">
+        <div ng-show="conOrImg">
             <div>
                 <table class="table table-striped">
                     <thead>
@@ -51,7 +65,7 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="container in containers">
-                        <td><a href="#/doob/docker/containers/{{ container.Id }}/json" ng-click = "getIC($event , 'c')">{{ container.Names}}</a></td>
+                        <td><a href="#/doob/docker/containers/{{ container.Id }}/json" ng-click = "getIC($event , 'c')">{{ container.Names | containerNameFilter}}</a></td>
                         <td><a href="#/doob/docker/images/{{ container.Image }}/json" ng-click = "getIC($event , 'i')">{{ container.Image }}</a></td>
                         <td>{{ container.Command}}</td>
                         <td>{{ container.Created }}</td>
@@ -61,7 +75,7 @@
                 </table>
             </div>
         </div>
-        <div class="tab-pane fade" id="ios">
+        <div ng-show="!conOrImg">
             <div>
                 <table class="table table-striped">
                     <thead>
