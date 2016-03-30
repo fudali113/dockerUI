@@ -10,13 +10,14 @@
 <style>
     .mynav{
         position: relative;
-        -moz-border-radius: 10px;
-        -webkit-border-radius: 10px;
-        border-radius: 10px;
+        -moz-border-radius: 13px;
+        -webkit-border-radius: 13px;
+        border-radius: 13px;
         background: lightseagreen ;
         float: left ;
         width: 99% ;
-        padding: 15px 0px 10px 0px;
+        height:100% ;
+        padding: 15px 0px 0px 0px;
         color: aqua;
     }
 
@@ -80,28 +81,18 @@
         </div>
         <div>
             <div class="myRightNav myActive" align="center">
-                <div style="float: left;width: 96%"><h3><strong>用户信息</strong></h3></div>
-                <div style="float: left;width: 4%"><h3><strong>></strong></h3></div>
+                <div style="float: left;width: 95%"><h3><strong>用户信息</strong></h3></div>
+                <div style="float: left;width: 5%"><h3><strong>></strong></h3></div>
             </div>
             <div class="myRightNav" align="center">
-                <div style="float: left;width: 96%"><h3><strong>账户信息</strong></h3></div>
-                <div style="float: left;width: 4%"><h3><strong>></strong></h3></div>
+                <div style="float: left;width: 95%"><h3><strong>账户信息</strong></h3></div>
+                <div style="float: left;width: 5%"><h3><strong>></strong></h3></div>
             </div>
         </div>
     </div>
     <div style="float: left ; width: 80%">
-        <div style="float: left;width:3%"><h2></h2></div>
-        <div style="float: left;width:94%" style="padding: 10px 5px 0px 0px">
-            <ul id="myTab" class="nav nav-tabs">
-                <li class="active" style="width: 30%">
-                    <a href="#userinfo" data-toggle="tab">
-                        <h4><strong>个人信息</strong></h4>
-                    </a>
-                </li>
-                <li style="width: 30%"><a href="#accountinfo" data-toggle="tab"><h4><strong>账户信息</strong></h4></a></li>
-            </ul>
-            <div id="myTabContent" class="tab-content">
-                <div class="tab-pane fade in active" id="userinfo">
+        <div style="float: left ; margin: 50px 31px 50px 31px ; background: wheat ; -moz-border-radius: 13px;-webkit-border-radius: 13px;">
+                <div ng-show="true">
                     <table class="table table-striped">
                         <tr style="height: 100px">
                             <td style="width: 25%"><Strong>用户名</Strong></td>
@@ -157,10 +148,10 @@
                         </td></tr>
                     </table>
                 </div>
-                <div class="tab-pane fade in active" id="accountinfo">
+                <div ng-show="false">
 
                 </div>
-            </div>
+        </div>
         <div style="float: left;width:3%"></div>
         </div>
     </div>
