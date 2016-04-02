@@ -11,7 +11,7 @@
      http://www.springframework.org/schema/tx
 	 http://www.springframework.org/schema/tx/spring-tx.xsd
 	 http://www.springframework.org/schema/aop
-	 classpath:org\springframework\aop\config\spring-aop-4.0.xsd
+	 http://www.springframework.org/schema/aop/spring-aop.xsd
 	 http://www.springframework.org/schema/websocket
 	 http://www.springframework.org/schema/websocket/spring-websocket.xsd
      http://www.springframework.org/schema/context

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - doob@139.129.4.187" uuid="868b678e-0274-4b2c-ae18-1aa2da392e36">
+      <secret-storage>master_key</secret-storage>
+      <user-name>fudali</user-name>
+      <schema-pattern>doob.*</schema-pattern>
+      <default-schemas>doob.*</default-schemas>
+    </data-source>
+  </component>
+</project>
