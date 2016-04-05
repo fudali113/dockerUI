@@ -6,11 +6,16 @@ app.controller('datacon', function($scope , $http) {
     $scope.databases = []
     $scope.createOrHistory = true
     $scope.nowHidePage = "my database"
+    $scope.fromData={}
+    
+    $http.get("/doob/database/get").success(function (data) {
+        $scope.containers = data.result
+    })
 
 
     $scope.createDatabase = function(no){
         $('#myModal').modal('show');
-        $scope.nowSelectDatabase = database[no]
+        $scope.nowSelectDatabase = databases[no]
     }
 
     $scope.selectPage = function(){
@@ -28,7 +33,7 @@ app.controller('datacon', function($scope , $http) {
         $http({
             method: 'POST',
             url:'/doob/database/create/'+$scope.nowSelectDatabase ,
-            params : '',
+            params : $scope.fromData,
         }).success(function(data){
             if (data == undefined) return
         })

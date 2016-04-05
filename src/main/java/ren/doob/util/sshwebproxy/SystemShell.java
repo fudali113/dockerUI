@@ -56,10 +56,18 @@ public class SystemShell {
         System.out.println(shell);
         System.out.println(before);
         shellChannel.write(shell , true);
-        shellChannel.read();
-        String[] after = shellChannel.getScreen();
-        System.out.println(after);
-        return arrayDiff(after,before);
+
+        try {
+            Thread.sleep(310);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            shellChannel.read();
+            String[] after = shellChannel.getScreen();
+            System.out.println(after);
+            return arrayDiff(after,before);
+        }
+
     }
 
     synchronized public static ArrayList<String> createCon(Parameter parameter){//同步保证数据正确

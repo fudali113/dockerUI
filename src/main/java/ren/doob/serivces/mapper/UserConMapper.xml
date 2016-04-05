@@ -8,13 +8,13 @@
     </select>
 
     <insert id="addCon" parameterType="ren.doob.common.Parameter">
-        INSERT INTO user_container (userid,containerid,containername,
+        INSERT INTO user_container (userid,containerid,containername
         <if test="accept.whetherData != null">
-            whetherdatabase
+            ,whetherdatabase
         </if>
-        ) VALUES (#{accept.userid},#{accept.id},#{accept.name},
+        ) VALUES (#{accept.userid},#{accept.id},#{accept.name}
         <if test="accept.whetherData != null">
-            #{accept.whetherdatabase}
+            ,#{accept.whetherData}
         </if> )
     </insert>
 

@@ -34,6 +34,24 @@ public class Container {
     private Integer userid;
     private String containerid;
     private String containername;
+    private Integer whetherdatabase;
+    private String createdate;
+
+    public String getCreatedate() {
+        return createdate;
+    }
+
+    public void setCreatedate(String createdate) {
+        this.createdate = createdate;
+    }
+
+    public Integer getWhetherdatabase() {
+        return whetherdatabase;
+    }
+
+    public void setWhetherdatabase(Integer whetherdatabase) {
+        this.whetherdatabase = whetherdatabase;
+    }
 
     public String getContainerid() {
         return containerid;

@@ -55,13 +55,16 @@ public class CreateDockerShellString {
                 portPara.put(map.get(key),map.get(value));
             }
         }
+
         if(runPara.containsKey("--name")) runPara.remove("--name");
         if(runPara.containsKey("-d")) runPara.remove("-d");
+
         for (String parakey : runPara.keySet()){
             String value = runPara.get(parakey);
             if(parakey.trim().contains(" ") || value.trim().contains(" ")) return "运行参数中不能出现空格！！！";
             runParaString.append(parakey + " " + value + " ");
         }
+
         if(!portPara.isEmpty()) {
             for (String parakey : portPara.keySet()) {
                 String value = portPara.get(parakey);
