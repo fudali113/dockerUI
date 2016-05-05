@@ -2,7 +2,6 @@ package ren.doob.common;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 import ren.doob.serivces.model.User;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Enumeration;
@@ -51,8 +50,5 @@ public class BaseController {
      */
     protected User getUserinfo(){
           return (User) Mc.getSes().getAttribute(CommonField.SESSION_USERINFO);
-
     }
-
-
 }

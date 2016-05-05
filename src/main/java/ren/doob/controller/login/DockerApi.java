@@ -86,12 +86,11 @@ public class DockerApi extends BaseController {
     @ResponseBody   //
     @RequestMapping(value = "/{IorC}/{id}" , method = RequestMethod.DELETE , produces="application/json;charset=UTF-8")
     public Object deletecontainer(@PathVariable("id") String id , @PathVariable("IorC") String IorC) throws IOException {
-        if("containers".equals(IorC) || "images".equals(IorC)) {
-            String deleteDockerUrl = IorC + "/" + id;
-            Map<String, String> map = dockerApi.deleteDockerApi(deleteDockerUrl);
-            Mc.getRes().setStatus(Integer.parseInt(map.get("statusCode")));
-            return map.get("responseBody");
-        }else{
+        if("containers".equals(IorC)) {
+            return dockerUserNameSpace.deleteConOrIma(id,true);
+        } else if("images".equals(IorC)){
+            return dockerUserNameSpace.deleteConOrIma(id,false);
+        } else{
             Mc.getRes().setStatus(404);
             return null;
         }

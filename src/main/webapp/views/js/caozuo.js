@@ -41,7 +41,7 @@ $(function(){
         $('#'+src).show().siblings().hide()
         $('#mymenuul > li a').removeClass("mymenuactive")
         $(this).addClass("mymenuactive")
-    })
+})
 
 
     daovoice('init', {
