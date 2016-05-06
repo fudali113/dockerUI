@@ -163,7 +163,8 @@
                             <div class="form-group">
                                 <label for="ssh1" class="col-sm-2 control-label">镜像名：</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="ssh1" name="imageName" placeholder="容器基于何种镜像启动" ng-model="fromData.imageName">
+                                    <select id="ssh1"  class="form-control" ng-change="selectAction()" ng-model="fromData.imageName" ng-options="image.RepoTags[0] as image.RepoTags[0] for image in images">
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">

@@ -49,6 +49,10 @@ app.controller('containers', function($scope , $http) {
     url[0] = "/doob/docker/cons/0"
     url[1] = "/doob/docker/images/json"
 
+    $scope.selectAction = function() {
+        console.log($scope.fromData.imageName);
+    };
+
     $scope.init = function() {
         $http.get(url[0]).success(function (response) {
             var list = new Array()
@@ -97,6 +101,7 @@ app.controller('containers', function($scope , $http) {
         for(i=0;i<parameterArray.length;i++){
             paras[parameterArray[i].name] = parameterArray[i].value
         }
+        paras["imageName"] = $scope.fromData.imageName
         $http({
             method: 'POST',
             url: url,
