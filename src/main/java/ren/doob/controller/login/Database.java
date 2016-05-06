@@ -69,7 +69,7 @@ public class Database extends BaseController{
     @RequestMapping(value = "/create/{name}" , method = RequestMethod.POST , produces="application/json;charset=UTF-8")
     public Object createDatabase(@PathVariable("name") String name){
 
-        String conName = getUserinfo().getName()+"_database_"+getPara().get("databaseName");
+        String conName = getUserinfo().getName()+"_d_"+getPara().get("databaseName");
         String passwd = setPasswdField.get(name) + "=" + getPara().get("databasePasswd");
 
         putP("userid",getUserinfo().getId().toString());

@@ -2,7 +2,10 @@ var app = angular.module('containersApp', []);
 
 app.filter('containerNameFilter',function (){
     return function (input){
-        return input.substring(1)
+        name = input.substring(1)
+        names = name.split("_")
+        simpleName = names[names.length - 1]
+        return simpleName
     }
 })
 

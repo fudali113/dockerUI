@@ -100,7 +100,8 @@ public class DockerApi extends BaseController {
     @RequestMapping(value = "/create/{name}" , method = RequestMethod.POST , produces="application/json;charset=UTF-8")
     public Object create(@PathVariable("name") String name){
         User onlineUser = getUserinfo();
-        Mc.putP("name" , onlineUser.getName()+"_"+name);//为每个用户的容器名添加前缀，避免相同而导致创建出错
+        Mc.putP("name" , onlineUser.getName()+"_c_"+name);
+        Mc.putP("conName" , onlineUser.getName()+"_c_"+name);//为每个用户的容器名添加前缀，避免相同而导致创建出错
         Mc.putP("userid" , onlineUser.getId().toString());
         return dockerUserNameSpace.createCon(Mc.getPara());
     }

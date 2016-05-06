@@ -1,4 +1,14 @@
 var app = angular.module('database', []);
+
+app.filter('containerNameFilter',function (){
+    return function (input){
+        name = input.substring(1)
+        names = name.split("_")
+        simpleName = names[names.length - 1]
+        return simpleName
+    }
+})
+
 app.controller('datacon', function($scope , $http) {
 
     var databases = ['mysql','postgresql','mongodb','redis','go']
@@ -7,10 +17,18 @@ app.controller('datacon', function($scope , $http) {
     $scope.createOrHistory = true
     $scope.nowHidePage = "my database"
     $scope.fromData={}
+
     
-    $http.get("/doob/database/get").success(function (data) {
-        $scope.containers = data.result
-    })
+    var getDatabase = function(){
+        $http.get("/doob/docker/cons/1").success(function (response) {
+            var list = new Array()
+            for (i=0 ; i < response.length ; i++){
+                list.push(JSON.parse(response[i]))
+            }
+            $scope.containers = list;
+        })
+    }
+    getDatabase()
 
 
     $scope.createDatabase = function(no){
@@ -35,7 +53,13 @@ app.controller('datacon', function($scope , $http) {
             url:'/doob/database/create/'+$scope.nowSelectDatabase ,
             params : $scope.fromData,
         }).success(function(data){
-            if (data == undefined) return
+            if (data.result == 1) {
+                $('#myModal').modal('hide')
+                alert("创建"+$scope.nowSelectDatabase+"数据库实例成功")
+                getDatabase()
+            }else{
+                alert('创建失败')
+            }
         })
     }
 

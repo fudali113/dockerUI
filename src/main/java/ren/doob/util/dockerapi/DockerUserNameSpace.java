@@ -68,11 +68,13 @@ public class DockerUserNameSpace {
         else deleteStr = "docker rmi -f " + Id;
 
         ArrayList<String> result = SystemShell.runShell(deleteStr);
+
         if (Id.equals(result.get(0))){
             return 1;
         }else{
             return 0;
         }
+
     }
 
     /**
@@ -96,7 +98,7 @@ public class DockerUserNameSpace {
         }
 
         if (addnum == 0 ){ //如果添加数据库失败，删除此容器
-            deleteConOrIma(ConID , true);
+            deleteConOrIma(parameter.get("name") , true);
         }
         return addnum;
     }

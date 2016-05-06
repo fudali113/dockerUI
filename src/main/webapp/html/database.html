@@ -17,8 +17,8 @@
                 <font size="4" color="aqua">选择一个数据镜像，点击并创建一个属于自己的云数据库实例(点击右侧图标切换到已有实例)</font>
             </div>
             <div style="height: 13%; width: 10% ; float: right;position: relative;
-                -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px;">
-                <image ng-src="/doob/views/images/database/change.png" alt="切换按钮" title="点击切换当前页面" class="myimagerotate"  ng-click="selectPage()"></image>
+                -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px;" ng-click="selectPage()">
+                <image ng-src="/doob/views/images/database/change.png" alt="切换按钮" title="点击切换当前页面" class="myimagerotate" ></image>
             </div>
         </div>
     </div>
@@ -67,19 +67,26 @@
         </div>
     </div>
     <div ng-show="!createOrHistory">
-        <table class="table table-bordered" style="width: 99%">
-            <thead>
-                <tr><td>编号</td><td>数据库</td><td>创建时间</td><td>状态</td></tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="con in containers">
-                    <td>{{con.id}}</td>
-                    <td>{{con.containername}}</td>
-                    <td>{{con.createdate}}</td>
-                    <td style="background: greenyellow">1</td>
+        <div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>数据库实例名</th>
+                    <th>运行终端</th>
+                    <th>创建</th>
+                    <th>状态</th>
                 </tr>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                <tr ng-repeat="container in containers">
+                    <td><a href="#/doob/docker/containers/{{ container.Id }}/json" ng-click = "getIC($event , 'c')">{{ container.Name | containerNameFilter}}</a></td>
+                    <td>{{ container.Path}}</td>
+                    <td>{{ container.Created }}</td>
+                    <td>{{ container.State.Status }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
