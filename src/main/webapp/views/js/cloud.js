@@ -2,7 +2,7 @@ var app = angular.module('containersApp', []);
 
 app.filter('containerNameFilter',function (){
     return function (input){
-        return input[0]
+        return input.substring(1)
     }
 })
 
@@ -43,12 +43,16 @@ app.directive('runparameter', function() {
 app.controller('containers', function($scope , $http) {
     $scope.fromData = {}
     var url = new Array()
-    url[0] = "/doob/docker/containers/json"
+    url[0] = "/doob/docker/cons/0"
     url[1] = "/doob/docker/images/json"
 
     $scope.init = function() {
         $http.get(url[0]).success(function (response) {
-            $scope.containers = response;
+            var list = new Array()
+            for (i=0 ; i < response.length ; i++){
+                list.push(JSON.parse(response[i]))
+            }
+            $scope.containers = list;
         });
         $http.get(url[1]).success(function (response) {
             $scope.images = response;

@@ -28,6 +28,9 @@
             <if test="accept.userid != null">
                 userid = #{accept.userid}
             </if>
+            <if test="accept.whetherdatabase != null">
+                AND whetherdatabase = #{accept.whetherdatabase }
+            </if>
         </where>
     </sql>
 

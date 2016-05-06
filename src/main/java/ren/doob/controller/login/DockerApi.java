@@ -111,4 +111,12 @@ public class DockerApi extends BaseController {
         String shell = "docker logs -t --tail=all "+nameORid;
         return SystemShell.runShell(shell);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/cons/{wheteherDatabase}" , method = RequestMethod.GET , produces="application/json;charset=UTF-8")
+    public Object getMyCon(@PathVariable("wheteherDatabase") Integer wheteherDatabase) throws IOException {
+
+        Integer userId = getUserinfo().getId();
+        return dockerUserNameSpace.getMyCon(userId, wheteherDatabase);
+    }
 }

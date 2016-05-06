@@ -4,9 +4,13 @@ app.controller('logs', function($scope , $http) {
     $scope.nowSelect = "所有"
     $scope.selectList = ['所有','系统','访问','应用']
 
-    var url = "/doob/docker/containers/json"
+    var url = "/doob/docker/cons/2"
     $http.get(url).success( function(response) {
-        $scope.containers = response;
+        var list = new Array()
+        for (i=0 ; i < response.length ; i++){
+            list.push(JSON.parse(response[i]))
+        }
+        $scope.containers = list;
     });
 
     $http.get('/doob/docker/containers/8e53f468da98/logs').success( function(response) {

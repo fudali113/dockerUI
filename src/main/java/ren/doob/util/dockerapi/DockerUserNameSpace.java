@@ -5,9 +5,12 @@ import org.springframework.stereotype.Service;
 import ren.doob.common.Mc;
 import ren.doob.common.Parameter;
 import ren.doob.serivces.UserConService;
+import ren.doob.serivces.model.Container;
 import ren.doob.util.sshwebproxy.SystemShell;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author fudali
@@ -41,6 +44,8 @@ public class DockerUserNameSpace {
 
     @Autowired
     private UserConService userConService;
+    @Autowired
+    private DockerApiUtil dockerApiUtil;
 
     synchronized public int createCon(Parameter parameter ){//同步保证数据正确
 
@@ -95,5 +100,32 @@ public class DockerUserNameSpace {
         }
         return addnum;
     }
+
+    /**
+     * 根据用户id查找自己的容器
+     * @param userId
+     * @param select 选择是否是容器实例或者数据库实例；
+     * @return docker remote API格式容器列表
+     */
+    public List getMyCon(Integer userId , Integer select) throws IOException {
+
+        Parameter parameter = new Parameter();
+        ArrayList arrayList = new ArrayList();
+
+        parameter.put("userid" , userId.toString());
+
+        if (select == 0 || select == 1){
+            parameter.put("whetherdatabase" , select.toString());
+        }
+
+        ArrayList<Container> userCon = userConService.getCon(parameter);
+
+        for (Container c: userCon) {
+            arrayList.add(dockerApiUtil.getDockerApiJson("containers/"+c.getContainerid()+"/json"));
+        }
+
+        return arrayList;
+    }
+
 
 }
