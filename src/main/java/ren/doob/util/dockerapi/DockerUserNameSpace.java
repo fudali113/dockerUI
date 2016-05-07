@@ -70,6 +70,9 @@ public class DockerUserNameSpace {
         ArrayList<String> result = SystemShell.runShell(deleteStr);
 
         if (Id.equals(result.get(0))){
+            Parameter p = new Parameter();
+            p.put("name" , Id);
+            userConService.deleteCon(p);
             return 1;
         }else{
             return 0;
@@ -109,7 +112,7 @@ public class DockerUserNameSpace {
      * @param select 选择是否是容器实例或者数据库实例；
      * @return docker remote API格式容器列表
      */
-    public List getMyCon(Integer userId , Integer select) throws IOException {
+    public List getMyCon(Integer userId , Integer select){
 
         Parameter parameter = new Parameter();
         ArrayList arrayList = new ArrayList();
@@ -123,7 +126,15 @@ public class DockerUserNameSpace {
         ArrayList<Container> userCon = userConService.getCon(parameter);
 
         for (Container c: userCon) {
-            arrayList.add(dockerApiUtil.getDockerApiJson("containers/"+c.getContainerid()+"/json"));
+
+            String result = null;
+            try {
+                result = dockerApiUtil.getDockerApiJson("containers/"+c.getContainerid()+"/json");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if(result != null) arrayList.add(result);
+
         }
 
         return arrayList;
