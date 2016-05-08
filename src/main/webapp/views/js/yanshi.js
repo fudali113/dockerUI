@@ -1,4 +1,14 @@
 var app = angular.module('yanshiApp', []);
+
+app.filter('containerNameFilter',function (){
+    return function (input){
+        name = input.substring(1)
+        names = name.split("_")
+        simpleName = names[names.length - 1]
+        return simpleName
+    }
+})
+
 app.controller('logs', function($scope , $http) {
     $scope.nowCon = "..."
     $scope.nowSelect = "所有"
