@@ -40,17 +40,26 @@ import java.util.Map;
 public class SystemShell {
 
     private static final SshConnection sshConnection = new SshConnection("139.129.4.187", 22, "root", "fudali133B");
-    private static final   ShellChannel shellChannel = sshConnection.openShellChannel();
+    private static ShellChannel shellChannel = sshConnection.openShellChannel();
 
 
     public static ShellChannel getSystemShell(){
+        if (shellChannel == null)  {
+            return new SshConnection("139.129.4.187", 22, "root", "fudali133B").openShellChannel();
+        }
         return shellChannel;
     }
     public static SshConnection getSshConnection(){
+        if (sshConnection == null) {
+            return new SshConnection("139.129.4.187", 22, "root", "fudali133B");
+        }
         return sshConnection;
     }
 
     synchronized public static ArrayList<String> runShell(String shell){
+        if (shellChannel == null)  {
+            shellChannel = new SshConnection("139.129.4.187", 22, "root", "fudali133B").openShellChannel();
+        }
         shellChannel.read();
         String[] before = shellChannel.getScreen();
         System.out.println(shell);
