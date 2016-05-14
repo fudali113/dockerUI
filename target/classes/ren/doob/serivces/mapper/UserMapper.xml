@@ -14,16 +14,16 @@
         UPDATE user
         <set>
             <if test="accept.phone != null">
-                phone = #{accept.phone}
+                phone = #{accept.phone},
             </if>
             <if test="accept.email != null">
-                email = #{accept.email}
+                email = #{accept.email},
             </if>
             <if test="accept.conmax != null">
-                conmax = #{accept.conmax}
+                conmax = #{accept.conmax},
             </if>
             <if test="accept.imagemax != null">
-                imagemax = #{accept.imagemax}
+                imagemax = #{accept.imagemax},
             </if>
             <if test="accept.pass != null">
                 pass = #{accept.pass}

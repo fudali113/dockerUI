@@ -44,15 +44,28 @@ $(function(){
 })
 
 
-    daovoice('init', {
+    /*daovoice('init', {
         app_id: "29ab36ab",
         user_id: "NO_89757", // 必填: 该用户在您系统上的唯一ID
         email: "fudali113@gmail.com", // 选填:  该用户在您系统上的主邮箱
         name: "fudali", // 选填: 用户名
         signed_up: 1449821660 // 选填: 用户的注册时间，用Unix时间戳表示
     });
-    daovoice('update');
+    daovoice('update');*/
 })
+
+var mydaovoice = function(myuserinfo){
+    var userinfo = {
+        app_id: "29ab36ab",
+        user_id: myuserinfo.id, // 必填: 该用户在您系统上的唯一ID
+        email: myuserinfo.email, // 选填:  该用户在您系统上的主邮箱
+        name: myuserinfo.name, // 选填: 用户名
+        signed_up: null// 选填: 用户的注册时间，用Unix时间戳表示
+
+    }
+    daovoice('init', userinfo);
+    daovoice('update');
+}
 
 var gethostinfo = function(){
     $.get("/doob/ssh/hostInfo",function(data){

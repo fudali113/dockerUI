@@ -10,6 +10,9 @@ app.controller('user', function($scope , $http) {
   $scope.init = function () {
     $http.get("/doob/userinfo").success(function (response) {
       var u = response.userinfo
+
+      window.parent.mydaovoice(u)
+
       userinfo = ["", u.phone, u.email, u.conmax, u.imagemax]
       $scope.updatePara = u
       $scope.updatePara.pass = ""
